@@ -5,9 +5,10 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <?php
-require_once __DIR__ . '/models/members.php';
-require_once __DIR__ . '/dao/daoMembers.php';
+    require_once __DIR__ . '/models/members.php';
+    require_once __DIR__ . '/dao/daoMembers.php';
 ?>
+//
 <html>
     <head>
         <meta charset="UTF-8">
