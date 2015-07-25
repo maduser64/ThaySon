@@ -10,6 +10,7 @@ and open the template in the editor.
 ?>
 //tài sao k có j
 //hay ah nha
+// thêm này
 <html>
     <head>
         <meta charset="UTF-8">
