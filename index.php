@@ -8,7 +8,8 @@ and open the template in the editor.
     require_once __DIR__ . '/models/members.php';
     require_once __DIR__ . '/dao/daoMembers.php';
 ?>
-//
+//tài sao k có j
+//hay ah nha
 <html>
     <head>
         <meta charset="UTF-8">
