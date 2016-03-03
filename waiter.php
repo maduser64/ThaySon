@@ -1,4 +1,5 @@
 <?php
+//chao
 session_start();
 require_once __DIR__ . '/host.php';
 unset($_SESSION['user_id']);
@@ -19,6 +20,8 @@ unset($_SESSION['user_id']);
         });
         </script>
     </head>
+    
+    
     <body>
    Bạn mới đăng kí cần chờ cấp quyền!  hoặc liên hệ admin: sđt...  email...
     </body>
