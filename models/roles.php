@@ -9,39 +9,40 @@
 /**
  * Description of Roles
  *
- * @author NgoCo
+ * @author TriTueViet
  */
 class Roles {
-    private $roleid;
-    private $rolename;
+
+    private $roleId;
+    private $roleName;
     private $description;
-    function __construct() {    
-    }
-    
-    function getRoleid() {
-        return $this->roleid;
+
+    function __construct() {
+        
     }
 
-    function getRolename() {
-        return $this->rolename;
+    function getRoleId() {
+        return $this->roleId;
+    }
+
+    function getRoleName() {
+        return $this->roleName;
     }
 
     function getDescription() {
         return $this->description;
     }
 
-    function setRoleid($roleid) {
-        $this->roleid = $roleid;
+    function setRoleId($roleId) {
+        $this->roleId = $roleId;
     }
 
-    function setRolename($rolename) {
-        $this->rolename = $rolename;
+    function setRoleName($roleName) {
+        $this->roleName = $roleName;
     }
 
     function setDescription($description) {
         $this->description = $description;
     }
-
-
 
 }

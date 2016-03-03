@@ -9,103 +9,103 @@
 /**
  * Description of Feeds
  *
- * @author NgoCo
+ * @author TriTueViet
  */
 class Feeds {
 
-    private $feedid;
-    private $facebookidfeed;
-    private $facebookuseridfeed;
+    private $feedId;
+    private $facebookIdFeed;
+    private $facebookUserIdFeed;
     private $message;
-    private $createfeedtime;
-    private $updatefeedtime;
-    private $createtime;
-    private $updatetime;
-    private $groupid;
-    private $statusid;
+    private $createFeedTime;
+    private $updateFeedTime;
+    private $groupId;
+    private $statusId;
+    private $createTime;
+    private $updateTime;
 
     function __construct() {
         
     }
 
-    function getFeedid() {
-        return $this->feedid;
+    function getFeedId() {
+        return $this->feedId;
     }
 
-    function getFacebookidfeed() {
-        return $this->facebookidfeed;
+    function getFacebookIdFeed() {
+        return $this->facebookIdFeed;
     }
 
-    function getFacebookuseridfeed() {
-        return $this->facebookuseridfeed;
+    function getFacebookUserIdFeed() {
+        return $this->facebookUserIdFeed;
     }
 
     function getMessage() {
         return $this->message;
     }
 
-    function getCreatefeedtime() {
-        return $this->createfeedtime;
+    function getCreateFeedTime() {
+        return $this->createFeedTime;
     }
 
-    function getUpdatefeedtime() {
-        return $this->updatefeedtime;
+    function getUpdateFeedTime() {
+        return $this->updateFeedTime;
     }
 
-    function getCreatetime() {
-        return $this->createtime;
+    function getGroupId() {
+        return $this->groupId;
     }
 
-    function getUpdatetime() {
-        return $this->updatetime;
+    function getStatusId() {
+        return $this->statusId;
     }
 
-    function getGroupid() {
-        return $this->groupid;
+    function getCreateTime() {
+        return $this->createTime;
     }
 
-    function getStatusid() {
-        return $this->statusid;
+    function getUpdateTime() {
+        return $this->updateTime;
     }
 
-    function setFeedid($feedid) {
-        $this->feedid = $feedid;
+    function setFeedId($feedId) {
+        $this->feedId = $feedId;
     }
 
-    function setFacebookidfeed($facebookidfeed) {
-        $this->facebookidfeed = $facebookidfeed;
+    function setFacebookIdFeed($facebookIdFeed) {
+        $this->facebookIdFeed = $facebookIdFeed;
     }
 
-    function setFacebookuseridfeed($facebookuseridfeed) {
-        $this->facebookuseridfeed = $facebookuseridfeed;
+    function setFacebookUserIdFeed($facebookUserIdFeed) {
+        $this->facebookUserIdFeed = $facebookUserIdFeed;
     }
 
     function setMessage($message) {
         $this->message = $message;
     }
 
-    function setCreatefeedtime($createfeedtime) {
-        $this->createfeedtime = $createfeedtime;
+    function setCreateFeedTime($createFeedTime) {
+        $this->createFeedTime = $createFeedTime;
     }
 
-    function setUpdatefeedtime($updatefeedtime) {
-        $this->updatefeedtime = $updatefeedtime;
+    function setUpdateFeedTime($updateFeedTime) {
+        $this->updateFeedTime = $updateFeedTime;
     }
 
-    function setCreatetime($createtime) {
-        $this->createtime = $createtime;
+    function setGroupId($groupId) {
+        $this->groupId = $groupId;
     }
 
-    function setUpdatetime($updatetime) {
-        $this->updatetime = $updatetime;
+    function setStatusId($statusId) {
+        $this->statusId = $statusId;
     }
 
-    function setGroupid($groupid) {
-        $this->groupid = $groupid;
+    function setCreateTime($createTime) {
+        $this->createTime = $createTime;
     }
 
-    function setStatusid($statusid) {
-        $this->statusid = $statusid;
+    function setUpdateTime($updateTime) {
+        $this->updateTime = $updateTime;
     }
 
 }

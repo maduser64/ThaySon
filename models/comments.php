@@ -9,85 +9,94 @@
 /**
  * Description of Comments
  *
- * @author NgoCo
+ * @author TriTueViet
  */
 class Comments {
 
-    private $commentid;
-    private $facebookidcomment;
-    private $facebooommenttime;
-    private $createkuseridcomment;
+    private $commentId;
+    private $facebookIdComment;
+    private $facebookUserIdComment;
     private $message;
-    private $createctime;
-    private $updatetime;
-    private $statusid;
+    private $createCommentTime;
+    private $statusId;
+    private $createTime;
+    private $updateTime;
+    private $feedId;
 
     function __construct() {
         
     }
 
-    function getCommentid() {
-        return $this->commentid;
+    function getCommentId() {
+        return $this->commentId;
     }
 
-    function getFacebookidcomment() {
-        return $this->facebookidcomment;
+    function getFacebookIdComment() {
+        return $this->facebookIdComment;
     }
 
-    function getFacebooommenttime() {
-        return $this->facebooommenttime;
-    }
-
-    function getCreatekuseridcomment() {
-        return $this->createkuseridcomment;
+    function getFacebookUserIdComment() {
+        return $this->facebookUserIdComment;
     }
 
     function getMessage() {
         return $this->message;
     }
 
-    function getCreatectime() {
-        return $this->createctime;
+    function getCreateCommentTime() {
+        return $this->createCommentTime;
     }
 
-    function getUpdatetime() {
-        return $this->updatetime;
+    function getStatusId() {
+        return $this->statusId;
     }
 
-    function getStatusid() {
-        return $this->statusid;
+    function getCreateTime() {
+        return $this->createTime;
     }
 
-    function setCommentid($commentid) {
-        $this->commentid = $commentid;
+    function getUpdateTime() {
+        return $this->updateTime;
     }
 
-    function setFacebookidcomment($facebookidcomment) {
-        $this->facebookidcomment = $facebookidcomment;
+    function getFeedId() {
+        return $this->feedId;
     }
 
-    function setFacebooommenttime($facebooommenttime) {
-        $this->facebooommenttime = $facebooommenttime;
+    function setCommentId($commentId) {
+        $this->commentId = $commentId;
     }
 
-    function setCreatekuseridcomment($createkuseridcomment) {
-        $this->createkuseridcomment = $createkuseridcomment;
+    function setFacebookIdComment($facebookIdComment) {
+        $this->facebookIdComment = $facebookIdComment;
+    }
+
+    function setFacebookUserIdComment($facebookUserIdComment) {
+        $this->facebookUserIdComment = $facebookUserIdComment;
     }
 
     function setMessage($message) {
         $this->message = $message;
     }
 
-    function setCreatectime($createctime) {
-        $this->createctime = $createctime;
+    function setCreateCommentTime($createCommentTime) {
+        $this->createCommentTime = $createCommentTime;
     }
 
-    function setUpdatetime($updatetime) {
-        $this->updatetime = $updatetime;
+    function setStatusId($statusId) {
+        $this->statusId = $statusId;
     }
 
-    function setStatusid($statusid) {
-        $this->statusid = $statusid;
+    function setCreateTime($createTime) {
+        $this->createTime = $createTime;
+    }
+
+    function setUpdateTime($updateTime) {
+        $this->updateTime = $updateTime;
+    }
+
+    function setFeedId($feedId) {
+        $this->feedId = $feedId;
     }
 
 }

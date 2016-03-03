@@ -9,51 +9,103 @@
 /**
  * Description of Users
  *
- * @author NgoCo
+ * @author TriTueViet
  */
 class Users {
 
-    private $userid;
-    private $username;
+    private $userId;
+    private $userName;
     private $password;
-    private $fullname;
-    private $address;
+    private $fullName;
+    private $address1;
+    private $address2;
     private $birthday;
-    private $phonenumber;
+    private $avatar;
+    private $phoneNumber1;
+    private $phoneNumber2;
     private $gender;
     private $email;
-    private $createtime;
-    private $updatetime;
-    private $groupid;
+    private $school;
+    private $class;
+    private $createTime;
+    private $updateTime;
 
-    function getUserid() {
-        return $this->userid;
+    function __construct() {
+        
+    }
+    function getAvatar() {
+        return $this->avatar;
     }
 
-    function getUsername() {
-        return $this->username;
+    function setAvatar($avatar) {
+        $this->avatar = $avatar;
+    }
+
+        function getAddress1() {
+        return $this->address1;
+    }
+    function getSchool() {
+        return $this->school;
+    }
+
+    function getClass() {
+        return $this->class;
+    }
+
+    function setSchool($school) {
+        $this->school = $school;
+    }
+
+    function setClass($class) {
+        $this->class = $class;
+    }
+
+        function getAddress2() {
+        return $this->address2;
+    }
+
+    function getPhoneNumber1() {
+        return $this->phoneNumber1;
+    }
+
+    function getPhoneNumber2() {
+        return $this->phoneNumber2;
+    }
+
+    function setAddress1($address1) {
+        $this->address1 = $address1;
+    }
+
+    function setAddress2($address2) {
+        $this->address2 = $address2;
+    }
+
+    function setPhoneNumber1($phoneNumber1) {
+        $this->phoneNumber1 = $phoneNumber1;
+    }
+
+    function setPhoneNumber2($phoneNumber2) {
+        $this->phoneNumber2 = $phoneNumber2;
+    }
+
+        function getUserId() {
+        return $this->userId;
+    }
+
+    function getUserName() {
+        return $this->userName;
     }
 
     function getPassword() {
         return $this->password;
     }
 
-    function getFullname() {
-        return $this->fullname;
+    function getFullName() {
+        return $this->fullName;
     }
-
-    function getAddress() {
-        return $this->address;
-    }
-
     function getBirthday() {
         return $this->birthday;
     }
-
-    function getPhonenumber() {
-        return $this->phonenumber;
-    }
-
     function getGender() {
         return $this->gender;
     }
@@ -62,44 +114,31 @@ class Users {
         return $this->email;
     }
 
-    function getCreatetime() {
-        return $this->createtime;
+    function getCreateTime() {
+        return $this->createTime;
     }
 
-    function getUpdatetime() {
-        return $this->updatetime;
+    function getUpdateTime() {
+        return $this->updateTime;
     }
 
-    function getGroupid() {
-        return $this->groupid;
+    function setUserId($userId) {
+        $this->userId = $userId;
     }
 
-    function setUserid($userid) {
-        $this->userid = $userid;
-    }
-
-    function setUsername($username) {
-        $this->username = $username;
+    function setUserName($userName) {
+        $this->userName = $userName;
     }
 
     function setPassword($password) {
         $this->password = $password;
     }
 
-    function setFullname($fullname) {
-        $this->fullname = $fullname;
+    function setFullName($fullName) {
+        $this->fullName = $fullName;
     }
-
-    function setAddress($address) {
-        $this->address = $address;
-    }
-
     function setBirthday($birthday) {
         $this->birthday = $birthday;
-    }
-
-    function setPhonenumber($phonenumber) {
-        $this->phonenumber = $phonenumber;
     }
 
     function setGender($gender) {
@@ -110,35 +149,12 @@ class Users {
         $this->email = $email;
     }
 
-    function setCreatetime($createtime) {
-        $this->createtime = $createtime;
+    function setCreateTime($createTime) {
+        $this->createTime = $createTime;
     }
 
-    function setUpdatetime($updatetime) {
-        $this->updatetime = $updatetime;
-    }
-
-    function setGroupid($groupid) {
-        $this->groupid = $groupid;
-    }
-
-    function __construct1($userid, $username, $password, $fullname, $address, $birthday, $phonenumber, $gender, $email, $createtime, $updatetime, $groupid) {
-        $this->userid = $userid;
-        $this->username = $username;
-        $this->password = $password;
-        $this->fullname = $fullname;
-        $this->address = $address;
-        $this->birthday = $birthday;
-        $this->phonenumber = $phonenumber;
-        $this->gender = $gender;
-        $this->email = $email;
-        $this->createtime = $createtime;
-        $this->updatetime = $updatetime;
-        $this->groupid = $groupid;
-    }
-
-    function __construct() {
-        
+    function setUpdateTime($updateTime) {
+        $this->updateTime = $updateTime;
     }
 
 }

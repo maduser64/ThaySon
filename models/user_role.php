@@ -9,41 +9,39 @@
 /**
  * Description of User_role
  *
- * @author NgoCo
+ * @author TriTueViet
  */
 class User_role {
 
-    private $userroleid;
-    private $roleid;
-    private $userid;
+    private $userRoleId;
+    private $roleId;
+    private $userId;
     function __construct() {
         
     }
-    function getUserroleid() {
-        return $this->userroleid;
+    function getUserRoleId() {
+        return $this->userRoleId;
     }
 
-    function getRoleid() {
-        return $this->roleid;
+    function getRoleId() {
+        return $this->roleId;
     }
 
-    function getUserid() {
-        return $this->userid;
+    function getUserId() {
+        return $this->userId;
     }
 
-    function setUserroleid($userroleid) {
-        $this->userroleid = $userroleid;
+    function setUserRoleId($userRoleId) {
+        $this->userRoleId = $userRoleId;
     }
 
-    function setRoleid($roleid) {
-        $this->roleid = $roleid;
+    function setRoleId($roleId) {
+        $this->roleId = $roleId;
     }
 
-    function setUserid($userid) {
-        $this->userid = $userid;
+    function setUserId($userId) {
+        $this->userId = $userId;
     }
-
-
 
 
 }

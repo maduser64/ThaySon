@@ -9,19 +9,18 @@
 /**
  * Description of Status
  *
- * @author NgoCo
+ * @author TriTueViet
  */
 class Status {
-    private $statusid;
+    private $statusId;
     private $name;
     private $description;
     
     function __construct() {
         
     }
-    
-    function getStatusid() {
-        return $this->statusid;
+    function getStatusId() {
+        return $this->statusId;
     }
 
     function getName() {
@@ -32,8 +31,8 @@ class Status {
         return $this->description;
     }
 
-    function setStatusid($statusid) {
-        $this->statusid = $statusid;
+    function setStatusId($statusId) {
+        $this->statusId = $statusId;
     }
 
     function setName($name) {
@@ -43,5 +42,6 @@ class Status {
     function setDescription($description) {
         $this->description = $description;
     }
+
 
 }

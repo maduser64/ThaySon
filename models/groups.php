@@ -9,27 +9,31 @@
 /**
  * Description of Groups
  *
- * @author NgoCo
+ * @author TriTueViet
  */
 class Groups {
-    private $groupid;
-    private $facebookgroupid;
+
+    private $groupId;
+    private $facebookGroupId;
     private $name;
     private $privacy;
     private $description;
     private $icon;
     private $email;
     private $owner;
-    private $creategrouptime;
-    private $createtime;
-    
-    private $userid;
+    private $createGroupTime;
+    private $createTime;
 
     function __construct() {
         
     }
-    function getGroupid() {
-        return $this->groupid;
+
+    function getGroupId() {
+        return $this->groupId;
+    }
+
+    function getFacebookGroupId() {
+        return $this->facebookGroupId;
     }
 
     function getName() {
@@ -56,20 +60,20 @@ class Groups {
         return $this->owner;
     }
 
-    function getUserid() {
-        return $this->userid;
+    function getCreateGroupTime() {
+        return $this->createGroupTime;
     }
 
-    function getCreategrouptime() {
-        return $this->creategrouptime;
+    function getCreateTime() {
+        return $this->createTime;
     }
 
-    function getCreatetime() {
-        return $this->createtime;
+    function setGroupId($groupId) {
+        $this->groupId = $groupId;
     }
 
-    function setGroupid($groupid) {
-        $this->groupid = $groupid;
+    function setFacebookGroupId($facebookGroupId) {
+        $this->facebookGroupId = $facebookGroupId;
     }
 
     function setName($name) {
@@ -96,26 +100,12 @@ class Groups {
         $this->owner = $owner;
     }
 
-    function setUserid($userid) {
-        $this->userid = $userid;
+    function setCreateGroupTime($createGroupTime) {
+        $this->createGroupTime = $createGroupTime;
     }
 
-    function setCreategrouptime($creategrouptime) {
-        $this->creategrouptime = $creategrouptime;
+    function setCreateTime($createTime) {
+        $this->createTime = $createTime;
     }
-
-    function setCreatetime($createtime) {
-        $this->createtime = $createtime;
-    }
-    function getFacebookgroupid() {
-        return $this->facebookgroupid;
-    }
-
-    function setFacebookgroupid($facebookgroupid) {
-        $this->facebookgroupid = $facebookgroupid;
-    }
-
-
-
 
 }
