@@ -243,34 +243,33 @@ if (isset($_POST['deleteUser'])) {
                                     </div><!-- /.box-header -->
                                     <div class="box-body ">
                                         <input type="hidden" name="param" />
-                                        <div class="col-md-12" style="padding-bottom: 10px;">
-
+                                        <div class="col-md-15" style="padding-bottom: 10px;">
+                                            
                                             <div class= "col-md-1 text-left ">
                                                 <button class="btn bg-blue btn-sm btn-danger" type="submit" name="deleteUser">Delete</button>
                                             </div>
-                                            <div class= "col-md-2 text-center " style="padding-bottom: 20px;">
+                                            <div class= "col-md-2 text-center ">
                                                 <div class="form-group">                                 
-                                                    <a class="btn bg-blue col-md-6 btn-sm" href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');"><i class="fa fa-plus-circle"></i> Add User</a>
+                                                    <a class="btn bg-blue btn-sm" href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');"><i class="fa fa-plus-circle"></i> Add User</a>
                                                 </div>                     
                                             </div>   
-                                            <div class= "col-md-4 text-center " style="padding-bottom: 20px;">
+                                            <div class= "col-md-2 text-center ">
                                                 <div class="form-group">                                 
-                                                    <a class="btn bg-blue col-md-6 btn-sm" href="sentMailPage.php" ><i class="fa fa-plus-circle"></i> Select to send mail</a>
+                                                    <a class="btn bg-blue btn-sm" href="sentMailPage.php" ><i class="fa fa-plus-circle"></i> Select to send mail</a>
                                                 </div>                     
                                             </div>   
-                                            <div class="col-md-5">
+                                            <div class="col-md-4 text-center">
                                                 <!-- search form -->
-
-                                                <div class="" class="col-md-12">
-                                                    <input type="text" name="usename"  class="form-group2 col-md-8" placeholder="Search user..." value="<?php echo$key; ?>"/>
                                                     <div class="form-group"> 
                                                         <span class="input-group-btn">
-                                                            <button  name="searchUser" id="search-btn" class="form-group3 btn bg-blue col-md-4"
+                                                            <input type="text" name="usename"  class="form-group2 col-md-8" placeholder="Search user..." value="<?php echo$key; ?>"/>
+                                                            <button  name="searchUser" id="search-btn" class="form-group3 btn bg-blue btm-sm col-md-2"
                                                                 onclick="check();" ><i class="fa fa-search"></i></button>
                                                         </span>                                  
                                                     </div>
-                                                </div> <!-- input -->
+                                                
                                             </div> 
+                                                
                                         </div>
                                         <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
                                             <thead>
@@ -279,9 +278,9 @@ if (isset($_POST['deleteUser'])) {
                                                     <th class="text-center"><small>Full Name</small></th>
                                                     <th class="text-center"><small>User name</small></th>
                                                     <th class="text-center"><small>Current Address</small></th>
-                                                    <th class="text-center"><small>Address</small></th>
-                                                    <th class="text-center"><small>Home Number</small></th>
+                                                    <th class="text-center"><small>Home town</small></th>
                                                     <th class="text-center"><small>Phone Number</small></th>
+                                                    <th class="text-center"><small>Home Number</small></th>
                                                     <th class="text-center"><small>Email</small></th>
                                                     <th class="text-center"><small>Birthday</small></th>
                                                     <th class="text-center"><small>Gender</small></th>
@@ -304,8 +303,8 @@ if (isset($_POST['deleteUser'])) {
                                                     echo "<td class=\"text-center\" ><small>{$row->getUserName()}</smail></td>";
                                                     echo "<td class=\"text-center\" ><small>{$row->getAddress1()}</smail></td>";
                                                     echo "<td class=\"text-center\" ><small>{$row->getAddress2()}</smail></td>";
-                                                    echo "<td class=\"text-center\" ><small>{$row->getPhoneNumber2()}</smail></td>";
                                                     echo "<td class=\"text-center\" ><small>{$row->getPhoneNumber1()}</smail></td>";
+                                                    echo "<td class=\"text-center\" ><small>{$row->getPhoneNumber2()}</smail></td>";
                                                     echo "<td class=\"text-center\" ><small>{$row->getEmail()}</smail></td>";
                                                     echo "<td class=\"text-center\" ><small>{$row->getBirthday()}</smail></td>";
                                                     if ($row->getGender() == 1)

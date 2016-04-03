@@ -237,7 +237,7 @@ if (isset($_POST['save'])) {
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-3 control-label">Address:</label>
+                                            <label class="col-lg-3 control-label">Current Address:</label>
                                             <div class="col-lg-8">
                                                 <input class="form-control" value="<?php echo $res->getAddress1() ?>" type="text" name="address">
                                             </div>
@@ -268,7 +268,7 @@ if (isset($_POST['save'])) {
                                         </div>
                                         <br><br>
                                         <div class="form-group">
-                                            <label class="col-lg-3 control-label">Parents' phone number:</label>
+                                            <label class="col-lg-3 control-label">Home Number:</label>
                                             <div class="col-lg-8">
                                                 <input class="form-control" value="<?php echo $res->getPhoneNumber2() ?>" type="text" name="phonenumber2">
                                             </div>
