@@ -9,6 +9,7 @@ require_once $ROOT . '/models/inbox.php';
 require_once $ROOT . '/dao/daoInbox.php';
 require_once $ROOT . '/dao/daoFeeds.php';
 require_once $ROOT . '/models/feeds.php';
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
 }

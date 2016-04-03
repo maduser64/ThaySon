@@ -27,68 +27,23 @@ class Users {
     private $email;
     private $school;
     private $class;
+    private $facebookId;
     private $createTime;
     private $updateTime;
 
     function __construct() {
         
     }
-    function getAvatar() {
-        return $this->avatar;
+
+    function getFacebookId() {
+        return $this->facebookId;
     }
 
-    function setAvatar($avatar) {
-        $this->avatar = $avatar;
+    function setFacebookId($facebookId) {
+        $this->facebookId = $facebookId;
     }
 
-        function getAddress1() {
-        return $this->address1;
-    }
-    function getSchool() {
-        return $this->school;
-    }
-
-    function getClass() {
-        return $this->class;
-    }
-
-    function setSchool($school) {
-        $this->school = $school;
-    }
-
-    function setClass($class) {
-        $this->class = $class;
-    }
-
-        function getAddress2() {
-        return $this->address2;
-    }
-
-    function getPhoneNumber1() {
-        return $this->phoneNumber1;
-    }
-
-    function getPhoneNumber2() {
-        return $this->phoneNumber2;
-    }
-
-    function setAddress1($address1) {
-        $this->address1 = $address1;
-    }
-
-    function setAddress2($address2) {
-        $this->address2 = $address2;
-    }
-
-    function setPhoneNumber1($phoneNumber1) {
-        $this->phoneNumber1 = $phoneNumber1;
-    }
-
-    function setPhoneNumber2($phoneNumber2) {
-        $this->phoneNumber2 = $phoneNumber2;
-    }
-
-        function getUserId() {
+    function getUserId() {
         return $this->userId;
     }
 
@@ -103,15 +58,45 @@ class Users {
     function getFullName() {
         return $this->fullName;
     }
+
+    function getAddress1() {
+        return $this->address1;
+    }
+
+    function getAddress2() {
+        return $this->address2;
+    }
+
     function getBirthday() {
         return $this->birthday;
     }
+
+    function getAvatar() {
+        return $this->avatar;
+    }
+
+    function getPhoneNumber1() {
+        return $this->phoneNumber1;
+    }
+
+    function getPhoneNumber2() {
+        return $this->phoneNumber2;
+    }
+
     function getGender() {
         return $this->gender;
     }
 
     function getEmail() {
         return $this->email;
+    }
+
+    function getSchool() {
+        return $this->school;
+    }
+
+    function getClass() {
+        return $this->class;
     }
 
     function getCreateTime() {
@@ -137,8 +122,29 @@ class Users {
     function setFullName($fullName) {
         $this->fullName = $fullName;
     }
+
+    function setAddress1($address1) {
+        $this->address1 = $address1;
+    }
+
+    function setAddress2($address2) {
+        $this->address2 = $address2;
+    }
+
     function setBirthday($birthday) {
         $this->birthday = $birthday;
+    }
+
+    function setAvatar($avatar) {
+        $this->avatar = $avatar;
+    }
+
+    function setPhoneNumber1($phoneNumber1) {
+        $this->phoneNumber1 = $phoneNumber1;
+    }
+
+    function setPhoneNumber2($phoneNumber2) {
+        $this->phoneNumber2 = $phoneNumber2;
     }
 
     function setGender($gender) {
@@ -147,6 +153,14 @@ class Users {
 
     function setEmail($email) {
         $this->email = $email;
+    }
+
+    function setSchool($school) {
+        $this->school = $school;
+    }
+
+    function setClass($class) {
+        $this->class = $class;
     }
 
     function setCreateTime($createTime) {

@@ -12,33 +12,47 @@ require_once $ROOT . '/models/groups.php';
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
 }
+if($_GET['update']!=null){
+    ?>
+    <script>alert('Done!');</script>
+    <?php
+}
+$res= new Users();
 $res = getUserById($_SESSION['user_id']);
 $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
+
 //$listGroup = (array) getListGroupsWithIdUser($_SESSION['user_id']);
 //echo '---'.$listInbox;
 if (isset($_POST['save'])) {
-    //$uname = mysql_real_escape_string($_POST['uname']);
+
     $email = mysql_real_escape_string($_POST['email']);
-    //$upass = (mysql_real_escape_string($_POST['pass']));
     $fullname = mysql_real_escape_string($_POST['fullname']);
     $address = mysql_real_escape_string($_POST['address']);
-    $phone = (mysql_real_escape_string($_POST['phone']));
-    $gender = mysql_real_escape_string($_POST['gender']);  // Storing Selected Value In Variable
+    $phone = mysql_real_escape_string($_POST['phonenumber']);
+    $gender = mysql_real_escape_string($_POST['gender']);  
     $tdate = mysql_real_escape_string($_POST['date']);
-    //$date = str_replace('/', '-', $tdate);
-    $user = new Users();
-
-    //$res->setUserName($uname);
+    $phone2 = mysql_real_escape_string($_POST['phonenumber2']);
+    $address2 = mysql_real_escape_string($_POST['address2']);
+    $class = mysql_real_escape_string($_POST['class']);
+    $school = mysql_real_escape_string($_POST['school']);
+    
+   // echo ''.$email.$fullname.$address.$phone.$phone2;
+    
     $res->setEmail($email);
-    $res->setPhoneNumber($phone);
-    $res->setAddress($address);
+    $res->setPhoneNumber1($phone);
+    $res->setAddress1($address);
     $res->setGender($gender);
     $res->setBirthday(date('Y-m-d', strtotime($tdate)));
-    // $user->setPassword($upass);
+    $res->setAddress2($address2);
+    $res->setClass($class);
+    $res->setSchool($school);
+    $res->setPhoneNumber2($phone2);
     $res->setFullName($fullname);
+    
     $insert = updateUsers($res);
-    if ($insert != null) {
-        header("Location: profile.php");
+    
+    if ($insert ==true) {
+        header("Location: profile.php?update=ok");
     } else {
         ?>
         <script>alert('error while registering you...');</script>
@@ -69,9 +83,9 @@ if (isset($_POST['save'])) {
         <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
 
         <script>
-            $(function () {
-                $("#datepicker").datepicker();
-            });
+    $(function () {
+        $("#datepicker").datepicker();
+    });
         </script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -93,10 +107,10 @@ if (isset($_POST['save'])) {
                             <li class="dropdown messages-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-envelope-o"></i>
-                                    <span class="label label-success">4</span>
+                                    <span class="label label-success"><?php echo '' . ($listInbox == null ? 0 : $listInbox); ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">You have 4 messages</li>
+                                    <li class="header">You have <?php echo '' . ($listInbox == null ? 0 : $listInbox); ?> messages</li>                                   
                                     <li class="footer"><a href="inboxView.php?pageNumInbox=1">See All Messages</a></li>
                                 </ul>
                             </li>
@@ -191,7 +205,7 @@ if (isset($_POST['save'])) {
                             <div class=" col-sm-6 "> 
 
                                 <div class="box box-primary box-header with-border" >
-<!--                                    <h2 class=" center">Update Personal info</h2>-->
+                                    <!--                                    <h2 class=" center">Update Personal info</h2>-->
                                     <!--/.box-header-->  
 
                                     <form class="form-horizontal" role="form" method="post">
@@ -208,11 +222,11 @@ if (isset($_POST['save'])) {
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Phone Number:</label>
                                             <div class="col-lg-8">
-                                                <input name="phone" class="form-control" value="<?php echo $res->getPhoneNumber1() ?>" type="text">
+                                                <input name="phonenumber" class="form-control" value="<?php echo $res->getPhoneNumber1() ?>" type="text">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-3 control-label">DOB:</label>
+                                            <label class="col-lg-3 control-label">Date of birth:</label>
                                             <div class="col-lg-8">
                                                 <div class='input-group date' id='datepicker' data-provide="datepicker" data-date-format="dd-mm-yyyy">
                                                     <input type='text' class="form-control" name = "date" value="<?php echo $res->getBirthday() ?>"/>
@@ -226,6 +240,12 @@ if (isset($_POST['save'])) {
                                             <label class="col-lg-3 control-label">Address:</label>
                                             <div class="col-lg-8">
                                                 <input class="form-control" value="<?php echo $res->getAddress1() ?>" type="text" name="address">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Email:</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" value="<?php echo $res->getEmail() ?>" type="text" name="email">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -246,20 +266,46 @@ if (isset($_POST['save'])) {
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php
-                                           if(checkRole($res->getUserId(), 5)){
-                                        ?>
+                                        <br><br>
                                         <div class="form-group">
-                                            <label class="col-md-5 control-label"></label>
-                                            <div class="col-md-6">
-                                                
-                                                <button class="btn btn-primary" type="submit" name="save"><i class="fa fa-save"></i> Save</button>
-<!--                                                <input class="btn btn-primary"  value="Save" type="submit" name="save">-->
-                                                <span style="padding-right: 10px;"></span>
-                                                <input class="btn btn-default"  type="reset" value="Cancel"/>
-                                            </div
-                                        </div> 
-                                           <?php }?>
+                                            <label class="col-lg-3 control-label">Parents' phone number:</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" value="<?php echo $res->getPhoneNumber2() ?>" type="text" name="phonenumber2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Home town:</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" value="<?php echo $res->getAddress2() ?>" type="text" name="address2">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Class:</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" value="<?php echo $res->getClass() ?>" type="text" name="class">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">School:</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" value="<?php echo $res->getSchool() ?>" type="text" name="school">
+                                            </div>
+                                        </div>
+
+                                        <?php
+                                        if (checkRole($res->getUserId(), 5)) {
+                                            ?>
+                                            <div class="form-group">
+                                                <label class="col-md-5 control-label"></label>
+                                                <div class="col-md-6">
+
+                                                    <button class="btn btn-primary" type="submit" name="save"><i class="fa fa-save"></i> Save</button>
+    <!--                                                <input class="btn btn-primary"  value="Save" type="submit" name="save">-->
+                                                    <span style="padding-right: 10px;"></span>
+                                                    <input class="btn btn-default"  type="reset" value="Cancel"/>
+                                                </div
+                                            </div> 
+                                        <?php } ?>
                                     </form>
                                 </div>
                             </div>
