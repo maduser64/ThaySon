@@ -121,7 +121,7 @@ if (isset($accessToken)) {
 
     echo $id_group . ' ' . createUser_Group($user_group);
 
-    $member = new Members;
+    $member = new Members();
     foreach ($feedEdge["members"] as $status2) {
         try {
             echo '<br><br>------------------------------------------<br>  ' . $status2->getProperty("id");

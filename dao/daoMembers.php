@@ -6,17 +6,22 @@ require_once $ROOT .'/models/members.php';
 $memberId = "MemberId";
 $facebookIdMember = "FacebookIdMember";
 $name = "Name";
-$realname = "RealName";
 $administrator = "Administrator";
 $groupId = "GroupId";
-$memberId = "MemberId";
-$facebookProfileId = "FacebookProfileMember";
+$realName = "RealName";
+$address1 = "Address1";
+$address2 = "Address2";
+$birthday = "Birthday";
+$phoneNumber1 = "PhoneNumber1";
+$phoneNumber2 = "PhoneNumber2";
+$email = "Email";
+$gender = "Gender";
 $class = "Class";
 $school = "School";
-$phoneNumber1 = "PhoneNumber1";
-$phoneNumber2="PhoneNumber2";
-$address1= "Address1";
-$address2= "Address2";
+$facebookLink = "FacebookLink";
+$facebookProfileId = "FacebookProfileId";
+$createTime = "CreateTime";
+$updateTime = "UpdateTime";
 
 function getMemberIdUseMemberId($varName) {
     global $memberId,$memberId;
@@ -35,30 +40,15 @@ function getMemberIdUseFacebookIdMember($varName) {
     global $memberId,$facebookIdMember;
     $db = new DB_CONNECT();
     $result = mysql_query("SELECT *FROM members WHERE ".$facebookIdMember." = '".$varName."'") or die(mysql_error());
-    $varName=null;
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_array($result)) {
             $varName=$row[$memberId];
-            break;
+            return $varName;
         }
     }
- 
-    return $varName;
+    return NULL;
 }
-function getMemberIdUseFacebookIdMemberAndGroupId($varName,$varGroupId) {
-    global $memberId,$facebookIdMember,$groupId;
-    $db = new DB_CONNECT();
-    $result = mysql_query("SELECT *FROM members WHERE ".$facebookIdMember." = '".$varName."' and ".$groupId." = '".$varGroupId."'") or die(mysql_error());
-    $varName=null;
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_array($result)) {
-            $varName=$row[$memberId];
-            break;
-        }
-    }
- 
-    return $varName;
-}
+
 function getMemberIdUseName($varName) {
     global $memberId,$name;
     $db = new DB_CONNECT();
@@ -98,11 +88,193 @@ function getMemberIdUseGroupId($varName) {
     return $varName;
 }
 
-function getListMembers($varIdGroup) {
- global    $memberId, $facebookIdMember, $name, $administrator, $groupId; 
+function getMemberIdUseRealName($varName) {
+    global $memberId,$realName;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$realName." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseAddress1($varName) {
+    global $memberId,$address1;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$address1." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseAddress2($varName) {
+    global $memberId,$address2;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$address2." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseBirthday($varName) {
+    global $memberId,$birthday;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$birthday." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUsePhoneNumber1($varName) {
+    global $memberId,$phoneNumber1;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$phoneNumber1." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUsePhoneNumber2($varName) {
+    global $memberId,$phoneNumber2;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$phoneNumber2." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseEmail($varName) {
+    global $memberId,$email;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$email." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseGender($varName) {
+    global $memberId,$gender;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$gender." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseClass($varName) {
+    global $memberId,$class;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$class." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseSchool($varName) {
+    global $memberId,$school;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$school." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseFacebookLink($varName) {
+    global $memberId,$facebookLink;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$facebookLink." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseFacebookProfileId($varName) {
+    global $memberId,$facebookProfileId;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$facebookProfileId." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseCreateTime($varName) {
+    global $memberId,$createTime;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$createTime." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getMemberIdUseUpdateTime($varName) {
+    global $memberId,$updateTime;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$updateTime." = '".$varName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            break;
+        }
+    }
+    return $varName;
+}
+
+function getListMembersUsingGroupId($varName) {
+ global    $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school,$facebookLink, $facebookProfileId, $createTime, $updateTime; 
 $listMembers = array();
     $db = new DB_CONNECT();
-    $result = mysql_query("SELECT *FROM members WHERE $groupId=".$varIdGroup ) or die(mysql_error());
+    $result = mysql_query("SELECT *FROM members WHERE ".$groupId."='".$varName."'") or die(mysql_error());
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_array($result)) {
             $members = new Members();
@@ -111,137 +283,97 @@ $listMembers = array();
             $members->setName($row[$name]);
             $members->setAdministrator($row[$administrator]);
             $members->setGroupId($row[$groupId]);
-            $members->setAddress1($row['Address1']);
-            $members->setAddress2($row['Address2']);
-            $members->setClass($row['Class']);
-            $members->setSchool($row['School']);
-            $members->setEmail($row['Email']);
-            $members->setPhoneNumber1($row['PhoneNumber1']);
-            $members->setPhoneNumber2($row['PhoneNumber2']);
-            $members->setFullname($row['Realname']);
-            $members->setFacebookProfileId($row['FacebookProfileId']);
+            $members->setRealName($row[$realName]);
+            $members->setAddress1($row[$address1]);
+            $members->setAddress2($row[$address2]);
+            $members->setBirthday($row[$birthday]);
+            $members->setPhoneNumber1($row[$phoneNumber1]);
+            $members->setPhoneNumber2($row[$phoneNumber2]);
+            $members->setEmail($row[$email]);
+            $members->setGender($row[$gender]);
+            $members->setClass($row[$class]);
+            $members->setSchool($row[$school]);
+            $members->setFacebookLink($row[$facebookLink]);
+            $members->setFacebookProfileId($row[$facebookProfileId]);
+            $members->setCreateTime($row[$createTime]);
+            $members->setUpdateTime($row[$updateTime]);
+
             array_push($listMembers, $members);
         }
     }
     return $listMembers;
 }
 
-// get member in specific  group by key
-function getListMembersByKey($varIdGroup,$key) {
- global    $memberId, $facebookIdMember, $name, $administrator, $groupId; 
-$listMembers = array();
-    $db = new DB_CONNECT();
-    $result = mysql_query("SELECT *FROM members WHERE $groupId=".$varIdGroup." and FacebookIdMember like N'%".$key."%'" ) or die(mysql_error());
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_array($result)) {
-            $members = new Members();
-            $members->setMemberId($row[$memberId]);
-            $members->setFacebookIdMember($row[$facebookIdMember]);
-            $members->setName($row[$name]);
-            $members->setAdministrator($row[$administrator]);
-            $members->setGroupId($row[$groupId]);
-            $members->setAddress1($row['Address1']);
-            $members->setAddress2($row['Address2']);
-            $members->setSchool($row['Class']);
-            $members->setClass($row['School']);
-            $members->setEmail($row['Email']);
-            $members->setPhoneNumber1($row['PhoneNumber1']);
-            $members->setPhoneNumber2($row['PhoneNumber2']);
-            $members->setFullname($row['Realname']);
-            $members->setFacebookProfileId($row['FacebookProfileId']);
-            array_push($listMembers, $members);
-        }
-    }
-    $db->close();
-    return $listMembers;
-}
-//// get member in all  groups by key 
-function getListMembersByKeyInAllGroup($user,$key) {
- global    $memberId, $facebookIdMember, $name, $administrator, $groupId; 
-$listMembers = array();
-    $db = new DB_CONNECT();
-    $result = mysql_query("SELECT *FROM members m,user_group ug WHERE ug.userId=".$user
-            . " and m.groupId = ug.groupId and m.FacebookIdMember like N'%".$key."%'" ) or die(mysql_error());
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_array($result)) {
-            $members = new Members();
-            $members->setMemberId($row[$memberId]);
-            $members->setFacebookIdMember($row[$facebookIdMember]);
-            $members->setName($row[$name]);
-            $members->setFullname($row[$realname]);
-            $members->setAdministrator($row[$administrator]);
-            $members->setGroupId($row[$groupId]);
-            $members->setAddress1($row['Address1']);
-            $members->setAddress2($row['Address2']);
-            $members->setSchool($row['Class']);
-            $members->setClass($row['School']);
-            $members->setEmail($row['Email']);
-            $members->setPhoneNumber1($row['PhoneNumber1']);
-            $members->setPhoneNumber2($row['PhoneNumber2']);
-            $members->setFullname($row['Realname']);
-            $members->setFacebookProfileId($row['FacebookProfileId']);
-            array_push($listMembers, $members);
-        }
-    }
-    return $listMembers;
-}
-//
 function updateMembers(Members $members) {
-  global   $memberId, $facebookIdMember, $name, $administrator, $groupId,$address1
-          ,$address2,$phoneNumber1,$phoneNumber2,$school,$class; 
+  global   $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school, $facebookLink, $facebookProfileId, $createTime, $updateTime; 
     $db = new DB_CONNECT();
     $result = mysql_query("UPDATE members SET  "
             .$facebookIdMember." = '". $members->getFacebookIdMember()."', "
             .$name." = '". $members->getName()."', "
             .$administrator." = '". $members->getAdministrator()."', "
             .$groupId." = '". $members->getGroupId()."', "
+            .$realName." = '". $members->getRealName()."', "
             .$address1." = '". $members->getAddress1()."', "
             .$address2." = '". $members->getAddress2()."', "
+            .$birthday." = '". $members->getBirthday()."', "
             .$phoneNumber1." = '". $members->getPhoneNumber1()."', "
             .$phoneNumber2." = '". $members->getPhoneNumber2()."', "
+            .$email." = '". $members->getEmail()."', "
+            .$gender." = '". $members->getGender()."', "
             .$class." = '". $members->getClass()."', "
             .$school." = '". $members->getSchool()."', "
+            .$facebookLink." = '". $members->getFacebookLink()."', "
             .$facebookProfileId." = '". $members->getFacebookProfileId()
             ."' WHERE ".$memberId." = '".$members->getMemberId()."'");
     if ($result) {
-        return true;
+        return 'true';
     }
-    return false;
+    return 'false';
 }
 
 function createMembers(Members $members) {
-    global   $memberId, $facebookIdMember, $name, $administrator, $groupId; 
+    global   $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school, $facebookLink, $facebookProfileId, $createTime, $updateTime; 
     $db = new DB_CONNECT();
-    
-    $exitMember=getMemberIdUseFacebookIdMemberAndGroupId($members->getFacebookIdMember(),$members->getGroupId());
-    if($exitMember!=null)   return false;
-    
+    $id=getMemberIdUseFacebookIdMember($members->getFacebookIdMember());
+    if($id!=NULL){
+        $members->setMemberId($id);
+        updateMembers($members);
+        return;
+    }
     $result = mysql_query("INSERT INTO members("
             .$facebookIdMember.","
             .$name.","
             .$administrator.","
-            .$groupId
+            .$groupId.","
+            .$realName.","
             .$address1.","
             .$address2.","
+            .$birthday.","
             .$phoneNumber1.","
             .$phoneNumber2.","
+            .$email.","
+            .$gender.","
             .$class.","
             .$school.","
+            .$facebookLink.","
             .$facebookProfileId
             .") VALUES( '"
             .$members->getFacebookIdMember()."','"
             .$members->getName()."','"
             .$members->getAdministrator()."','"
             .$members->getGroupId()."','"
+            .$members->getRealName()."','"
             .$members->getAddress1()."','"
             .$members->getAddress2()."','"
+            .$members->getBirthday()."','"
             .$members->getPhoneNumber1()."','"
             .$members->getPhoneNumber2()."','"
+            .$members->getEmail()."','"
+            .$members->getGender()."','"
             .$members->getClass()."','"
-            .$members->getSchool().","
-            .$members->getFacebookProfileId()
-            ."')");
-    
+            .$members->getSchool()."','"
+            .$members->getFacebookLink()."','"
+            .$members->getFacebookProfileId()."')") or die(mysql_error());
     if ($result) {
         return true;
     }
@@ -297,15 +429,145 @@ function deleteMembersUseGroupId($id) {
     }
     return false;
 }   
-function updateInfor($id, $iclass, $ifullname, $iphone1, $iphone2, $iaddress1, $iaddress2, $iemail, $ischool){
-     $db = new DB_CONNECT();
-     $sql = "update Members set Class = '".$iclass."',Realname='".$ifullname."'"
-             . ",PhoneNumber1='".$iphone1."',Address1='".$iaddress1."',Email ='".$iemail."'"
-             . ",PhoneNumber2='".$iphone2."',Address2='".$iaddress2."',School ='".$ischool
-             . "' where MemberId = ".$id.";";
-     //echo ''.$sql;
-     $result = mysql_query($sql);
-     if($result) return 'true';
-     return 'false';
-}
+
+function deleteMembersUseRealName($id) {
+    global $realName;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$realName." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseAddress1($id) {
+    global $address1;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$address1." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseAddress2($id) {
+    global $address2;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$address2." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseBirthday($id) {
+    global $birthday;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$birthday." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUsePhoneNumber1($id) {
+    global $phoneNumber1;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$phoneNumber1." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUsePhoneNumber2($id) {
+    global $phoneNumber2;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$phoneNumber2." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseEmail($id) {
+    global $email;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$email." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseGender($id) {
+    global $gender;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$gender." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseClass($id) {
+    global $class;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$class." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseSchool($id) {
+    global $school;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$school." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseFacebookLink($id) {
+    global $facebookLink;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$facebookLink." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseFacebookProfileId($id) {
+    global $facebookProfileId;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$facebookProfileId." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseCreateTime($id) {
+    global $createTime;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$createTime." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
+function deleteMembersUseUpdateTime($id) {
+    global $updateTime;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM members WHERE ".$updateTime." = '".$id."'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}   
+
 ?>

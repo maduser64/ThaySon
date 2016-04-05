@@ -158,7 +158,7 @@ else if(checkRoleTV($_SESSION['user_id'])|| checkRoleQuanTri($_SESSION['user_id'
                 <!-- Main content -->
                 <section class="content">
                     <div class= "col-md-12 text-center " style="padding-bottom: 20px;">
-                        <?php if(checkRoleTV($_SESSION['user_id'])==false){ ?>
+                        <?php if(checkRoleAdminUsingUserId($_SESSION['user_id'])==true||  checkRoleQuanTri($_SESSION['user_id'])==true){ ?>
                         <a class="btn bg-blue col-md-1 btn-sm" href="homePage.php"><i class="fa fa-backward"></i>  Back </a> 
                         <?php } ?>    
                         <?php if ($rule==TRUE) { ?>                          

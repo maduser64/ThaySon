@@ -15,52 +15,34 @@ class Members {
 
     private $memberId;
     private $facebookIdMember;
-    private $facebookProfileId;
     private $name;
     private $administrator;
     private $groupId;
-    private $fullname;
+    private $realName;
     private $address1;
     private $address2;
+    private $birthday;
     private $phoneNumber1;
     private $phoneNumber2;
+    private $email;
+    private $gender;
     private $class;
     private $school;
-    private $email;
+    private $facebookLink;
+    private $facebookProfileId;
+    private $createTime;
+    private $updateTime;
 
     function __construct() {
         
     }
-    function getFacebookProfileId() {
-        return $this->facebookProfileId;
+
+    function getFacebookLink() {
+        return $this->facebookLink;
     }
 
-    function setFacebookProfileId($facebookProfileId) {
-        $this->facebookProfileId = $facebookProfileId;
-    }
-
-        function getFullname() {
-        return $this->fullname;
-    }
-
-    function getClass() {
-        return $this->class;
-    }
-
-    function getEmail() {
-        return $this->email;
-    }
-
-    function setFullname($fullname) {
-        $this->fullname = $fullname;
-    }
-
-    function setClass($class) {
-        $this->class = $class;
-    }
-
-    function setEmail($email) {
-        $this->email = $email;
+    function setFacebookLink($facebookLink) {
+        $this->facebookLink = $facebookLink;
     }
 
     function getMemberId() {
@@ -83,6 +65,58 @@ class Members {
         return $this->groupId;
     }
 
+    function getRealName() {
+        return $this->realName;
+    }
+
+    function getAddress1() {
+        return $this->address1;
+    }
+
+    function getAddress2() {
+        return $this->address2;
+    }
+
+    function getBirthday() {
+        return $this->birthday;
+    }
+
+    function getPhoneNumber1() {
+        return $this->phoneNumber1;
+    }
+
+    function getPhoneNumber2() {
+        return $this->phoneNumber2;
+    }
+
+    function getEmail() {
+        return $this->email;
+    }
+
+    function getGender() {
+        return $this->gender;
+    }
+
+    function getClass() {
+        return $this->class;
+    }
+
+    function getSchool() {
+        return $this->school;
+    }
+
+    function getFacebookProfileId() {
+        return $this->facebookProfileId;
+    }
+
+    function getCreateTime() {
+        return $this->createTime;
+    }
+
+    function getUpdateTime() {
+        return $this->updateTime;
+    }
+
     function setMemberId($memberId) {
         $this->memberId = $memberId;
     }
@@ -102,24 +136,9 @@ class Members {
     function setGroupId($groupId) {
         $this->groupId = $groupId;
     }
-    function getAddress1() {
-        return $this->address1;
-    }
 
-    function getAddress2() {
-        return $this->address2;
-    }
-
-    function getPhoneNumber1() {
-        return $this->phoneNumber1;
-    }
-
-    function getPhoneNumber2() {
-        return $this->phoneNumber2;
-    }
-
-    function getSchool() {
-        return $this->school;
+    function setRealName($realName) {
+        $this->realName = $realName;
     }
 
     function setAddress1($address1) {
@@ -130,6 +149,10 @@ class Members {
         $this->address2 = $address2;
     }
 
+    function setBirthday($birthday) {
+        $this->birthday = $birthday;
+    }
+
     function setPhoneNumber1($phoneNumber1) {
         $this->phoneNumber1 = $phoneNumber1;
     }
@@ -138,9 +161,34 @@ class Members {
         $this->phoneNumber2 = $phoneNumber2;
     }
 
+    function setEmail($email) {
+        $this->email = $email;
+    }
+
+    function setGender($gender) {
+        $this->gender = $gender;
+    }
+
+    function setClass($class) {
+        $this->class = $class;
+    }
+
     function setSchool($school) {
         $this->school = $school;
     }
+
+    function setFacebookProfileId($facebookProfileId) {
+        $this->facebookProfileId = $facebookProfileId;
+    }
+
+    function setCreateTime($createTime) {
+        $this->createTime = $createTime;
+    }
+
+    function setUpdateTime($updateTime) {
+        $this->updateTime = $updateTime;
+    }
+
 }
 
 ?>

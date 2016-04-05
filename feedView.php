@@ -19,6 +19,7 @@ if ($_GET['groupId'] != null) {
     $currentGroup = $_GET['groupId'];
     $current = $_GET['pageNum'] == null ? 1 : $_GET['pageNum'];
 } else {
+    header("Location: homePage.php");
     return;
 }
 try {
@@ -41,6 +42,13 @@ $listFeeds = (array) getFeedIdUseGroupId($_GET['groupId'], $start, 10);
 $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
 $totalRecord = getTotalRecord($_SESSION['user_id']);
 $numPage = round($totalRecord / 10);
+
+function getLastWeekDates()
+{
+   $date = new DateTime('7 days ago');
+ 
+    return $date->format('m-d-Y');
+}
 ?>
 <html>
     <head>
@@ -200,7 +208,7 @@ $numPage = round($totalRecord / 10);
                                     <label class="col-md-4 control-label">From Date </label>
                                     <div class="col-md-8">
                                         <div class='input-group date' id='datetimepicker-from-date' data-provide="datepicker" data-date-format="mm-dd-yyyy">
-                                            <input type='text' class="form-control" name = "from-date" placeholder="Input start date"/>
+                                            <input type='text' class="form-control" name = "from-date" placeholder="Input start date" value="<?php echo getLastWeekDates();?>"/>
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -210,10 +218,10 @@ $numPage = round($totalRecord / 10);
                             </div>  
                             <div class="col-md-4 left">
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">To Date</label>
+                                    <label class="col-md-4 control-label">To Date </label>
                                     <div class="col-md-8">
                                         <div class='input-group date' id='datetimepicker-to-date' data-provide="datepicker" data-date-format="mm-dd-yyyy">
-                                            <input type='text' class="form-control" name = "to-date" placeholder="Input end date"/>
+                                            <input type='text' class="form-control" name = "to-date" placeholder="Input end date" value="<?php $now = new DateTime(); echo $now->format('m-d-Y'); ?>"/>
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>

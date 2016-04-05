@@ -19,12 +19,11 @@ if (!isset($_SESSION['user_id'])) {
 $res = getUserById($_SESSION['user_id']);
 if (isset($_GET['groupId'])) {
     $listMembers = (array) getListMembersUsingGroupId($_GET['groupId']);
-}else {
+} else {
     header("Location: homePage.php");
     return;
 }
 $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
-
 ?>
 
 <html>
@@ -82,34 +81,49 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
         </script>
     </head>
     <?php
-//    if (isset($_POST["update"])) {
-//
-//        $iclass = $_POST['iclass'];
-//        $ifullname = $_POST['irealname'];
-//        $iaddress1 = $_POST['iaddress1'];
-//        $iaddress2 = $_POST['iaddress2'];
-//        $iphone1 = $_POST['iphone1'];
-//        $iphone2 = $_POST['iphone2'];
-//        $iemail = $_POST['iemail'];
-//        $ischool = $_POST['ischool'];
-//        $size = sizeof($listMembers);
-//        $result = 'false';
-//        for ($i = 0; $i < $size; $i++) {
-////            echo $listMembers[$i]->getMemberId() . '---' . $iclass[$i] . '---' . $ifullname[$i] . '--' . $iphone[$i] . '--' . $iaddress[$i] . '--' . $iemail[$i];
+    if (isset($_POST["update"])) {
+        
+        $ifullname = $_POST['irealname'];
+        $iaddress1 = $_POST['iaddress1'];
+        $iaddress2 = $_POST['iaddress2'];
+        $ibirthday = $_POST['ibirthday'];
+        $iphone1 = $_POST['iphone1'];
+        $iphone2 = $_POST['iphone2'];
+        $iemail = $_POST['iemail'];
+        $igender = $_POST['igender'];
+        $iclass = $_POST['iclass'];
+        $ischool = $_POST['ischool'];
+        $ifacebooklink = $_POST['ifacebooklink'];
+
+        $size = sizeof($listMembers);
+        $result = 'false';
+        for ($i = 0; $i < $size; $i++) {
+            $listMembers[$i]->setRealName($ifullname[$i]);
+            $listMembers[$i]->setAddress1($iaddress1[$i]);
+            $listMembers[$i]->setAddress2($iaddress2[$i]);
+            $listMembers[$i]->setBirthday($ibirthday[$i]);
+            $listMembers[$i]->setPhoneNumber1($iphone1[$i]);
+            $listMembers[$i]->setPhoneNumber2($iphone2[$i]);
+            $listMembers[$i]->setEmail($iemail[$i]);
+            $listMembers[$i]->setGender($igender[$i]);
+            $listMembers[$i]->setClass($iclass[$i]);
+            $listMembers[$i]->setSchool($ischool[$i]);
+            $listMembers[$i]->setFacebookLink($ifacebooklink[$i]);
+            $listMembers[$i]->setFacebookProfileId($ifacebooklink[$i]);
+
+            //$result = updateMembers($listMembers[i]);
+
+            echo $listMembers[$i]->getMemberId() . '---' . $iclass[$i] . '---' . $ifullname[$i] . '--' . $iphone1[$i] . '--' . $iaddress1[$i] . '--' . $iemail[$i];
 //            $result = updateInfor($listMembers[$i]->getMemberId(), 
 //              $iclass[$i], $ifullname[$i], $iphone1[$i], $iphone2[$i], 
 //              $iaddress1[$i], $iaddress2[$i], $iemail[$i], $ischool[$i]);
-//        }
-////        echo '' . "---------------------------------------" + $result;
-//        if (strcmp($result, 'true') == 0) {
-//            $update = 0;
-//        } else {
-//
-//            echo '<script> showAlertFalse(); </script>';
-//            //  echo 'Strings do not match.';
-//        }
-//    }
-   
+//        echo '' . "---------------------------------------" + $result;
+            if (strcmp($result, 'true') != 0) {
+                echo '<script> showAlertFalse(); </script>';
+                break;
+            }
+        }
+    }
     ?>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -239,41 +253,37 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
                                                     <th class="text-center" >Class</th>
                                                     <th class="text-center" >School</th>
                                                     <th class="text-center" >Facebook link</th>
-                                                    <th class="text-center" >Create time</th>
-                                                    <th class="text-center" >Update time</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php
-                                                $size = sizeof($listMembers);
-                                                $row = new Members();
-                                                $i = 1;
-                                                foreach ($listMembers as $row) {
-                                                    echo '<tr>';
-                                                    echo "<td class=\"text-center\">{$i}</td>";
-                                                    echo "<td class=\"text-left\"><a href=https://www.facebook.com/{$row->getFacebookIdMember()}>{$row->getName()}</a></td>";
-                                                    if ($row->getAdministrator() == 1)
-                                                        echo "<td class=\"text-center\">true</td>";
-                                                    else
-                                                        echo "<td class=\"text-center\">false</td>";
-                                                    echo "<td class=\"text-center\">{$row->getRealName()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getAddress1()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getAddress2()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getBirthday()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getPhoneNumber1()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getPhoneNumber2()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getEmail()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getGender()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getClass()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getSchool()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getFacebookLink()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getCreateTime()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getUpdateTime()}</td>";
-                                                    
-                                                    echo '</tr>';
-                                                    $i++;
-                                                }
-                                                ?>
+<?php
+$size = sizeof($listMembers);
+$row = new Members();
+$i = 1;
+foreach ($listMembers as $row) {
+    echo '<tr>';
+    echo "<td class=\"text-center\">{$i}</td>";
+    echo "<td class=\"text-left\"><a href=https://www.facebook.com/{$row->getFacebookIdMember()}>{$row->getName()}</a></td>";
+    if ($row->getAdministrator() == 1)
+        echo "<td class=\"text-center\">true</td>";
+    else
+        echo "<td class=\"text-center\">false</td>";
+    echo "<td class=\"text-center\"><input name = \"irealname[]\" type = \"text\" value = \"{$row->getRealName()}\"/></td>";
+    echo'' . " <td class=\"text-left\" ><input name = \"iaddress1[]\" type = \"text\" value =\" {$row->getAddress1()}\"/></th>";
+    echo'' . " <td class=\"text-left\" ><input name = \"iaddress2[]\" type = \"text\" value =\" {$row->getAddress2()} \"/></th>";
+    echo "<td class=\"text-center\"><input name = \"ibirthday[]\" type = \"text\" value =\" {$row->getBirthday()} \"/></td>";
+    echo'' . " <td class=\"text-left\" ><input name = \"iphone1[]\" type = \"text\" value =\" {$row->getPhoneNumber1()} \"/></th>";
+    echo'' . " <td class=\"text-left\" ><input name = \"iphone2[]\" type = \"text\" value = \"{$row->getPhoneNumber2()}\"/></td>";
+    echo'' . " <td class=\"text-left\" ><input name = \"iemail[]\" type = \"text\" value =\" {$row->getEmail()} \"/></th>";
+    echo'' . " <td class=\"text-left\" ><input name = \"igender[]\" type = \"text\" value =\" {$row->getGender()} \"/></th>";
+    echo'' . " <td class=\"text-left\" ><input name = \"iclass[]\" type = \"text\" value =\" {$row->getClass()}\"/></th>";
+    echo'' . " <td class=\"text-left\" ><input name = \"ischool[]\" type = \"text\" value =\" {$row->getSchool()} \"/></th>";
+    echo'' . " <td class=\"text-left\" ><input name = \"ifacebooklink[]\" type = \"text\" value =\" {$row->getFacebookLink()} \"/></th>";
+
+    echo '</tr>';
+    $i++;
+}
+?>
 
                                             </tbody>
 
@@ -291,9 +301,9 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <?php
-                                echo "<a class=\"btn  bg-blue\" href=memberUpdate.php?groupId={$_GET['groupId']}><i class=\"fa fa-pencil-square-o style=\"margin-right: 5px; \"></i> Update / View Detail</a>";
-                                ?>
+<?php
+echo"<button class=\"col-md-1 center btn btn-primary\" type=\"submit\" name = \"update\"><i class=\"fa fa-envelope-o fa-save\" style=\"margin-right: 5px;\"></i> Save</button>";
+?>
 
                             </div>                           
                         </div>

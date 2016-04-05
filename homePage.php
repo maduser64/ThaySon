@@ -223,31 +223,31 @@ if (isset($_POST['deleteGroup'])) {
                                     <div class="box-header">
                                         <h3 class="box-title">Groups</h3>
                                     </div><!-- /.box-header -->
-                                    <div class="box-body ">
+                                    <div class="panel-body">
                                         <input type="hidden" name="param" />
-                                        <div class="col-md-12" style="padding-bottom: 10px;">
+                                        <div class="btn-group col-md-12" style="padding-bottom: 10px;">
 
-                                            <div class= "col-md-1 text-left ">
+                                            <div class= "btn col-md-1 text-left ">
                                                 <button class="btn bg-blue btn-sm btn-danger" type="submit" name="deleteGroup">Delete</button>
                                             </div>
                                             <?php if (checkRoleQLNhom($_SESSION['user_id'])||checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
-                                                <div class= "col-md-1 text-left ">
+                                                <div class= "btn col-md-1 text-left ">
                                                     <a class="btn bg-blue btn-sm " href="subGroup.php"> Manager group facebook</a>
                                                 </div>
                                                 <div class= "col-md-1"></div>
                                             <?php } ?>
                                             <?php if (checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
-                                                <div class= "col-md-1 text-left ">
+                                                <div class= "btn col-md-1 text-left ">
                                                     <a class="btn bg-blue btn-sm " href="rolesView.php?pageNumRole=1"> Permission</a>
                                                 </div>
-                                                <div class= "col-md-2"></div>
-                                                <div class="col-md-4">
+                                                <div class= "btn col-md-2"></div>
+                                                <div class="btn col-md-4">
                                                     <!-- search form -->
 
-                                                    <div class="" class="col-md-12">
-                                                        <input type="text" id="key" name="q" class="form-group2 col-md-8" placeholder="Search by FacebookID..." value=""/>
+                                                    <div class="btn-group  col-md-12">
+                                                        <input type="text" id="key" name="q" class="form col-md-8" placeholder="Search by FacebookID..." value=""/>
                                                         <span class="input-group-btn">
-                                                            <a type="submit" name="" id="search-btn" class="form-group2 btn bg-blue col-md-4"
+                                                            <a type="submit" name="" id="search-btn" class="form btn bg-blue col-md-4"
                                                                onclick="check()" ><i class="fa fa-search"></i></a>
                                                         </span>                                  
                                                     </div> <!-- input -->

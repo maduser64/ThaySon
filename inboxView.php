@@ -217,7 +217,7 @@ if (isset($_POST['deleteGroup'])) {
                                             </div><!-- /.box-header -->
                                             <div class="box-body">
                                                 <!--                                        <a href="#" onClick="select_all('checkbox_name', '1');">Check All</a> | <a href="#" onClick="select_all('checkbox_name', '0');">Uncheck All</a>-->
-                                                <table id="example1" class="table table-bordered text-center text-sm" cellspacing="0" width="100%">
+                                                <table id="example1" class="table table-bordered table-striped text-center text-sm" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>                    
                                                             <th><input type="checkbox" id="selectall"/></th>
