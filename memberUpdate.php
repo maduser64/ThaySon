@@ -45,6 +45,7 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <!-- DataTables -->
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="plugins/bootstrap-waitingfor.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script>
@@ -81,8 +82,65 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
         </script>
     </head>
     <?php
+
+    function getFacebookIdProfile($profile_url) {
+        $url = 'http://findmyfbid.com';
+        $data = array('url' => $profile_url);
+
+// use key 'http' even if you send the request to https://...
+        $options = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query($data),
+            ),
+        );
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        function getData($data) {
+            $dom = new DOMDocument;
+            $dom->loadHTML($data);
+            $divs = $dom->getElementsByTagName('code');
+
+            foreach ($divs as $div) {
+                return $div->nodeValue;
+            }
+        }
+        return getData($result);
+    }
+
     if (isset($_POST["update"])) {
+        ?>
+    <script>
+        $('#myModal').on('shown.bs.modal', function () {
+ 
+    var progress = setInterval(function() {
+    var $bar = $('.bar');
+
+    if ($bar.width()==500) {
+      
+        // complete
+      
+        clearInterval(progress);
+        $('.progress').removeClass('active');
+        $('#myModal').modal('hide');
+        $bar.width(0);
         
+    } else {
+      
+        // perform processing logic here
+      
+        $bar.width($bar.width()+50);
+    }
+    
+    $bar.text($bar.width()/5 + "%");
+	}, 800);
+  
+  
+})
+    </script>
+        <?php
         $ifullname = $_POST['irealname'];
         $iaddress1 = $_POST['iaddress1'];
         $iaddress2 = $_POST['iaddress2'];
@@ -96,35 +154,58 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
         $ifacebooklink = $_POST['ifacebooklink'];
 
         $size = sizeof($listMembers);
-        $result = 'false';
-        for ($i = 0; $i < $size; $i++) {
-            $listMembers[$i]->setRealName($ifullname[$i]);
-            $listMembers[$i]->setAddress1($iaddress1[$i]);
-            $listMembers[$i]->setAddress2($iaddress2[$i]);
-            $listMembers[$i]->setBirthday($ibirthday[$i]);
-            $listMembers[$i]->setPhoneNumber1($iphone1[$i]);
-            $listMembers[$i]->setPhoneNumber2($iphone2[$i]);
-            $listMembers[$i]->setEmail($iemail[$i]);
-            $listMembers[$i]->setGender($igender[$i]);
-            $listMembers[$i]->setClass($iclass[$i]);
-            $listMembers[$i]->setSchool($ischool[$i]);
-            $listMembers[$i]->setFacebookLink($ifacebooklink[$i]);
-            $listMembers[$i]->setFacebookProfileId($ifacebooklink[$i]);
+        $row = new Members();
+        $i = 0;
+        foreach ($listMembers as $row) {
 
-            //$result = updateMembers($listMembers[i]);
-
-            echo $listMembers[$i]->getMemberId() . '---' . $iclass[$i] . '---' . $ifullname[$i] . '--' . $iphone1[$i] . '--' . $iaddress1[$i] . '--' . $iemail[$i];
-//            $result = updateInfor($listMembers[$i]->getMemberId(), 
-//              $iclass[$i], $ifullname[$i], $iphone1[$i], $iphone2[$i], 
-//              $iaddress1[$i], $iaddress2[$i], $iemail[$i], $ischool[$i]);
-//        echo '' . "---------------------------------------" + $result;
-            if (strcmp($result, 'true') != 0) {
+            $row->setRealName($_POST['irealname'][$i]);
+            $row->setAddress1($iaddress1[$i]);
+            $row->setAddress2($iaddress2[$i]);
+            $row->setBirthday($ibirthday[$i]);
+            $row->setPhoneNumber1($iphone1[$i]);
+            $row->setPhoneNumber2($iphone2[$i]);
+            $row->setEmail($iemail[$i]);
+            $row->setGender($igender[$i]);
+            $row->setClass($iclass[$i]);
+            $row->setSchool($ischool[$i]);
+            $row->setFacebookLink($ifacebooklink[$i]);
+            $row->setFacebookProfileId(getFacebookIdProfile($ifacebooklink[$i]));
+            $result = updateMembers($row);
+            
+            if ($result == false) {
                 echo '<script> showAlertFalse(); </script>';
                 break;
             }
+            $i++;
         }
+          ?>
+    <script>
+        myApp.hidePleaseWait();
+    </script>
+        <?php
     }
     ?>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel"><i class="fa fa-clock-o"></i> Please Wait</h4>
+      </div>
+      <div class="modal-body center-block">
+        <p>Process....</p>
+        <div class="progress">
+          <div class="progress-bar bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+            
+          </div>
+        </div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
             <!-- Main Header -->
@@ -278,7 +359,8 @@ foreach ($listMembers as $row) {
     echo'' . " <td class=\"text-left\" ><input name = \"igender[]\" type = \"text\" value =\" {$row->getGender()} \"/></th>";
     echo'' . " <td class=\"text-left\" ><input name = \"iclass[]\" type = \"text\" value =\" {$row->getClass()}\"/></th>";
     echo'' . " <td class=\"text-left\" ><input name = \"ischool[]\" type = \"text\" value =\" {$row->getSchool()} \"/></th>";
-    echo'' . " <td class=\"text-left\" ><input name = \"ifacebooklink[]\" type = \"text\" value =\" {$row->getFacebookLink()} \"/></th>";
+    $link=trim($row->getFacebookLink());
+    echo'' . " <td class=\"text-left\" ><input name = \"ifacebooklink[]\" type = \"text\" value =\"{$link}\"/></th>";
 
     echo '</tr>';
     $i++;
@@ -301,9 +383,8 @@ foreach ($listMembers as $row) {
 
                         <div class="row">
                             <div class="col-md-12 text-center">
-<?php
-echo"<button class=\"col-md-1 center btn btn-primary\" type=\"submit\" name = \"update\"><i class=\"fa fa-envelope-o fa-save\" style=\"margin-right: 5px;\"></i> Save</button>";
-?>
+<button  class="col-md-1 center btn btn-primary" type="submit" name = "update"><i href="#myModal" class="fa fa-envelope-o fa-save" style="margin-right: 5px;"> </i>Save</button>";
+
 
                             </div>                           
                         </div>

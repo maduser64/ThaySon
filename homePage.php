@@ -82,7 +82,7 @@ if (isset($_POST['deleteGroup'])) {
                     alert('Insert FB Id to Search');
                 else {
                     var keey = $('#key').val();
-                    window.location.href = 'memberView.php?key='.concat(keey);
+                    window.location.href = 'memberSearch.php?FacebookProfileId='.concat(keey);
                 }
                 // $('search-btn').val();
             }

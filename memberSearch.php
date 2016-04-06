@@ -11,14 +11,15 @@ require_once $ROOT . '/dao/daoComments.php';
 require_once $ROOT . '/models/comments.php';
 require_once $ROOT . '/dao/daoMembers.php';
 require_once $ROOT . '/models/members.php';
+require_once $ROOT . '/models/membersSearchUserGroup.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
 }
 
 $res = getUserById($_SESSION['user_id']);
-if (isset($_GET['groupId'])) {
-    $listMembers = (array) getListMembersUsingGroupId($_GET['groupId']);
+if (isset($_GET['FacebookProfileId'])) {
+    $listMembers = (array) searchMembersByFacebookProfileIdInAllGroup($_GET['FacebookProfileId']);
 }else {
     header("Location: homePage.php");
     return;
@@ -81,36 +82,7 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
             }
         </script>
     </head>
-    <?php
-//    if (isset($_POST["update"])) {
-//
-//        $iclass = $_POST['iclass'];
-//        $ifullname = $_POST['irealname'];
-//        $iaddress1 = $_POST['iaddress1'];
-//        $iaddress2 = $_POST['iaddress2'];
-//        $iphone1 = $_POST['iphone1'];
-//        $iphone2 = $_POST['iphone2'];
-//        $iemail = $_POST['iemail'];
-//        $ischool = $_POST['ischool'];
-//        $size = sizeof($listMembers);
-//        $result = 'false';
-//        for ($i = 0; $i < $size; $i++) {
-////            echo $listMembers[$i]->getMemberId() . '---' . $iclass[$i] . '---' . $ifullname[$i] . '--' . $iphone[$i] . '--' . $iaddress[$i] . '--' . $iemail[$i];
-//            $result = updateInfor($listMembers[$i]->getMemberId(), 
-//              $iclass[$i], $ifullname[$i], $iphone1[$i], $iphone2[$i], 
-//              $iaddress1[$i], $iaddress2[$i], $iemail[$i], $ischool[$i]);
-//        }
-////        echo '' . "---------------------------------------" + $result;
-//        if (strcmp($result, 'true') == 0) {
-//            $update = 0;
-//        } else {
-//
-//            echo '<script> showAlertFalse(); </script>';
-//            //  echo 'Strings do not match.';
-//        }
-//    }
-   
-    ?>
+    
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
             <!-- Main Header -->
@@ -214,7 +186,7 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
                     <form id="form_id"  method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class= "col-md-12" style="padding-bottom: 20px;">
-                                <a class="col-md-1 btn btn-sm bg-blue" href = "subGroup.php"><i class="fa fa-backward "></i> Back</a>
+                                <a class="col-md-1 btn btn-sm bg-blue" href = "homePage.php"><i class="fa fa-backward "></i> Back</a>
                             </div> <!-- col -->
                             <div class="col-md-12">
                                 <div class="box table-responsive">
@@ -239,14 +211,22 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
                                                     <th class="text-center" >Class</th>
                                                     <th class="text-center" >School</th>
                                                     <th class="text-center" >Facebook link</th>
+                                                    
+                                                    <th class="text-center" >User name manager</th>
+                                                    <th class="text-center" >Full name manager</th>
+                                                    <th class="text-center" >Phone number manager</th>
+                                                    <th class="text-center" >Facebook group of member</th>
+                                                    
                                                     <th class="text-center" >Create time</th>
                                                     <th class="text-center" >Update time</th>
+                                                    
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
                                                 $size = sizeof($listMembers);
-                                                $row = new Members();
+                                                $row = new MembersSearchUserGroup();
                                                 $i = 1;
                                                 foreach ($listMembers as $row) {
                                                     echo '<tr>';
@@ -266,7 +246,13 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
                                                     echo "<td class=\"text-center\">{$row->getGender()}</td>";
                                                     echo "<td class=\"text-center\">{$row->getClass()}</td>";
                                                     echo "<td class=\"text-center\">{$row->getSchool()}</td>";
-                                                    echo "<td class=\"text-center\">{$row->getFacebookLink()}</td>";
+                                                    echo "<td class=\"text-center\"><a href={$row->getFacebookLink()}>{$row->getFacebookLink()}</a></td>";
+                                                    
+                                                    echo "<td class=\"text-center\">{$row->getUsernameManager()}</td>";
+                                                    echo "<td class=\"text-center\">{$row->getFullnameManager()}</td>";
+                                                    echo "<td class=\"text-center\">{$row->getPhoneNumberManager()}</td>";
+                                                    echo "<td class=\"text-center\"><a href=https://www.facebook.com/{$row->getIdGroupFacebook()}>{$row->getIdGroupFacebook()}</td>";
+                                                    
                                                     echo "<td class=\"text-center\">{$row->getCreateTime()}</td>";
                                                     echo "<td class=\"text-center\">{$row->getUpdateTime()}</td>";
                                                     
@@ -291,9 +277,7 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <?php
-                                echo "<a class=\"btn  bg-blue\" href=memberUpdate.php?groupId={$_GET['groupId']}><i class=\"fa fa-pencil-square-o style=\"margin-right: 5px; \"></i> Update / View Detail</a>";
-                                ?>
+                                
 
                             </div>                           
                         </div>

@@ -2,6 +2,7 @@
 require_once __DIR__ .'/host.php';
 require_once $ROOT .'/dao/db_connect.php';
 require_once $ROOT .'/models/members.php';
+require_once $ROOT .'/models/membersSearchUserGroup.php';
 
 $memberId = "MemberId";
 $facebookIdMember = "FacebookIdMember";
@@ -269,7 +270,49 @@ function getMemberIdUseUpdateTime($varName) {
     }
     return $varName;
 }
+function searchMembersByFacebookProfileIdInAllGroup($varName) {
+ global    $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school,$facebookLink, $facebookProfileId, $createTime, $updateTime; 
+$listMembers = array();
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT members.MemberId, members.Address1,members.Administrator,members.Name,members.GroupId, members.Birthday, members.PhoneNumber1,members.Email, members.Gender,members.PhoneNumber2, members.Address2, members.Class, members.School, members.FacebookIdMember, members.RealName,members.FacebookLink, members.FacebookProfileId, "
+            ." members.CreateTime,members.UpdateTime, users.UserName,users.FullName,users.PhoneNumber1,users.UserId, groups.FacebookGroupId "
+            ." FROM users,user_group,groups,members "  
+            ." WHERE users.UserId=user_group.UserId AND user_group.GroupId=members.GroupId AND groups.GroupId =user_group.GroupId AND members.FacebookProfileId like N'%".$varName."%'") or die(mysql_error());
 
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $members = new MembersSearchUserGroup();
+            $members->setMemberId($row[$memberId]);
+            $members->setFacebookIdMember($row[$facebookIdMember]);
+            $members->setName($row[$name]);
+            $members->setAdministrator($row[$administrator]);
+            $members->setGroupId($row[$groupId]);
+            $members->setRealName($row[$realName]);
+            $members->setAddress1($row[$address1]);
+            $members->setAddress2($row[$address2]);
+            $members->setBirthday($row[$birthday]);
+            $members->setPhoneNumber1($row[$phoneNumber1]);
+            $members->setPhoneNumber2($row[$phoneNumber2]);
+            $members->setEmail($row[$email]);
+            $members->setGender($row[$gender]);
+            $members->setClass($row[$class]);
+            $members->setSchool($row[$school]);
+            $members->setFacebookLink($row[$facebookLink]);
+            $members->setFacebookProfileId($row[$facebookProfileId]);
+            $members->setCreateTime($row[$createTime]);
+            $members->setUpdateTime($row[$updateTime]);
+            
+            $members->setUsernameManager($row['UserName']);
+            $members->setPhoneNumberManager($row['PhoneNumber1']);
+            $members->setIdUserManager($row['UserId']);
+            $members->setIdGroupFacebook($row['FacebookGroupId']);
+            $members->setFullnameManager($row['FullName']);
+
+            array_push($listMembers, $members);
+        }
+    }
+    return $listMembers;
+}
 function getListMembersUsingGroupId($varName) {
  global    $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school,$facebookLink, $facebookProfileId, $createTime, $updateTime; 
 $listMembers = array();
@@ -305,7 +348,7 @@ $listMembers = array();
 }
 
 function updateMembers(Members $members) {
-  global   $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school, $facebookLink, $facebookProfileId, $createTime, $updateTime; 
+  global    $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school,$facebookLink, $facebookProfileId, $createTime, $updateTime; 
     $db = new DB_CONNECT();
     $result = mysql_query("UPDATE members SET  "
             .$facebookIdMember." = '". $members->getFacebookIdMember()."', "
@@ -324,11 +367,11 @@ function updateMembers(Members $members) {
             .$school." = '". $members->getSchool()."', "
             .$facebookLink." = '". $members->getFacebookLink()."', "
             .$facebookProfileId." = '". $members->getFacebookProfileId()
-            ."' WHERE ".$memberId." = '".$members->getMemberId()."'");
+            ."' WHERE ".$memberId." = '".$members->getMemberId()."'") or die(mysql_error());
     if ($result) {
-        return 'true';
+        return true;
     }
-    return 'false';
+    return false;
 }
 
 function createMembers(Members $members) {
