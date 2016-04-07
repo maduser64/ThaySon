@@ -4,10 +4,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/ThaySon/plugins/bootstrap-waitingfor.js</file>
-            <file>file:/C:/xampp/htdocs/ThaySon/fetch_id.php</file>
-            <file>file:/C:/xampp/htdocs/ThaySon/dao/daoMembers.php</file>
+            <file>file:/C:/xampp/htdocs/ThaySon/upload.php</file>
             <file>file:/C:/xampp/htdocs/ThaySon/memberUpdate.php</file>
+            <file>file:/C:/xampp/htdocs/ThaySon/readExcel.php</file>
         </group>
     </open-files>
 </project-private>
