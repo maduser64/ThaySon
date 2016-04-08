@@ -12,32 +12,29 @@ require_once $ROOT . '/models/groups.php';
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
 }
-if($_GET['update']!=null){
+if (isset($_GET['update'])) {
     ?>
     <script>alert('Done!');</script>
     <?php
 }
-$res= new Users();
+$res = new Users();
 $res = getUserById($_SESSION['user_id']);
 $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
 //$listGroup = (array) getListGroupsWithIdUser($_SESSION['user_id']);
 //echo '---'.$listInbox;
 if (isset($_POST['save'])) {
-
     $email = mysql_real_escape_string($_POST['email']);
     $fullname = mysql_real_escape_string($_POST['fullname']);
     $address = mysql_real_escape_string($_POST['address']);
     $phone = mysql_real_escape_string($_POST['phonenumber']);
-    $gender = mysql_real_escape_string($_POST['gender']);  
+    $gender = mysql_real_escape_string($_POST['gender']);
     $tdate = mysql_real_escape_string($_POST['date']);
     $phone2 = mysql_real_escape_string($_POST['phonenumber2']);
     $address2 = mysql_real_escape_string($_POST['address2']);
     $class = mysql_real_escape_string($_POST['class']);
     $school = mysql_real_escape_string($_POST['school']);
-    
-   // echo ''.$email.$fullname.$address.$phone.$phone2;
-    
+    // echo ''.$email.$fullname.$address.$phone.$phone2;
     $res->setEmail($email);
     $res->setPhoneNumber1($phone);
     $res->setAddress1($address);
@@ -48,10 +45,10 @@ if (isset($_POST['save'])) {
     $res->setSchool($school);
     $res->setPhoneNumber2($phone2);
     $res->setFullName($fullname);
-    
+
     $insert = updateUsers($res);
-    
-    if ($insert ==true) {
+
+    if ($insert == true) {
         header("Location: profile.php?update=ok");
     } else {
         ?>
@@ -59,6 +56,28 @@ if (isset($_POST['save'])) {
         <?php
     }
 }
+if(isset($_POST['change'])){
+    //$old = mysql_real_escape_string($_POST['oldpassword']);
+    $new = mysql_real_escape_string($_POST['newpassword']);
+    $repeat = mysql_real_escape_string($_POST['repeatnewpassword']);
+   // echo '$new: '.$new.'  '.$repeat;
+    
+    if(strcmp($new,$repeat)==0){
+        //if(!preg_match("[0-9a-zA-Z]",$new)){
+            $res->setPassword($repeat);
+            if(updateUsersPass($res)==true){
+                echo '<script>alert(\'Successful!\');</script>';
+            }else {
+                echo '<script>alert(\'Error!\');</script>';
+            }
+        //}else {
+//            echo '<script>alert(\'New password not good!\');</script>';
+//        }
+    }else {
+        echo '<script>alert(\'Password not match!\');</script>';
+    }
+}
+
 ?>
 <html>
     <head>
@@ -83,9 +102,9 @@ if (isset($_POST['save'])) {
         <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
 
         <script>
-    $(function () {
-        $("#datepicker").datepicker();
-    });
+            $(function () {
+                $("#datepicker").datepicker();
+            });
         </script>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -207,7 +226,35 @@ if (isset($_POST['save'])) {
                                 <div class="box box-primary box-header with-border" >
                                     <!--                                    <h2 class=" center">Update Personal info</h2>-->
                                     <!--/.box-header-->  
+                                    <form class="form-horizontal" role="formpass" method="post">
+                                        <div class="box-header center">
+                                            <h1 class="box-title center">Change password</h1>
+                                            <div style="height: 10px;"></div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">New password:</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" value="" type="password" name="newpassword">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-3 control-label">Repeat new password:</label>
+                                            <div class="col-lg-8">
+                                                <input class="form-control" value="" type="password" name="repeatnewpassword">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-5 control-label"></label>
+                                            <div class="col-md-6">
 
+                                                <button class="btn btn-primary" type="submit" name="change"><i class="fa fa-save"></i> Change</button>
+<!--                                                <input class="btn btn-primary"  value="Save" type="submit" name="save">-->
+                                                <span style="padding-right: 10px;"></span>
+                                                <input class="btn btn-default"  type="reset" value="Cancel"/>
+                                            </div>
+                                        </div> 
+                                    </form>
                                     <form class="form-horizontal" role="form" method="post">
                                         <div class="box-header center">
                                             <h1 class="box-title center">Personal Information</h1>

@@ -38,12 +38,12 @@ class MyReadFilter implements PHPExcel_Reader_IReadFilter {
 
 }
 
-function getListMemberFromExel($inputFileName) {
+function getListMemberFromExel($count,$inputFileName) {
     $inputFileType = 'Excel2007';
 //$inputFileName = "Book1.xlsx";
     $sheetname = 'Sheet1';
 
-    $filterSubset = new MyReadFilter(2, 2, range('A', 'M'));
+    $filterSubset = new MyReadFilter(2, ($count+2), range('A', 'M'));
     $objReader = PHPExcel_IOFactory::createReader($inputFileType);
     $objReader->setLoadSheetsOnly($sheetname);
     $objReader->setReadFilter($filterSubset);

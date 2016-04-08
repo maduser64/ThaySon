@@ -25,6 +25,79 @@ if (isset($_GET['groupId'])) {
     return;
 }
 $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
+
+
+//----------------------------------------------------------------------------------------
+    function getData($data) {
+        $dom = new DOMDocument;
+        $dom->loadHTML($data);
+        $divs = $dom->getElementsByTagName('code');
+        foreach ($divs as $div) {
+            return $div->nodeValue;
+        }
+    }
+
+    function getFacebookIdProfile($profile_url) {
+        $url = 'http://findmyfbid.com';
+        $data = array('url' => $profile_url);
+
+// use key 'http' even if you send the request to https://...
+        $options = array(
+            'http' => array(
+                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method' => 'POST',
+                'content' => http_build_query($data),
+            ),
+        );
+        $context = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        return getData($result);
+    }
+
+    if (isset($_POST["update"])) {
+        echo '<script> showPleaseWait(); </script>';
+        $ifullname = $_POST['irealname'];
+        $iaddress1 = $_POST['iaddress1'];
+        $iaddress2 = $_POST['iaddress2'];
+        $ibirthday = $_POST['ibirthday'];
+        $iphone1 = $_POST['iphone1'];
+        $iphone2 = $_POST['iphone2'];
+        $iemail = $_POST['iemail'];
+        $igender = $_POST['igender'];
+        $iclass = $_POST['iclass'];
+        $ischool = $_POST['ischool'];
+        $ifacebooklink = $_POST['ifacebooklink'];
+
+        $size = sizeof($listMembers);
+        $row = new Members();
+        $i = 0;
+        foreach ($listMembers as $row) {
+
+            $row->setRealName(trim($_POST['irealname'][$i]));
+            $row->setAddress1(trim($iaddress1[$i]));
+            $row->setAddress2(trim($iaddress2[$i]));
+            $row->setBirthday(trim($ibirthday[$i]));
+            $row->setPhoneNumber1(trim($iphone1[$i]));
+            $row->setPhoneNumber2(trim($iphone2[$i]));
+            $row->setEmail(trim($iemail[$i]));
+            $row->setGender(trim($igender[$i]));
+            $row->setClass(trim($iclass[$i]));
+            $row->setSchool(trim($ischool[$i]));
+            $row->setFacebookLink(trim($ifacebooklink[$i]));
+            $row->setFacebookProfileId(trim(getFacebookIdProfile($ifacebooklink[$i])));
+            $result = updateMembers($row);
+
+            if ($result == false) {
+                echo '<script> showAlertFalse(); </script>';
+                break;
+            }
+            $i++;
+        }
+        echo '<script> hidePleaseWait(); </script>';
+        echo '<script> showAlertTrue(); </script>';
+    }
+
+
 ?>
 
 <html>
@@ -104,86 +177,22 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
                 //console.log("fAIL");
                 sweetAlert('Oops...', 'Something went wrong!', 'error');
             }
+            function showAlertTrue() {
+                //console.log("fAIL");
+                sweetAlert('Succesful...', 'update successful!', 'error');
+            }
             function showSweetAlert1(message) {
                 // console.log("OK");
 
                 swal(message, "", "success");
             }
         </script>
-    </head>
+    
     <?php
 
-//----------------------------------------------------------------------------------------
-    function getFacebookIdProfile($profile_url) {
-        $url = 'http://findmyfbid.com';
-        $data = array('url' => $profile_url);
 
-// use key 'http' even if you send the request to https://...
-        $options = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query($data),
-            ),
-        );
-        $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
-
-        function getData($data) {
-            $dom = new DOMDocument;
-            $dom->loadHTML($data);
-            $divs = $dom->getElementsByTagName('code');
-            foreach ($divs as $div) {
-                return $div->nodeValue;
-            }
-        }
-
-        return getData($result);
-    }
-
-    if (isset($_POST["update"])) {
-        echo '<script> showPleaseWait(); </script>';
-        $ifullname = $_POST['irealname'];
-        $iaddress1 = $_POST['iaddress1'];
-        $iaddress2 = $_POST['iaddress2'];
-        $ibirthday = $_POST['ibirthday'];
-        $iphone1 = $_POST['iphone1'];
-        $iphone2 = $_POST['iphone2'];
-        $iemail = $_POST['iemail'];
-        $igender = $_POST['igender'];
-        $iclass = $_POST['iclass'];
-        $ischool = $_POST['ischool'];
-        $ifacebooklink = $_POST['ifacebooklink'];
-
-        $size = sizeof($listMembers);
-        $row = new Members();
-        $i = 0;
-        foreach ($listMembers as $row) {
-
-            $row->setRealName(trim($_POST['irealname'][$i]));
-            $row->setAddress1(trim($iaddress1[$i]));
-            $row->setAddress2(trim($iaddress2[$i]));
-            $row->setBirthday(trim($ibirthday[$i]));
-            $row->setPhoneNumber1(trim($iphone1[$i]));
-            $row->setPhoneNumber2(trim($iphone2[$i]));
-            $row->setEmail(trim($iemail[$i]));
-            $row->setGender(trim($igender[$i]));
-            $row->setClass(trim($iclass[$i]));
-            $row->setSchool(trim($ischool[$i]));
-            $row->setFacebookLink(trim($ifacebooklink[$i]));
-            $row->setFacebookProfileId(trim(getFacebookIdProfile($ifacebooklink[$i])));
-            $result = updateMembers($row);
-
-            if ($result == false) {
-                echo '<script> showAlertFalse(); </script>';
-                break;
-            }
-            $i++;
-        }
-        echo '<script> hidePleaseWait(); </script>';
-    }
     ?>
-
+</head>
 
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -284,7 +293,18 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
                 <!-- Main content -->
                 <section class="content">
-
+                    <form  method="post" enctype="multipart/form-data">
+                        <div class= "col-md-22" style="padding-bottom: 20px;">
+                            <span><h5 class="box-title">Select excel file to upload, download sample file <a href="files/SampleFileInput.xlsx">here</a>:</h5></span>
+                                <table>
+                                    <tr>
+                                        <td><input type="file" name="fileToUpload" id="fileToUpload"></td>
+                                        <td><input type="submit" value="Upload excel file" name="submitExcel"></td>
+                                    </tr>
+                                </table>
+                            
+                        </div>
+                    </form>
                     <form id="form_id"  method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class= "col-md-12" style="padding-bottom: 20px;">
@@ -296,18 +316,7 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
                                         <h3 class="box-title">Members in Group</h3>
                                     </div><!-- /.box-header -->
                                     <div class="box-body ">
-                                        <form  method="post" enctype="multipart/form-data">
-                                            <div class= "col-md-22" style="padding-bottom: 20px;">
-                                                <span><h5 class="box-title">Select excel file to upload:</h5>
-                                                    <table>
-                                                        <tr>
-                                                            <td><input type="file" name="fileToUpload" id="fileToUpload"></td>
-                                                            <td><input type="submit" value="Upload excel file" name="submitExcel"></td>
-                                                        </tr>
-                                                    </table>
-                                                </span>
-                                            </div>
-                                        </form>
+
                                         <table name= "data" id="example1" class="table table-bordered text-sm table-striped" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
@@ -351,51 +360,80 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
                                                         echo "Sorry, your file was not uploaded.";
                                                     } else {
                                                         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file2)) {
-                                                            echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
+                                                            // echo "The file " . basename($_FILES["fileToUpload"]["name"]) . " has been uploaded.";
+                                                            $count = sizeof($listMembers);
+                                                            $sheetData = (array) getListMemberFromExel($count, $target_file2);
 
-                                                            $sheetData = getListMemberFromExel($target_file2);
-                                                            $count = sizeof($sheetData);
                                                             //var_dump($sheetData);
-                                                            echo '<br> chay bai 2 :  - -- - - ';
-                                                            echo 'count: ' . $count . '<br>';
-                                                            for ($i = 1; $i <= $count; $i++) {
-                                                                for ($j = 'A'; $j <= 'M'; $j++) {
-                                                                    echo $sheetData[$i][$j] . ' ';
-                                                                }
-                                                                echo '<br>';
+//                                                            echo '<br> chay bai 2 :  - -- - - ';
+//                                                            echo 'count: ' . $count . '<br>';
+                                                            //$j = 0;
+                                                            //for ($i = 2; $i <= $count + 1; $i++) {
+
+                                                            $row = new Members();
+                                                            $i = 2;
+                                                            foreach ($listMembers as $row) {
+//                                                                for ($j = 'A'; $j <= 'M'; $j++) {
+//                                                                    echo $sheetData[$i][$j] . ' ';
+//                                                                }
+//                                                                echo '<br>';
+                                                                $j = $i - 1;
+                                                                echo '<tr>';
+                                                                echo "<td class=\"text-center\">{$j}</td>";
+                                                                echo "<td class=\"text-left\"><a href=https://www.facebook.com/{$row->getFacebookIdMember()}>{$row->getName()}</a></td>";
+                                                                if ($row->getAdministrator() == 1)
+                                                                    echo "<td class=\"text-center\">true</td>";
+                                                                else
+                                                                    echo "<td class=\"text-center\">false</td>";
+                                                                echo "<td class=\"text-center\"><input name = \"irealname[]\" type = \"text\" value = \"{$sheetData[$i]['C']}\"/></td>";
+                                                                echo'' . " <td class=\"text-left\" ><input name = \"iaddress1[]\" type = \"text\" value =\"{$sheetData[$i]['D']}\"/></th>";
+                                                                echo'' . " <td class=\"text-left\" ><input name = \"iaddress2[]\" type = \"text\" value =\"{$sheetData[$i]['E']}\"/></th>";
+                                                                echo "<td class=\"text-center\"><input name = \"ibirthday[]\" type = \"text\" value =\"{$sheetData[$i]['F']}\"/></td>";
+                                                                echo'' . " <td class=\"text-left\" ><input name = \"iphone1[]\" type = \"text\" value =\"{$sheetData[$i]['G']}\"/></th>";
+                                                                echo'' . " <td class=\"text-left\" ><input name = \"iphone2[]\" type = \"text\" value = \"{$sheetData[$i]['H']}\"/></td>";
+                                                                echo'' . " <td class=\"text-left\" ><input name = \"iemail[]\" type = \"text\" value =\"{$sheetData[$i]['I']}\"/></th>";
+                                                                echo'' . " <td class=\"text-left\" ><input name = \"igender[]\" type = \"text\" value =\"{$sheetData[$i]['J']}\"/></th>";
+                                                                echo'' . " <td class=\"text-left\" ><input name = \"iclass[]\" type = \"text\" value =\"{$sheetData[$i]['K']}\"/></th>";
+                                                                echo'' . " <td class=\"text-left\" ><input name = \"ischool[]\" type = \"text\" value =\"{$sheetData[$i]['L']}\"/></th>";
+                                                                $link = trim($sheetData[$i]['M']);
+                                                                echo'' . " <td class=\"text-left\" ><input name = \"ifacebooklink[]\" type = \"text\" value =\"{$link}\"/></th>";
+
+                                                                echo '</tr>';
+                                                                $i++;
                                                             }
                                                         } else {
                                                             echo "Sorry, there was an error uploading your file.";
                                                         }
                                                     }
-                                                }
+                                                } else {
 //------------------------------------------------------------------------------------------------------------
-                                                $size = sizeof($listMembers);
-                                                $row = new Members();
-                                                $i = 1;
-                                                foreach ($listMembers as $row) {
-                                                    echo '<tr>';
-                                                    echo "<td class=\"text-center\">{$i}</td>";
-                                                    echo "<td class=\"text-left\"><a href=https://www.facebook.com/{$row->getFacebookIdMember()}>{$row->getName()}</a></td>";
-                                                    if ($row->getAdministrator() == 1)
-                                                        echo "<td class=\"text-center\">true</td>";
-                                                    else
-                                                        echo "<td class=\"text-center\">false</td>";
-                                                    echo "<td class=\"text-center\"><input name = \"irealname[]\" type = \"text\" value = \"{$row->getRealName()}\"/></td>";
-                                                    echo'' . " <td class=\"text-left\" ><input name = \"iaddress1[]\" type = \"text\" value =\"{$row->getAddress1()}\"/></th>";
-                                                    echo'' . " <td class=\"text-left\" ><input name = \"iaddress2[]\" type = \"text\" value =\"{$row->getAddress2()}\"/></th>";
-                                                    echo "<td class=\"text-center\"><input name = \"ibirthday[]\" type = \"text\" value =\"{$row->getBirthday()}\"/></td>";
-                                                    echo'' . " <td class=\"text-left\" ><input name = \"iphone1[]\" type = \"text\" value =\"{$row->getPhoneNumber1()}\"/></th>";
-                                                    echo'' . " <td class=\"text-left\" ><input name = \"iphone2[]\" type = \"text\" value = \"{$row->getPhoneNumber2()}\"/></td>";
-                                                    echo'' . " <td class=\"text-left\" ><input name = \"iemail[]\" type = \"text\" value =\"{$row->getEmail()}\"/></th>";
-                                                    echo'' . " <td class=\"text-left\" ><input name = \"igender[]\" type = \"text\" value =\"{$row->getGender()}\"/></th>";
-                                                    echo'' . " <td class=\"text-left\" ><input name = \"iclass[]\" type = \"text\" value =\"{$row->getClass()}\"/></th>";
-                                                    echo'' . " <td class=\"text-left\" ><input name = \"ischool[]\" type = \"text\" value =\"{$row->getSchool()}\"/></th>";
-                                                    $link = trim($row->getFacebookLink());
-                                                    echo'' . " <td class=\"text-left\" ><input name = \"ifacebooklink[]\" type = \"text\" value =\"{$link}\"/></th>";
+                                                    $size = sizeof($listMembers);
+                                                    $row = new Members();
+                                                    $i = 1;
+                                                    foreach ($listMembers as $row) {
+                                                        echo '<tr>';
+                                                        echo "<td class=\"text-center\">{$i}</td>";
+                                                        echo "<td class=\"text-left\"><a href=https://www.facebook.com/{$row->getFacebookIdMember()}>{$row->getName()}</a></td>";
+                                                        if ($row->getAdministrator() == 1)
+                                                            echo "<td class=\"text-center\">true</td>";
+                                                        else
+                                                            echo "<td class=\"text-center\">false</td>";
+                                                        echo "<td class=\"text-center\"><input name = \"irealname[]\" type = \"text\" value = \"{$row->getRealName()}\"/></td>";
+                                                        echo'' . " <td class=\"text-left\" ><input name = \"iaddress1[]\" type = \"text\" value =\"{$row->getAddress1()}\"/></th>";
+                                                        echo'' . " <td class=\"text-left\" ><input name = \"iaddress2[]\" type = \"text\" value =\"{$row->getAddress2()}\"/></th>";
+                                                        echo "<td class=\"text-center\"><input name = \"ibirthday[]\" type = \"text\" value =\"{$row->getBirthday()}\"/></td>";
+                                                        echo'' . " <td class=\"text-left\" ><input name = \"iphone1[]\" type = \"text\" value =\"{$row->getPhoneNumber1()}\"/></th>";
+                                                        echo'' . " <td class=\"text-left\" ><input name = \"iphone2[]\" type = \"text\" value = \"{$row->getPhoneNumber2()}\"/></td>";
+                                                        echo'' . " <td class=\"text-left\" ><input name = \"iemail[]\" type = \"text\" value =\"{$row->getEmail()}\"/></th>";
+                                                        echo'' . " <td class=\"text-left\" ><input name = \"igender[]\" type = \"text\" value =\"{$row->getGender()}\"/></th>";
+                                                        echo'' . " <td class=\"text-left\" ><input name = \"iclass[]\" type = \"text\" value =\"{$row->getClass()}\"/></th>";
+                                                        echo'' . " <td class=\"text-left\" ><input name = \"ischool[]\" type = \"text\" value =\"{$row->getSchool()}\"/></th>";
+                                                        $link = trim($row->getFacebookLink());
+                                                        echo'' . " <td class=\"text-left\" ><input name = \"ifacebooklink[]\" type = \"text\" value =\"{$link}\"/></th>";
 
-                                                    echo '</tr>';
-                                                    $i++;
+                                                        echo '</tr>';
+                                                        $i++;
+                                                    }
                                                 }
                                                 ?>
 
@@ -415,8 +453,9 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <button  class="col-md-1 center btn btn-primary" type="submit" name = "update"><i href="#myModal" class="fa fa-envelope-o fa-save" style="margin-right: 5px;"> </i>Save</button>";
-
+                                <?php
+                                echo"<button class=\"col-md-1 center btn btn-primary\" type=\"submit\" name = \"update\"><i class=\"fa fa-envelope-o fa-save\" style=\"margin-right: 5px;\"></i> Save</button>";
+                                ?>
 
                             </div>                           
                         </div>
@@ -438,7 +477,6 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
                 var _gaq = _gaq || [];
                 _gaq.push(['_setAccount', 'UA-38304687-1']);
                 _gaq.push(['_trackPageview']);
-
                 (function () {
                     var ga = document.createElement('script');
                     ga.type = 'text/javascript';

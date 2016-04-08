@@ -478,7 +478,19 @@ function updateUsers(Users $users) {
     }
     return false;
 }
+function updateUsersPass(Users $users) {
+    global $userId, $userName, $password, $fullName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $createTime, $updateTime, $school, $class, $avatar;
 
+    $db = new DB_CONNECT();
+
+    $result = mysql_query("UPDATE users SET  "
+            . $password . " = '" . $users->getPassword()
+            . "' WHERE " . $userId . " = '" . $users->getUserId() . "'") or die(mysql_error());
+    if ($result) {
+        return true;
+    }
+    return false;
+}
 function createUsers(Users $users) {
     global $userId, $userName, $password, $fullName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $createTime, $updateTime, $school, $class, $avatar;
 
