@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 03, 2016 at 08:28 PM
+-- Generation Time: Apr 08, 2016 at 06:49 PM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.3
 
@@ -65,14 +65,6 @@ CREATE TABLE IF NOT EXISTS `feeds` (
   KEY `fk_feeds_groups_idx` (`GroupId`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=502 ;
 
---
--- Dumping data for table `feeds`
---
-
-INSERT INTO `feeds` (`FeedId`, `FacebookIdFeed`, `FacebookUserIdFeed`, `Message`, `CreateFeedTime`, `UpdateFeedTime`, `StatusId`, `GroupId`, `CreateTime`, `UpdateTime`) VALUES
-(501, '163289470499096_503586699802703', '856760261071101', 'mô tả  các con gà :3   chơi chơi', '2015-12-29 22:17:06', '2015-12-29 22:17:06', 1, 54, '2016-01-29 20:23:12', '2016-01-29 20:23:12'),
-(500, '163289470499096_503618026466237', '856760261071101', 'test............', '2015-12-29 23:46:18', '2015-12-29 23:46:18', 1, 54, '2016-01-29 20:23:12', '2016-01-29 20:23:12');
-
 -- --------------------------------------------------------
 
 --
@@ -92,14 +84,15 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `CreateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ParentGroupId` int(20) DEFAULT '0',
   PRIMARY KEY (`GroupId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=55 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=59 ;
 
 --
 -- Dumping data for table `groups`
 --
 
 INSERT INTO `groups` (`GroupId`, `FacebookGroupId`, `Name`, `Privacy`, `Description`, `Icon`, `Email`, `Owner`, `CreateGroupTime`, `CreateTime`, `ParentGroupId`) VALUES
-(54, '163289470499096', 'các con gà', 'CLOSED', '', 'https://fbstatic-a.akamaihd.net/rsrc.php/v2/yt/r/_9rFHMj4DIY.png', '163289470499096@groups.faceboo', '', '0000-00-00 00:00:00', '2016-01-29 20:20:57', 0);
+(58, '548960115147783', 'Gà vật lộn', 'CLOSED', '', 'https://static.xx.fbcdn.net/rsrc.php/v2/y2/r/yOUyZI9bori.png', '548960115147783@groups.faceboo', '856760261071101', '0000-00-00 00:00:00', '2016-04-06 16:12:26', 0),
+(57, '1649687745294539', 'Team work money', 'SECRET', '', 'https://static.xx.fbcdn.net/rsrc.php/v2/yM/r/tOv73myJSBM.png', '1649687745294539@groups.facebo', '856760261071101', '0000-00-00 00:00:00', '2016-04-05 18:03:44', 0);
 
 -- --------------------------------------------------------
 
@@ -156,30 +149,36 @@ CREATE TABLE IF NOT EXISTS `members` (
   `MemberId` int(20) NOT NULL AUTO_INCREMENT,
   `FacebookIdMember` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `Name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `Administrator` varchar(10) COLLATE utf8_unicode_ci DEFAULT '0',
+  `Administrator` tinyint(1) DEFAULT NULL,
   `GroupId` int(20) DEFAULT NULL,
-  `Class` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Realname` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `PhoneNumber1` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Email` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `Address1` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `RealName` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Address1` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `Address2` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `PhoneNumber2` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `FacebookProfileId` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Birthday` datetime DEFAULT NULL,
+  `PhoneNumber1` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `PhoneNumber2` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Email` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Gender` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Class` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `School` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FacebookLink` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `FacebookProfileId` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `CreateTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `UpdateTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`MemberId`),
   KEY `fk_members_groups_idx` (`GroupId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=66 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `members`
 --
 
-INSERT INTO `members` (`MemberId`, `FacebookIdMember`, `Name`, `Administrator`, `GroupId`, `Class`, `Realname`, `PhoneNumber1`, `Email`, `Address1`, `Address2`, `PhoneNumber2`, `FacebookProfileId`, `School`) VALUES
-(64, '834298333352135', 'Binh Hoang Xuan', '1', 54, '    D11CN6', 'Hoàng Xuân Bình', '  1234567  ', '  binh@mail.com  ', '      Hà Nội', '  Hoà Bình  ', '123124', NULL, '        '),
-(65, '919473994785230', 'Đông Nguyên', '1', 54, '    ', ' ', '            ', '            ', '      ', '        ', '', NULL, '        '),
-(62, '856760261071101', 'Tường Vũ', '1', 54, '    ', ' ', '            ', '            ', '      ', '        ', '', NULL, '        '),
-(63, '823428784432896', 'Nguyễn Thơ', '1', 54, '    ', ' ', '            ', '            ', '      ', '        ', '', NULL, '        ');
+INSERT INTO `members` (`MemberId`, `FacebookIdMember`, `Name`, `Administrator`, `GroupId`, `RealName`, `Address1`, `Address2`, `Birthday`, `PhoneNumber1`, `PhoneNumber2`, `Email`, `Gender`, `Class`, `School`, `FacebookLink`, `FacebookProfileId`, `CreateTime`, `UpdateTime`) VALUES
+(1, '141151552894521', 'Loan Loan', 0, 57, 'ABC1', 'ABC', 'ABC', '2016-09-08 00:00:00', '98632879344', '98632879344', 'triuewesd@yahoo.com', 'nam', 'D11CN6', 'PTIT', 'https://www.facebook.com/tritueviet01', '100002114043418', '0000-00-00 00:00:00', '2016-04-08 15:09:51'),
+(2, '1473930516252716', 'Ngoco Co Ngo', 1, 57, 'ABC2', 'ABC', 'ABC', '2016-09-09 00:00:00', '98632879345', '98632879345', 'triuewesd@yahoo.com', 'nam', 'D11CN7', 'PTIT', 'https://www.facebook.com/tritueviet02', 'https://www.facebook.com', '0000-00-00 00:00:00', '2016-04-08 15:11:23'),
+(3, '823428784432896', 'Nguyễn Thơ', 1, 57, 'ABC3 re', 'ABC', 'ABC', '2016-09-10 00:00:00', '98632879346', '98632879346', 'triuewesd@yahoo.com', 'nam', 'D11CN8', 'PTIT', 'https://www.facebook.com/tritueviet03', 'https://www.facebook.com', '0000-00-00 00:00:00', '2016-04-08 16:32:37'),
+(4, '919473994785230', 'Đông Nguyên', 1, 57, 'ABC4  test', 'ABC', 'ABC', '2016-09-11 00:00:00', '98632879347', '98632879347', 'triuewesd@yahoo.com', 'nam', 'D11CN9', 'PTIT', 'https://www.facebook.com/tritueviet04', 'https://www.facebook.com', '0000-00-00 00:00:00', '2016-04-08 15:17:13'),
+(5, '856760261071101', 'Tường Vũ', 1, 58, 'ABC1', 'ABC', 'ABC', '2016-09-08 00:00:00', '98632879344', '98632879344', 'triuewesd@yahoo.com', 'nam', 'D11CN6', 'PTIT', 'https://www.facebook.com/tritueviet01', '100002114043418', '0000-00-00 00:00:00', '2016-04-08 15:08:54');
 
 -- --------------------------------------------------------
 
@@ -261,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`UserId`, `UserName`, `Password`, `FullName`, `Address1`, `Birthday`, `PhoneNumber1`, `Email`, `Gender`, `CreateTime`, `UpdateTime`, `Avatar`, `PhoneNumber2`, `Address2`, `Class`, `School`, `FacebookId`) VALUES
-(19, 'Admin', 'admin', 'Admin', '', '1993-05-10 00:00:00', '', 'admin@gmail.com', '2', '2016-01-29 19:40:59', '2016-03-02 16:59:21', NULL, NULL, NULL, '0', NULL, NULL),
+(19, 'Admin', 'admin', 'Admin', '', '1993-05-10 00:00:00', '', 'admin@gmail.com', '2', '2016-01-29 19:40:59', '2016-04-08 16:34:37', NULL, NULL, NULL, '0', NULL, NULL),
 (18, 'tritueviet', 'abc', 'TUONG VAN VU', 'Tổ 6 Mỗ Lao Hà Đông Hà Nội', '1993-12-08 00:00:00', '01674183276', 'tritueviet01@yahoo.com', '1', '2016-01-29 19:31:55', '2016-04-03 18:07:09', NULL, '01674183276', 'Thái bình', 'D11CN', 'PTIT', NULL),
 (20, 'tho', '123', 'thơ', '1', '2012-12-12 00:00:00', '1', '1', '1', '2016-02-24 10:39:45', '2016-04-03 15:59:15', NULL, NULL, NULL, '', NULL, NULL);
 
@@ -278,15 +277,16 @@ CREATE TABLE IF NOT EXISTS `user_group` (
   PRIMARY KEY (`UserGroupId`),
   KEY `fk_user_group_users_idx` (`UserId`),
   KEY `fk_user_group_groups_idx` (`GroupId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=40 ;
 
 --
 -- Dumping data for table `user_group`
 --
 
 INSERT INTO `user_group` (`UserGroupId`, `UserId`, `GroupId`) VALUES
-(34, 19, 54),
-(35, 18, 54);
+(39, 19, 58),
+(38, 19, 57),
+(37, 19, 56);
 
 -- --------------------------------------------------------
 
