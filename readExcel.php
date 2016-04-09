@@ -1,6 +1,6 @@
 <?php
 //error_reporting(E_ALL);
-set_time_limit(0);
+//set_time_limit(0);
 date_default_timezone_set('Europe/London');
 
 //session_start();
