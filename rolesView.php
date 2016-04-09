@@ -5,7 +5,7 @@ require_once $ROOT . '/dao/daoUsers.php';
 require_once $ROOT . '/models/users.php';
 require_once $ROOT . '/models/inbox.php';
 require_once $ROOT . '/dao/daoInbox.php';
-require_once $ROOT . '/models/Roles.php';
+require_once $ROOT . '/models/roles.php';
 require_once $ROOT . '/dao/daoRoles.php';
 
 if (!isset($_SESSION['user_id'])) {

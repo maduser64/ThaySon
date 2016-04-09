@@ -7,7 +7,7 @@ require_once $ROOT . '/models/groups.php';
 require_once $ROOT . '/dao/daoGroups.php';
 require_once $ROOT . '/models/feeds.php';
 require_once $ROOT . '/dao/daoFeeds.php';
-require_once $ROOT . '/models/Comments.php';
+require_once $ROOT . '/models/comments.php';
 require_once $ROOT . '/dao/daoComments.php';
 ob_start();
 
