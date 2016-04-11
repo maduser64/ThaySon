@@ -64,15 +64,18 @@ if(isset($_POST['change'])){
     
     if(strcmp($new,$repeat)==0){
         //if(!preg_match("[0-9a-zA-Z]",$new)){
+       
+        $valid = validateUserAndPass("tuongvv", $repeat);
+        if (strcmp($valid, 'true') == 0) {
             $res->setPassword($repeat);
             if(updateUsersPass($res)==true){
                 echo '<script>alert(\'Successful!\');</script>';
             }else {
                 echo '<script>alert(\'Error!\');</script>';
             }
-        //}else {
-//            echo '<script>alert(\'New password not good!\');</script>';
-//        }
+        }else {
+            echo '<script>alert(\'New password not good!\');</script>';
+        }
     }else {
         echo '<script>alert(\'Password not match!\');</script>';
     }

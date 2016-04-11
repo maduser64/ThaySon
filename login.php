@@ -42,7 +42,7 @@
                  echo '<script> alert("UserName/Password invalid")</script>;';
             }
         } else {
-            echo '<script> alert("UserName/Password invalid")</script>;';
+            echo '<script> alert("UserName/Password invalid! only number and character! min 3 character and number!")</script>;';
         }
     }
     ?>

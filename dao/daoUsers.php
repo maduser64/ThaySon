@@ -27,14 +27,15 @@ function validateUserAndPass($userNameTmp, $passTmp) {
     //echo '-------------------------------------------'.$passTmp;
         $r1 = '/[A-Z]/';  //Uppercase
         $r2 = '/[a-z]/';  //lowercase
-        $r3 = '/[!@#$%^&*()\-_=+{};:,<.>]/';  // whatever you mean by 'special char'
+       // $r3 = '/[!@#$%^&*()\-_=+{};:,<.>]/';  // whatever you mean by 'special char'
+        $r3 =  "/[a-zA-Z0-9]{3}/";  // whatever you mean by 'special char'
         $r4 = '/[0-9]/';  //numbers
         $uppercase = preg_match($r1, $passTmp);
         $lowercase = preg_match($r2, $passTmp);
         $number = preg_match($r4, $passTmp);
         $symbol = preg_match($r3, $passTmp);
 
-        if (!$uppercase || !$lowercase || !$number  || $symbol) {
+        if (!$uppercase || !$lowercase || !$number  || !$symbol) {
             return 'Password must not include special character ,'
             . ' must include at least 1 uppercase letter,'
             . ' 1 lower letter, at least one number!';                    
@@ -42,7 +43,7 @@ function validateUserAndPass($userNameTmp, $passTmp) {
         if (strlen($passTmp) < 8) {
             return 'Password is too short(>8 characters)';
         }
-        if (preg_match_all($r3, $userNameTmp, $o))
+        if (!preg_match_all($r3, $userNameTmp, $o))
             return 'Username must not include special character';
         if (strlen($userNameTmp) < 5) {
             return 'Username must include at least 5 character';
@@ -50,10 +51,11 @@ function validateUserAndPass($userNameTmp, $passTmp) {
         return 'true';  
 }
 function check_Pass($passTmp) {
-    $r3 = '/[!@#$%^&*()\-_=+{};:,<.>]/'; 
+//    $r3 = "/[!@#$%^&*()\-_=+{};:,<.>]/"; 
+    $r3 = "/[a-zA-Z0-9]{3}/"; 
     $symbol = preg_match($r3, $passTmp);
-    if($symbol) return false;
-    return true;
+    if($symbol) return true;
+    return false;
 }
 function checkUser($varUserName, $varPass) {
     global $userId, $userName, $password, $fullName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $createTime, $updateTime, $school, $class, $avatar;
@@ -541,14 +543,13 @@ function createUsers(Users $users) {
             . $users->getAddress1() . "','"
             . $users->getAddress2() . "','"
             . $users->getBirthday() . "','"
-            . $users->getAvatar() . "','"
             . $users->getPhoneNumber1() . "','"
             . $users->getPhoneNumber2() . "','"
             . $users->getEmail() . "','"
-            . $users->getGender() . "';"
+            . $users->getGender() . "','"
             . $users->getSchool() . "','"
             . $users->getClass() . "');";
-    echo '' . $sql;
+    //echo '' . $sql;
     $result = mysql_query($sql);
     if ($result) {
         return 'true';
