@@ -71,13 +71,28 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
         $content = $_POST['ContentMessage'];
         $result = insertWithMultiInbox($fromUserId, $toAddress, $subject, $content);
         $result2 = insertWithMultiInbox2($fromUserId, $toGroup, $subject, $content);
-          // echo '--------------------' . $toGroup;
+        // echo '--------------------' . $toGroup;
         if (strcmp($result, 'true') == 0) {
             // echo 'Strings match.';
-            echo '<script> showSweetAlert1("Your message has been sent!"); </script>';
+            echo '<script> alert("Your message has been sent!"); </script>';
         } else {
-            '<script> showAlertFalse(); </script>';
+            echo '<script> alert("Can not send! Try again "); </script>';
             //  echo 'Strings do not match.';
+        }
+    }else if (isset($_POST['send-action-ex'])) {
+        $fromUserId = $_SESSION['user_id'];
+        $toAddress = mysql_real_escape_string($_GET['UserId']);
+       //$toGroup = mysql_real_escape_string($_POST['ToGroupAddress']);
+        $subject = mysql_real_escape_string($_POST['Subject']);
+        $content = $_POST['ContentMessage'];
+        $result = insertWithMultiInbox($fromUserId, $toAddress, $subject, $content);
+        //$result2 = insertWithMultiInbox2($fromUserId, $toGroup, $subject, $content);
+        // echo '--------------------' . $toGroup;
+        if (strcmp($result, 'true') == 0) {
+            // echo 'Strings match.';
+            echo '<script> alert("Your message has been sent!"); </script>';
+        } else {
+            echo '<script> alert('.'"'.$result.'"'.'); </script>';            
         }
     }
     ?>
@@ -194,20 +209,27 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
                                     <h3 class="box-title"> Compose New Message</h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body" style="align-content: center">
-                                    <?php 
-                                                $keyy = (!isset($_GET['UserId']))?'':$_GET['UserId'];
-                                    ?>
-                                    <div class="form-group">
-<!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
-                                        <div class="email_subject_label"><span>To users: </span></div>
-                                        <input type="text" name="ToAddress" id="to_manuals" class="form-control" placeholder="To users:" required/>
-                                    </div>   
-                                     <div class="form-group">
-<!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
-                                        <div class="email_subject_label"><span>To groups: </span></div>
-                                        <input type="text" name="ToGroupAddress" id="cc_manuals" class="form-control" placeholder="To groups:" required/>
-                                    </div> 
-                                     
+                                    <?php
+                                    if (isset($_GET['UserId'])) {
+                                        $keyy = ($_GET['UserName']);
+                                        ?>
+                                        <div class="form-group">
+    <!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
+                                            <div><span>To users: </span></div>
+                                            <input readonly="true" type="text" name="ToAddress1"  class="form-control" required value="<?php echo $keyy ?>"/>
+                                        </div>
+                                    <?php } else { ?>
+                                        <div class="form-group">
+    <!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
+                                            <div class="email_subject_label"><span>To users: </span></div>
+                                            <input type="text" name="ToAddress" id="to_manuals" class="form-control" placeholder="To users:" />
+                                        </div>   
+                                        <div class="form-group">
+    <!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
+                                            <div class="email_subject_label"><span>To groups: </span></div>
+                                            <input type="text" name="ToGroupAddress" id="cc_manuals" class="form-control" placeholder="To groups:" />
+                                        </div> 
+                                    <?php } ?>
                                     <div class="form-group">
                                         <div class="email_subject_label"><span>Subject: </span></div>
                                         <input name="Subject" class="form-control" placeholder="Subject:" required>
@@ -225,8 +247,11 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
                                 </div><!-- /.box-body -->
                                 <div class="box-footer">
                                     <div class="pull-right">
-<!--                                        <button class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button>-->
-                                        <button type="submit" class="btn btn-primary" name = "send-action"><i class="fa fa-envelope-o"></i> Send</button>
+                                        <?php if (isset($_GET['UserId'])) { ?>
+                                            <button type="submit" class="btn btn-primary" name = "send-action-ex"><i class="fa fa-envelope-o"></i> Send</button>  
+                                        <?php } else{  ?>
+                                        <button type="submit" class="btn bg-green" name = "send-action"><i class="fa fa-envelope-o"></i> Send</button>                                      
+                                        <?php }?>
                                     </div>
 <!--                                    <button class="btn btn-default"><i class="fa fa-times"></i> Discard</button>-->
                                 </div><!-- /.box-footer -->
@@ -251,9 +276,9 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
     <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
     <!-- Page Script -->
     <script>
-             $(function () {
-                 //Add text editor
-                 $("#compose-textarea").wysihtml5();
-             });
+            $(function() {
+                //Add text editor
+                $("#compose-textarea").wysihtml5();
+            });
     </script>
 </html>

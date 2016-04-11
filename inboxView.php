@@ -63,14 +63,14 @@ if (isset($_POST['deleteGroup'])) {
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script>
-            jQuery(document).ready(function ($) {
-                $('#selectall').click(function (event) {  //on click 
+            jQuery(document).ready(function($) {
+                $('#selectall').click(function(event) {  //on click 
                     if (this.checked) { // check select status
-                        $('.cbox').each(function () { //loop through each checkbox
+                        $('.cbox').each(function() { //loop through each checkbox
                             this.checked = true;  //select all checkboxes with class "checkbox1"               
                         });
                     } else {
-                        $('.cbox').each(function () { //loop through each checkbox
+                        $('.cbox').each(function() { //loop through each checkbox
                             this.checked = false; //deselect all checkboxes with class "checkbox1"                       
                         });
                     }
@@ -91,7 +91,7 @@ if (isset($_POST['deleteGroup'])) {
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>A</b>LT</span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg"><i class="fa fa-home"></i><b> Admin</b>LTE</span>
+                    <span class="logo-lg"><i class="fa fa-home"></i><b> Admin</b></span>
                 </a>
 
                 <!-- Header Navbar -->
@@ -189,111 +189,109 @@ if (isset($_POST['deleteGroup'])) {
                     </div>
                     <div class="row">
                         <form id="form_id" name="myform" action="approvedInbox.php" method="POST">
-                            <div class= "col-md-6" style="padding-top: 10px;padding-bottom: 10px;">
-                                <div class= "col-md-2" style="padding-bottom: 20px; padding-left: 10px;">
+                            <div class= "col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
+                                <div class= "col-md-3" >
                                     <a class="btn-sm btn bg-blue" href = "homePage.php"><i class="fa fa-backward"></i> Back</a>
                                 </div>
                                 <?php if (checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
-                                    <div class= "col-md-2 text-left " >
+                                    <div class= "col-md-3 " >
                                         <button type="button"class=" btn-sm btn bg-blue" name="approve"><i class="fa fa-upload"></i> Approve</button>
+                                    </div>
+                                <?php } ?>                              
+                                <?php if (checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
+                                    <div class= "col-md-3" >
+                                        <button  type="button" name="deleteGroup" class="btn btn-sm bg-red-active"><i class="fa fa-trash"></i> Delete Message</button>
                                     </div>
                                 <?php } ?>
 
-                                    <div class= "col-md-2 text-left ">
-                                        <a class="btn btn-sm bg-blue " href = "sentMailPage.php"><i class="fa fa-envelope-o"></i> Compose New Message</a>
-                                    </div>
-                                    <div class= "col-md-4 text-left" ></div>
-                                    <?php if (checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
-                                        <div class= "col-md-2 text-left " >
-                                            <button  type="button" name="deleteGroup" class="btn btn-sm bg-blue">Delete</button>
-                                        </div>
-                                    <?php } ?>
-
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="box table-responsive">
-                                            <div class="box-header">
-                                                <h3 class="box-title">Inbox</h3>
-                                            </div><!-- /.box-header -->
-                                            <div class="box-body">
-                                                <!--                                        <a href="#" onClick="select_all('checkbox_name', '1');">Check All</a> | <a href="#" onClick="select_all('checkbox_name', '0');">Uncheck All</a>-->
-                                                <table id="example1" class="table table-bordered table-striped text-center text-sm" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>                    
-                                                            <th><input type="checkbox" id="selectall"/></th>
-                                                            <th>From</th>
-                                                            <th>Subject</th>
-                                                            <th>Content</th>
-                                                            <th>Sent Date</th>  
-                                                            <th>Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                        $size = sizeof($listInbox);
-                                                        $row = new Inbox();
-                                                        $i = 0;
-                                                        foreach ($listInbox as $row) {
-                                                            $i++;
-                                                            echo '<tr>';
-                                                            echo "<td><input type=\"checkbox\" class =\"cbox\" name=\"checkbox_name[]\" value=\"{$row->getInboxId()}\" /></td>";
+                                <div class= "col-md-3 col-sm-3 pull-right">
+                                    <a class="btn btn-sm bg-blue " href = "sentMailPage.php"><i class="fa fa-envelope-o"></i> Compose New Message</a>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="box table-responsive">
+                                    <div class="box-header">
+                                        <h3 class="box-title">Inbox</h3>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body">
+                                        <!--                                        <a href="#" onClick="select_all('checkbox_name', '1');">Check All</a> | <a href="#" onClick="select_all('checkbox_name', '0');">Uncheck All</a>-->
+                                        <table id="example1" class="table table-bordered table-striped text-center text-sm" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>                    
+                                                    <th><input type="checkbox" id="selectall"/></th>
+                                                    <th>From</th>
+                                                    <th>Subject</th>
+                                                    <th>Content</th>
+                                                    <th>Sent Date</th>  
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                                $size = sizeof($listInbox);
+                                                $row = new Inbox();
+                                                $i = 0;
+                                                foreach ($listInbox as $row) {
+                                                    $i++;
+                                                    echo '<tr>';
+                                                    echo "<td><input type=\"checkbox\" class =\"cbox\" name=\"checkbox_name[]\" value=\"{$row->getInboxId()}\" /></td>";
 //                                                    echo "<td>{$i}</td>";
-                                                            echo "<td>" . getNameUserUseUserId($row->getFromUserId()) . "</td>";
-                                                            echo "<td>{$row->getSubject()}</td>";
-                                                            echo "<td>{$row->getContent()}</td>";
-                                                            echo "<td>{$row->getSentDate()}</td>";
-                                                            if ($row->getStatus() == 1)
-                                                                echo "<td><font color=\"#ff0000\">Unapproved</font></td>";
-                                                            else
-                                                                echo "<td>Approved</td>";
+                                                    echo "<td>" . getNameUserUseUserId($row->getFromUserId()) . "</td>";
+                                                    echo "<td>{$row->getSubject()}</td>";
+                                                    echo "<td>{$row->getContent()}</td>";
+                                                    echo "<td>{$row->getSentDate()}</td>";
+                                                    if ($row->getStatus() == 1)
+                                                        echo "<td><font color=\"#ff0000\">Unapproved</font></td>";
+                                                    else
+                                                        echo "<td>Approved</td>";
 
-                                                            echo '</tr>';
+                                                    echo '</tr>';
 //      
-                                                        }
-                                                        ?>
+                                                }
+                                                ?>
 
-                                                    </tbody>
+                                            </tbody>
 
-                                                </table>
-                                            </div><!-- /.box-body -->
-                                        </div><!-- /.box -->
-                                    </div><!-- /.col -->
-                                </form>
-                            </div><!-- /.row -->
+                                        </table>
+                                    </div><!-- /.box-body -->
+                                </div><!-- /.box -->
+                            </div><!-- /.col -->
+                        </form>
+                    </div><!-- /.row -->
 
-                            <div class="row">
-                                <div class="padding-2 col-md-12 text-center">
-                                    <ul class="pagination">
-                                        <?php
-                                        if ($numPage != null && $numPage != 1) {
-                                            $iPage = $current;
-                                            if ($iPage > 1) {
-                                                $ncurrent = $current - 1;
-                                                echo "<li><a href =feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum=$ncurrent>&laquo;</a></li>";
-                                            }
-                                            //$startPage, $endPage;
-                                            $startPage = $iPage - 2;
-                                            $endPage = $iPage + 2;
-                                            if ($startPage < 1) {
-                                                $endPage = $endPage - $startPage + 1;
-                                                $startPage = 1;
-                                            }
-                                            if ($endPage > $numPage) {
-                                                $endPage = $numPage;
-                                            }
-                                            for ($i = $startPage; $i <= $endPage; ++$i) {
-                                                if ($iPage == $i)
-                                                    echo "<li class = \"active\"><a href=feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum=$i>$i</a></li>";
-                                                else
-                                                    echo "<li><a href =feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum={$i}>$i</a></li>";
+                    <div class="row">
+                        <div class="padding-2 col-md-12 text-center">
+                            <ul class="pagination">
+                                <?php
+                                if ($numPage != null && $numPage != 1) {
+                                    $iPage = $current;
+                                    if ($iPage > 1) {
+                                        $ncurrent = $current - 1;
+                                        echo "<li><a href =feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum=$ncurrent>&laquo;</a></li>";
+                                    }
+                                    //$startPage, $endPage;
+                                    $startPage = $iPage - 2;
+                                    $endPage = $iPage + 2;
+                                    if ($startPage < 1) {
+                                        $endPage = $endPage - $startPage + 1;
+                                        $startPage = 1;
+                                    }
+                                    if ($endPage > $numPage) {
+                                        $endPage = $numPage;
+                                    }
+                                    for ($i = $startPage; $i <= $endPage; ++$i) {
+                                        if ($iPage == $i)
+                                            echo "<li class = \"active\"><a href=feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum=$i>$i</a></li>";
+                                        else
+                                            echo "<li><a href =feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum={$i}>$i</a></li>";
 //                                            <li <% if (iPage == i){ %>  class = "active"  <%} %>><button  type="submit" value="<%=i %>" name="page"><%=i %></button></li>
-                                            }
-                                            if ($iPage < $numPage) {
-                                                $ncurrent = $iPage + 1;
-                                                echo "<li><a href =feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum={$ncurrent}>&raquo</a></li>";
-                                            }
-                                        }
-                                        ?>
+                                    }
+                                    if ($iPage < $numPage) {
+                                        $ncurrent = $iPage + 1;
+                                        echo "<li><a href =feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum={$ncurrent}>&raquo</a></li>";
+                                    }
+                                }
+                                ?>
                             </ul>
                         </div>
                     </div>

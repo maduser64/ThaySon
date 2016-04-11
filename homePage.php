@@ -225,34 +225,35 @@ if (isset($_POST['deleteGroup'])) {
                                     </div><!-- /.box-header -->
                                     <div class="panel-body">
                                         <input type="hidden" name="param" />
-                                        <div class="btn-group col-md-12" style="padding-bottom: 10px;">
+                                        <div class="col-md-12" style="padding-bottom: 10px;">
 
-                                            <div class= "btn col-md-1 text-left ">
-                                                <button class="btn bg-blue btn-sm btn-danger" type="submit" name="deleteGroup">Delete</button>
+                                            <div class= "col-md-2 text-left ">
+                                                <button class="btn bg-red btn-sm " type="submit" name="deleteGroup"><i class="fa fa-trash"></i> Delete Group</button>
                                             </div>
                                             <?php if (checkRoleQLNhom($_SESSION['user_id'])||checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
-                                                <div class= "btn col-md-1 text-left ">
+                                                <div class= "col-md-3 text-left ">
                                                     <a class="btn bg-blue btn-sm " href="subGroup.php"> Manager group facebook</a>
                                                 </div>
-                                                <div class= "col-md-1"></div>
+                                                
                                             <?php } ?>
                                             <?php if (checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
-                                                <div class= "btn col-md-1 text-left ">
+                                            <div class="col-md-7 pull-right col-sm-8">
+                                                <div class= " col-md-2 ">
                                                     <a class="btn bg-blue btn-sm " href="rolesView.php?pageNumRole=1"> Permission</a>
                                                 </div>
-                                                <div class= "btn col-md-2"></div>
-                                                <div class="btn col-md-4">
+                                                
+                                                <div class="col-md-6 pull-right col-sm-6 " id = "search_form">
                                                     <!-- search form -->
-
-                                                    <div class="btn-group  col-md-12">
-                                                        <input type="text" id="key" name="q" class="form col-md-8" placeholder="Search by FacebookID..." value=""/>
-                                                        <span class="input-group-btn">
-                                                            <a type="submit" name="" id="search-btn" class="form btn bg-blue col-md-4"
-                                                               onclick="check()" ><i class="fa fa-search"></i></a>
-                                                        </span>                                  
-                                                    </div> <!-- input -->
+                                                   <div class="input-group" >
+                                                        <input type="text" id="key"  class="form-control" name="q" placeholder="Search by FacebookID..." value=""/>
+                                                         <div class="input-group-btn">
+                                                            <a type="submit" name="" id="search-btn" class="form-control btn bg-blue" onclick="check()" ><i class="fa fa-search"></i></a>
+                                                        </div>  
+                                                   </div>
+                                                    <!-- input -->
 
                                                 </div> 
+                                            </div>
                                             <?php } ?>
                                         </div>
                                         <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
@@ -333,12 +334,17 @@ if (isset($_POST['deleteGroup'])) {
     </body>
     <script type="text/javascript">
         function toggle_visibility(id) {
-            console.log('Click');
+            //console.log('Click');
             var e = document.getElementById(id);
-            if (e.style.display == 'block')
+            var e1 = document.getElementById("search_form");
+            if (e.style.display == 'block'){
                 e.style.display = 'none';
-            else
+                e1.style.display = 'block';
+            }
+            else{
                 e.style.display = 'block';
+                e1.style.display = 'none';
+            }
         }
 
     </script>

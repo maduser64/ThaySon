@@ -17,13 +17,13 @@ $key = !isset($_GET['key']) ? "" : $_GET['key'];
 $res = getUserById($_SESSION['user_id']);
 $groupId = $_GET['GroupUserId'];
 if (checkRoleAdminUsingUserId($_SESSION['user_id']) || checkRoleQuanTri($_SESSION['user_id'])) {
-    if(isset($key)){
+    if (isset($key)) {
 //       echo "-------------------------------kuw---------".$key;
-        $listUser = (array) getListUserbyKey($groupId,$key);
-    }
-    else $listUser = (array) getListUserInGroupUserUsingGroupUserId($groupId);
-  //  for($i=0;$i< sizeof($listUser);$i++)
-          //    echo ''.((Users)$listUser[i])->getUserId();
+        $listUser = (array) getListUserbyKey($groupId, $key);
+    } else
+        $listUser = (array) getListUserInGroupUserUsingGroupUserId($groupId);
+    //  for($i=0;$i< sizeof($listUser);$i++)
+    //    echo ''.((Users)$listUser[i])->getUserId();
 } else {
     header("Location: homePage.php");
 }
@@ -32,7 +32,7 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
 if (isset($_POST['addUser'])) {
     $groupId = $_GET['GroupUserId'];
     $toAddress = mysql_real_escape_string($_POST['userList']);
-   // echo '----------------------------------------------------------------'.$toAddress;
+    echo '----------------------------------------------------------------' . $toAddress;
     addUser($toAddress, $groupId);
     $backLink = "Location: viewUserInGroupUser.php?GroupUserId=" . $groupId;
     exit(header($backLink));
@@ -40,22 +40,46 @@ if (isset($_POST['addUser'])) {
 if (isset($_POST['searchUser'])) {
     $groupId = $_GET['GroupUserId'];
     $key = mysql_real_escape_string($_POST['usename']);
-    echo '----------------------------------------------------------------'.$key;
+    echo '----------------------------------------------------------------' . $key;
     //addUser($toAddress, $groupId);
-    $backLink = "Location: viewUserInGroupUser.php?GroupUserId=". $groupId."&key=".$key;
+    $backLink = "Location: viewUserInGroupUser.php?GroupUserId=" . $groupId . "&key=" . $key;
     exit(header($backLink));
 }
 if (isset($_POST['deleteUser'])) {
     echo '----------------------------------------------------------------';
     $groupId = $_GET['GroupUserId'];
+    //   echo $groupId;
     $posted = array_unique($_POST['checkbox_name']);
+    //echo sizeof($posted);
     if ($posted != null) {
         foreach ($posted as $value) {
-            echo $value . '</br>';
-            $res = deleteUser_Group($value, $groupId);
+            $userSelect = explode(',', $value);
+            //echo $value . '--' . $userSelect[0] . '-----' . $userSelect[1];
+            $res = deleteUser_Group($userSelect[0], $groupId);
         }
     }
-    $backLink = "Location: viewUserInGroupUser.php?GroupUserId=". $groupId;
+    $backLink = "Location: viewUserInGroupUser.php?GroupUserId=" . $groupId;
+    exit(header($backLink));
+}
+if (isset($_POST['sentMail'])) {
+    echo '----------------------------------------------------------------';
+    $groupId = $_GET['GroupUserId'];
+    //   echo $groupId;
+    $posted = array_unique($_POST['checkbox_name']);
+    //echo sizeof($posted);
+    $listId = '';
+    $listName = '';
+    if ($posted != null) {
+        foreach ($posted as $value) {
+            $userSelect = explode(',', $value);
+            $listName = $listName . $userSelect[1] . ' ; ';
+            $listId = $listId . $userSelect[0] . ',';
+//            echo $value . '--' . $userSelect[0] . '-----' . $userSelect[1];
+//          //  $res = deleteUser_Group($value, $groupId);
+        }
+        echo $value . '--' . $listName . '-----' . $listId;
+    }
+    $backLink = "Location: sentMailPage.php?UserId=" . $listId . '&UserName=' . $listName;
     exit(header($backLink));
 //    if ($res == 'Error') {
 //        echo '' . "<script> alert(\"Lỗi\");</script>";
@@ -113,14 +137,14 @@ if (isset($_POST['deleteUser'])) {
 
                 swal(message, "", "success");
             }
-            jQuery(document).ready(function ($) {
-                $('#selectall').click(function (event) {  //on click 
+            jQuery(document).ready(function($) {
+                $('#selectall').click(function(event) {  //on click 
                     if (this.checked) { // check select status
-                        $('.cbox').each(function () { //loop through each checkbox
+                        $('.cbox').each(function() { //loop through each checkbox
                             this.checked = true;  //select all checkboxes with class "checkbox1"               
                         });
                     } else {
-                        $('.cbox').each(function () { //loop through each checkbox
+                        $('.cbox').each(function() { //loop through each checkbox
                             this.checked = false; //deselect all checkboxes with class "checkbox1"                       
                         });
                     }
@@ -243,33 +267,30 @@ if (isset($_POST['deleteUser'])) {
                                     </div><!-- /.box-header -->
                                     <div class="box-body ">
                                         <input type="hidden" name="param" />
-                                        <div class="col-md-15" style="padding-bottom: 10px;">
-                                            
-                                            <div class= "col-md-1 text-left ">
-                                                <button class="btn bg-blue btn-sm btn-danger" type="submit" name="deleteUser">Delete</button>
+                                        <div class="col-md-12" style="padding-bottom: 10px;">
+
+                                            <div class= "col-md-2 text-left ">
+                                                <button class="btn bg-red btn-sm " type="submit" name="deleteUser"> <i class="fa fa-trash"></i> Delete Users</button>
                                             </div>
                                             <div class= "col-md-2 text-center ">
                                                 <div class="form-group">                                 
-                                                    <a class="btn bg-blue btn-sm" href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');"><i class="fa fa-plus-circle"></i> Add User</a>
+                                                    <a class="btn bg-blue btn-sm" href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');"><i class="fa fa-plus-circle"></i>  Add User</a>
                                                 </div>                     
                                             </div>   
                                             <div class= "col-md-2 text-center ">
-                                                <div class="form-group">                                 
-                                                    <a class="btn bg-blue btn-sm" href="sentMailPage.php" ><i class="fa fa-plus-circle"></i> Select to send mail</a>
+                                                <div class="form-group">  
+                                                    <button class="btn bg-blue btn-sm btn-default" type="submit" name="sentMail"> <i class="fa fa-envelope-o"></i> Select to send mail</button>
+<!--                                                    <a class="btn bg-blue btn-sm" href="sentMailPage.php" ><i class="fa fa-plus-circle"></i> Select to send mail</a>-->
                                                 </div>                     
-                                            </div>   
-                                            <div class="col-md-4 text-center">
-                                                <!-- search form -->
-                                                    <div class="form-group"> 
-                                                        <span class="input-group-btn">
-                                                            <input type="text" name="usename"  class="form-group2 col-md-8" placeholder="Search user..." value="<?php echo$key; ?>"/>
-                                                            <button  name="searchUser" id="search-btn" class="form-group3 btn bg-blue btm-sm col-md-2"
-                                                                onclick="check();" ><i class="fa fa-search"></i></button>
-                                                        </span>                                  
+                                            </div>
+                                            <div class="col-sm-3 col-md-3 pull-right" id="search_user1">
+                                                <div class="input-group">
+                                                    <input type="text" name="usename"  class="form-control" placeholder="Search user..." value="<?php echo $key ?>"/>
+                                                    <div class="input-group-btn">
+                                                        <button  name="searchUser" id="search-btn" class=" btn bg-blue" onclick="check();" ><i class="glyphicon glyphicon-search"></i></button>
                                                     </div>
-                                                
-                                            </div> 
-                                                
+                                                </div>                                
+                                            </div>                                           
                                         </div>
                                         <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
                                             <thead>
@@ -296,7 +317,7 @@ if (isset($_POST['deleteUser'])) {
                                                 $i = 0;
                                                 foreach ($listUser as $row) {
                                                     echo '<tr>';
-                                                    echo "<td class =\"text-center\"><input type=\"checkbox\" class =\"cbox\" name=\"checkbox_name[]\" value=\"{$row->getUserId()}\" /></td>";
+                                                    echo "<td class =\"text-center\"><input type=\"checkbox\" class =\"cbox\" name=\"checkbox_name[]\" value=\"{$row->getUserId()},{$row->getUserName()}({$row->getEmail()})\" /></td>";
                                                     $i++;
 
                                                     echo "<td class=\"text-center\" ><small>{$row->getFullName()}</smail></td>";
@@ -313,7 +334,7 @@ if (isset($_POST['deleteUser'])) {
                                                         echo "<td class=\"text-center\" ><small>Nữ</smail></td>";
                                                     echo "<td class=\"text-center\" ><small>{$row->getSchool()}</smail></td>";
                                                     echo "<td class=\"text-center\" ><small>{$row->getClass()}</smail></td>";
-                                                    echo "<td class=\"text-center\"><small><a href = sentMailPage.php?UserId={$row->getUserId()}&?UserName={$row->getFullName()}->send</a></small></td>";
+                                                    echo "<td class=\"text-center\"><small><a href = sentMailPage.php?UserId={$row->getUserId()}&UserName={$row->getUserName()}({$row->getEmail()})>send</a></small></td>";
                                                     echo '</tr>';
                                                 }
                                                 ?>
@@ -340,7 +361,7 @@ if (isset($_POST['deleteUser'])) {
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="col-md-6"></div>
-                                            <button  class="btn btn-sm col-md-3 btn-success" name="addUser" onclick="toggle_visibility('popupBoxOnePosition');">Add users</button>
+                                            <button  class="btn btn-sm col-md-3 btn-success" name="addUser" >Add users</button>
                                             <div class="col-sm-1"></div>
                                             <a href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');" class="bg-blue btn btn-sm col-md-2 right"><fi class="fa fa-close"></fi>Close</a>    
                                         </div><!-- /.col -->
@@ -349,30 +370,38 @@ if (isset($_POST['deleteUser'])) {
 
                                 </div>
                             </div>
-                        </div>
+                        </div>                       
                     </form>
 
                 </section>
-                <footer class="main-footer">
-                    <!-- To the right -->
-                    <div class="pull-right hidden-xs">
-                        Anything you want
-                    </div>
-                    <!-- Default to the left -->
-                    <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
-                </footer>
-
             </div>
+            <footer class="main-footer">
+                <!-- To the right -->
+                <div class="pull-right hidden-xs">
+                    Anything you want
+                </div>
+                <!-- Default to the left -->
+                <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+            </footer>
+
+
         </div>  <!-- /.content -->
     </body>
     <script type="text/javascript">
         function toggle_visibility(id) {
             console.log('Click');
             var e = document.getElementById(id);
-            if (e.style.display == 'block')
+            var e1 = document.getElementById("search_user1");
+
+            console.log(e1);
+            if (e.style.display == 'block') {
                 e.style.display = 'none';
-            else
+                e1.style.display = 'block';
+            }
+            else {
                 e.style.display = 'block';
+                e1.style.display = 'none';
+            }
         }
 
     </script>
@@ -382,7 +411,7 @@ if (isset($_POST['deleteUser'])) {
             background-color: rgba(0,0,0,0.7); display: none;
         }
         .popupBoxWrapper{
-            width: 400px; margin: 50px auto; text-align: center;
+            width: 500px; margin: 50px auto; text-align: center;
         }
         .popupBoxContent{
             background-color: #FFF; padding: 15px;

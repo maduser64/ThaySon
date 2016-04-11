@@ -229,26 +229,24 @@ function createInbox(Inbox $inbox) {
 }
 
 function insertWithMultiInbox($fromUser, $toUser, $subject, $content123) {
-    //echo nl2br('' . $content123 . "\n".$toUser."\n".$subject."\n".$fromUser."\n");
+   // echo nl2br('' . $content123 . "\n".$toUser."\n".$subject."\n".$fromUser."\n");
     $fromUser = trim($fromUser);
     if (isset($fromUser) === true && $fromUser === '') {
-        return 'false';
+        return 'Can not send message!';
     }
     $content123 = trim($content123);
     if (isset($content123) === true && $content123 === '') {
-        return 'false';
+        return 'Please fill out Content!';
     }
     $toUser = trim($toUser);
     if (isset($toUser) === true && $toUser === '') {
-        return 'false';
-    }
-    $content123 = trim($content123);
-    if (isset($content123) === true && $content123 === '') {
-        return 'false';
+       return 'Please choose users or groups!';
     }
     $myArray = explode(',', $toUser);
     //print_r($myArray);
     $amount = sizeof($myArray) - 1;
+    if($myArray[$amount]==='')
+        $amount = sizeof($myArray) - 2;
     $now = new DateTime();
     // echo $now->format('Y-m-d H:i:s');    // MySQL datetime format
     // echo nl2br(''.$content."\n");
@@ -271,20 +269,20 @@ function insertWithMultiInbox2($fromUser, $toUser, $subject, $content123) {
     //echo nl2br('' . $content123 . "\n".$toUser."\n".$subject."\n".$fromUser."\n");
     $fromUser = trim($fromUser);
     if (isset($fromUser) === true && $fromUser === '') {
-        return 'false';
+         return 'Error!!';
     }
     $content123 = trim($content123);
     if (isset($content123) === true && $content123 === '') {
-        return 'false';
+         return 'Please fill out content!';
     }
     $toUser = trim($toUser);
     if (isset($toUser) === true && $toUser === '') {
-        return 'false';
+         return 'Please choose users or groups!';
     }
-    $content123 = trim($content123);
-    if (isset($content123) === true && $content123 === '') {
-        return 'false';
-    }
+//    $content123 = trim($content123);
+//    if (isset($content123) === true && $content123 === '') {
+//        return 'false';
+//    }
     $myArray = explode(',', $toUser);
     $amount = sizeof($myArray);
     
@@ -308,15 +306,7 @@ function insertWithMultiInbox2($fromUser, $toUser, $subject, $content123) {
         // if(sizeof($myArray))
     }
     $db->close();
-    //print_r($myArray);
-    //$now = new DateTime();
-    // echo $now->format('Y-m-d H:i:s');    // MySQL datetime format
-    // echo nl2br(''.$content."\n");
-
-
-    //$db = new DB_CONNECT();
-    //echo $sqlString;
-    //$result = mysql_query($sqlString);
+  
     if ($result)
         return 'true';
     return 'false';

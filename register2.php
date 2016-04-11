@@ -12,29 +12,29 @@ if (isset($_POST['btn-signup'])) {
     $uname = mysql_real_escape_string($_POST['uname']);
     $email = mysql_real_escape_string($_POST['email']);
     $upass = (mysql_real_escape_string($_POST['upass']));
-//    $fullname = mysql_real_escape_string($_POST['fullname']);
-//    $address = mysql_real_escape_string($_POST['address']);
-//    $phone = (mysql_real_escape_string($_POST['phone']));
-//    $gender = mysql_real_escape_string($_POST['gender']);  // Storing Selected Value In Variable
-//    $tdate = mysql_real_escape_string($_POST['date']);
-//    $date = str_replace('/', '-', $tdate);
-    $user = new Users();
-    $user->setUserName($uname);
-    $user->setEmail($email);
-//    $user->setPhoneNumber($phone);
-//    $user->setAddress($address);
-//    $user->setGender($gender);
-//    $user->setBirthday(date('Y-m-d', strtotime($date)));
-    $user->setPassword($upass);
+    $urpass = (mysql_real_escape_string($_POST['urpass']));
+    if (strcmp($upass, $urpass) == 0) {
+        $valid = validateUserAndPass($uname, $upass);
+        if (strcmp($valid, 'true') == 0) {
+            $user = new Users();
+            $user->setUserName($uname);
+            $user->setEmail($email);
+            $user->setPassword($upass);
 //    $user->setFullName($fullname);
-    $insert = createUsers($user);
-    echo " : " . $insert;
-    if (!strcmp($insert, 'true')) {
-        header("Location: login.php");
+            $insert = createUsers($user);
+            //   echo " : " . $insert;
+            if (!strcmp($insert, 'true')) {
+                header("Location: login.php");
+            } else {
+                ?>
+                <script>alert('error while registering you...');</script>
+                <?php
+            }
+        } else {
+            echo '<script> alert(' . '"' . $valid . '"' . ')</script>;';
+        }
     } else {
-        ?>
-        <script>alert('error while registering you...');</script>
-        <?php
+        echo '<script> alert("Password doesnot match")</script>;';
     }
 }
 ?>
@@ -55,15 +55,8 @@ if (isset($_POST['btn-signup'])) {
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <!-- iCheck -->
         <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
-        <
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
         <script>
-            $(function () {
+            $(function() {
                 $("#datepicker").datepicker();
             });
         </script>
@@ -79,23 +72,20 @@ if (isset($_POST['btn-signup'])) {
                 <p class="login-box-msg">Register a new membership</p>
                 <form  method="post">
                     <div class="form-group has-feedback">
-                        <input type="text" class="form-control" placeholder="User Name" name ="uname">
+                        <input type="text" class="form-control" placeholder="User Name" name ="uname" required="">
                         <span class="glyphicon glyphicon-user form-control-feedback"></span>
                     </div>
-                    <!--                    <div class="form-group has-feedback">
-                                            <input type="text" class="form-control" placeholder="Full name">
-                                            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-                                        </div>-->
+                   
                     <div class="form-group has-feedback">
-                        <input type="email" class="form-control" placeholder="Email" name ="email">
+                        <input type="email" class="form-control" placeholder="Email" name ="email" required="">
                         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Password" name="upass">
+                        <input type="password" class="form-control" placeholder="Password" name="upass" required="">
                         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                     </div>
                     <div class="form-group has-feedback">
-                        <input type="password" class="form-control" placeholder="Retype password" name="urpass">
+                        <input type="password" class="form-control" placeholder="Retype password" name="urpass" required="">
                         <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
                     </div>
                     <div class="row">
@@ -129,13 +119,13 @@ if (isset($_POST['btn-signup'])) {
         <!-- iCheck -->
         <script src="plugins/iCheck/icheck.min.js"></script>
         <script>
-             $(function () {
-                 $('input').iCheck({
-                     checkboxClass: 'icheckbox_square-blue',
-                     radioClass: 'iradio_square-blue',
-                     increaseArea: '20%' // optional
-                 });
-             });
+            $(function() {
+                $('input').iCheck({
+                    checkboxClass: 'icheckbox_square-blue',
+                    radioClass: 'iradio_square-blue',
+                    increaseArea: '20%' // optional
+                });
+            });
         </script>
     </body>
 </html>

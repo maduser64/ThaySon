@@ -141,7 +141,7 @@ function deleteUser_GroupUserUseUserId($id) {
     return false;
 }
 function deleteUser_Group($user,$groupId) {
-    //echo '---------------------------------------------------'.$user.'----'.$groupId;
+   // echo '---------------------------------------------------'.$user.'----'.$groupId;
     global $groupUserId,$userId;
     $db = new DB_CONNECT();
     $result = mysql_query("DELETE FROM user_groupuser WHERE " . $userId . " = '" . $user . "' AND ".$groupUserId ."=".$groupId);

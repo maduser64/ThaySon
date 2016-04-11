@@ -22,6 +22,39 @@ $createTime = "CreateTime";
 $updateTime = "UpdateTime";
 $facebookId = "FacebookId";
 
+// validate for register
+function validateUserAndPass($userNameTmp, $passTmp) {
+    //echo '-------------------------------------------'.$passTmp;
+        $r1 = '/[A-Z]/';  //Uppercase
+        $r2 = '/[a-z]/';  //lowercase
+        $r3 = '/[!@#$%^&*()\-_=+{};:,<.>]/';  // whatever you mean by 'special char'
+        $r4 = '/[0-9]/';  //numbers
+        $uppercase = preg_match($r1, $passTmp);
+        $lowercase = preg_match($r2, $passTmp);
+        $number = preg_match($r4, $passTmp);
+        $symbol = preg_match($r3, $passTmp);
+
+        if (!$uppercase || !$lowercase || !$number  || $symbol) {
+            return 'Password must not include special character ,'
+            . ' must include at least 1 uppercase letter,'
+            . ' 1 lower letter, at least one number!';                    
+        }
+        if (strlen($passTmp) < 8) {
+            return 'Password is too short(>8 characters)';
+        }
+        if (preg_match_all($r3, $userNameTmp, $o))
+            return 'Username must not include special character';
+        if (strlen($userNameTmp) < 5) {
+            return 'Username must include at least 5 character';
+        }
+        return 'true';  
+}
+function check_Pass($passTmp) {
+    $r3 = '/[!@#$%^&*()\-_=+{};:,<.>]/'; 
+    $symbol = preg_match($r3, $passTmp);
+    if($symbol) return false;
+    return true;
+}
 function checkUser($varUserName, $varPass) {
     global $userId, $userName, $password, $fullName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $createTime, $updateTime, $school, $class, $avatar;
     $db = new DB_CONNECT();
@@ -478,6 +511,7 @@ function updateUsers(Users $users) {
     }
     return false;
 }
+
 function updateUsersPass(Users $users) {
     global $userId, $userName, $password, $fullName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $createTime, $updateTime, $school, $class, $avatar;
 
@@ -491,6 +525,7 @@ function updateUsersPass(Users $users) {
     }
     return false;
 }
+
 function createUsers(Users $users) {
     global $userId, $userName, $password, $fullName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $createTime, $updateTime, $school, $class, $avatar;
 
