@@ -18,7 +18,7 @@ $res = getUserById($_SESSION['user_id']);
 $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 $current = $_GET['pageNumInbox'] == null ? 1 : $_GET['pageNumInbox'];
 $start = ($current - 1) * 10 + 1;
-$listInbox = (array) getListInbox2($_SESSION['user_id'], ($start), 10);
+$listInbox = (array) getListInbox2($_SESSION['user_id'], ($start-1), 10);
 $totalRecord = getListInboxSize($_SESSION['user_id']);
 $numPage = round($totalRecord / 10);
 try {
@@ -193,17 +193,12 @@ if (isset($_POST['deleteGroup'])) {
                                 <div class= "col-md-3" >
                                     <a class="btn-sm btn bg-blue" href = "homePage.php"><i class="fa fa-backward"></i> Back</a>
                                 </div>
-                                <?php if (checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
                                     <div class= "col-md-3 " >
                                         <button type="button"class=" btn-sm btn bg-blue" name="approve"><i class="fa fa-upload"></i> Approve</button>
                                     </div>
-                                <?php } ?>                              
-                                <?php if (checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
                                     <div class= "col-md-3" >
                                         <button  type="button" name="deleteGroup" class="btn btn-sm bg-red-active"><i class="fa fa-trash"></i> Delete Message</button>
                                     </div>
-                                <?php } ?>
-
                                 <div class= "col-md-3 col-sm-3 pull-right">
                                     <a class="btn btn-sm bg-blue " href = "sentMailPage.php"><i class="fa fa-envelope-o"></i> Compose New Message</a>
                                 </div>
