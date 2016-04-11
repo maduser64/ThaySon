@@ -118,7 +118,18 @@ function getUserById($varUserName) {
 function checkUserName($varName) {
     //global    $userId, $userName, $password, $fullName, $address, $birthday, $phoneNumber, $email, $gender, $createTime, $updateTime; 
     $db = new DB_CONNECT();
-    $result = mysql_query("SELECT * FROM users WHERE username = '" . $varName . "' ") or die(mysql_error());
+    $result = mysql_query("SELECT * FROM users WHERE UserName = '" . $varName . "' ") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            return true;
+        }
+    }
+    return false;
+}
+function checkEmail($varName) {
+    //global    $userId, $userName, $password, $fullName, $address, $birthday, $phoneNumber, $email, $gender, $createTime, $updateTime; 
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT * FROM users WHERE Email = '" . $varName . "' ") or die(mysql_error());
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_array($result)) {
             return true;
@@ -531,8 +542,8 @@ function updateUsersPass(Users $users) {
 function createUsers(Users $users) {
     global $userId, $userName, $password, $fullName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $createTime, $updateTime, $school, $class, $avatar;
 
-    if (checkUserName($users->getUserName()) == true)
-        return "Username are existent!";
+    if (checkUserName($users->getUserName()) == true||checkEmail($users->getEmail()) == true)
+        return "Username or email are existent!";
 //$sql = 'TEST create';
 //System.out.print($sql);
     $db = new DB_CONNECT();
