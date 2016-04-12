@@ -25,11 +25,11 @@ $facebookId = "FacebookId";
 // validate for register
 function validateUserAndPass($userNameTmp, $passTmp) {
     //echo '-------------------------------------------'.$passTmp;
-        $r1 = '/[A-Z]/';  //Uppercase
-        $r2 = '/[a-z]/';  //lowercase
-       // $r3 = '/[!@#$%^&*()\-_=+{};:,<.>]/';  // whatever you mean by 'special char'
-        $r3 =  "/[a-zA-Z0-9]{3}/";  // whatever you mean by 'special char'
-        $r4 = '/[0-9]/';  //numbers
+        $r1 = '/[A-Z]{1,}/';  //Uppercase
+        $r2 = '/[a-z]{1,}/';  //lowercase
+     
+         $r3 = "/^[a-z.@A-Z0-9]{3,}$/";   // whatever you mean by 'special char'
+        $r4 = '/[0-9]{1,}/';  //numbers
         $uppercase = preg_match($r1, $passTmp);
         $lowercase = preg_match($r2, $passTmp);
         $number = preg_match($r4, $passTmp);
@@ -52,7 +52,7 @@ function validateUserAndPass($userNameTmp, $passTmp) {
 }
 function check_Pass($passTmp) {
 //    $r3 = "/[!@#$%^&*()\-_=+{};:,<.>]/"; 
-    $r3 = "/[a-zA-Z0-9]{3}/"; 
+     $r3 = "/^[a-z.@A-Z0-9]{3,}$/"; 
     $symbol = preg_match($r3, $passTmp);
     if($symbol) return true;
     return false;

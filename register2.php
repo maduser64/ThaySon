@@ -9,10 +9,14 @@ if (isset($_SESSION['user']) != "") {
 }
 
 if (isset($_POST['btn-signup'])) {
-    $uname = mysql_real_escape_string($_POST['uname']);
-    $email = mysql_real_escape_string($_POST['email']);
-    $upass = (mysql_real_escape_string($_POST['upass']));
-    $urpass = (mysql_real_escape_string($_POST['urpass']));
+    $uname = $_POST['uname'];
+    $email = $_POST['email'];
+    $upass = $_POST['upass'];
+    $urpass = $_POST['urpass'];
+//    $uname = @mysql_real_escape_string($_POST['uname']);
+//    $email = @mysql_real_escape_string($_POST['email']);
+//    $upass = @mysql_real_escape_string($_POST['upass']);
+//    $urpass = @mysql_real_escape_string($_POST['urpass']);
     if (strcmp($upass, $urpass) == 0) {
         $valid = validateUserAndPass($uname, $upass);
         if (strcmp($valid, 'true') == 0) {

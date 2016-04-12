@@ -28,15 +28,22 @@
 //	header("Location: homePage.php");
 //}
     if (isset($_POST['btn-login'])) {
-        $email = mysql_real_escape_string($_POST['UserName']);
-        $upass = mysql_real_escape_string($_POST['Password']);
+		$user=$_POST['UserName'];
+		$upass=$_POST['Password'];
+		//echo $user.' '.$upass;
+        //$user = @mysql_real_escape_string($user);
+        //$upass = @mysql_real_escape_string($upass);
         //$res=mysql_query("SELECT * FROM users WHERE email='$email'");
         //$row=mysql_fetch_array($res);
+		
         $valid = check_Pass($upass);
-        if ($valid) {
-            $user = checkUser($_POST['UserName'], $_POST['Password']);
+		$valid2 = check_Pass($user);
+	//	echo $user.'-->'.$upass.' $valid: ';
+        if ($valid&&$valid2) {
+            $user = checkUser($user,$upass);
             if ($user != null) {
                 $_SESSION['user_id'] = $user->getUserId();
+				//echo ' >>>>  ok';
                 header("Location: homePage.php");                             
             } else {
                  echo '<script> alert("UserName/Password invalid")</script>;';

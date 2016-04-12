@@ -57,9 +57,11 @@ if (isset($_POST['save'])) {
     }
 }
 if(isset($_POST['change'])){
-    //$old = mysql_real_escape_string($_POST['oldpassword']);
-    $new = mysql_real_escape_string($_POST['newpassword']);
-    $repeat = mysql_real_escape_string($_POST['repeatnewpassword']);
+    
+    $new = $_POST['newpassword'];
+    $repeat = $_POST['repeatnewpassword'];
+//    $new = mysql_real_escape_string($_POST['newpassword']);
+//    $repeat = mysql_real_escape_string($_POST['repeatnewpassword']);
    // echo '$new: '.$new.'  '.$repeat;
     
     if(strcmp($new,$repeat)==0){
