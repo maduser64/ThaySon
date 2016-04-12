@@ -722,21 +722,23 @@ function getGroupAdUser($user, $group) {
 }
 
 function getGroupAdUser2($group) {
+   
     $db = new DB_CONNECT();
-    $result = mysql_query("SELECT a.`UserId` ,a.`FullName`,a.`PhoneNumber`,a.`Email`, c.Name from users a, user_group b, groups c, user_role d "
-            . "WHERE b.UserId = a.UserId AND b.GroupId = c.GroupId AND b.UserId = d.UserId AND c.ParentGroupId =" . $group . " AND d.RoleId = 1")
+    $result = mysql_query("SELECT a.UserId from users a, user_groupuser b "
+            . "WHERE b.UserId = a.UserId AND b.GroupUserId = ".$group)
             or die(mysql_error());
     $userL = array();
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_array($result)) {
             $users = new Users();
             $users->setUserId($row['UserId']);
+  //           echo '-------------------------------------------------------'.$row['UserId'];
             // $users->setUserName($row[$userName]);
             //  $users->setPassword($row[$password]);
-            $users->setFullName($row['FullName']);
-            $users->setAddress($row['Name']);
+//            $users->setFullName($row['FullName']);
+//           $users->setAddress($row['Name']);
 //            $users->setBirthday($row['Email']);
-            $users->setPhoneNumber($row['PhoneNumber']);
+//           $users->setPhoneNumber($row['PhoneNumber']);
 //            $users->setEmail($row['Email']);
 //            $users->setCreateTime($row[$createTime]);
 //            $users->setGender($row[$gender]);            

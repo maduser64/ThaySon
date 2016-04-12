@@ -4,15 +4,17 @@ require_once $ROOT.'/dao/daoUsers.php';
 require_once $ROOT.'/models/users.php';
 require_once $ROOT . '/models/groups.php';
 require_once $ROOT . '/dao/daoGroups.php';
+require_once $ROOT . '/models/groupuser.php';
+require_once $ROOT . '/dao/daoGroupUser.php';
 class EmailLookup {
     private $emails = array();
         private function init(){
-            $groupList = getListGroups();
-            $groupItem = new Groups();
+           $groupList = getListGroupUserUsingUserId();
+           $groupItem = new GroupUser();
            $emailsList = array();
            $emailItem = array();
             foreach ($groupList as $groupItem){
-                $emailItem = array($groupItem->getName(),$groupItem->getName(),$groupItem->getGroupId());
+                $emailItem = array($groupItem->getName(),$groupItem->getName(),$groupItem->getGroupUserId());
                 array_push($emailsList, $emailItem);
             }
             $this->emails =   $emailsList;
@@ -53,5 +55,5 @@ class EmailLookup {
 	}
 }
 //$email_lookup = new EmailLookup($_REQUEST['q']);
-$email_lookup = new EmailLookup("g");
+$email_lookup = new EmailLookup("d");
 ?>

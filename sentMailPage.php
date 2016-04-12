@@ -69,8 +69,15 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
         $toGroup = mysql_real_escape_string($_POST['ToGroupAddress']);
         $subject = mysql_real_escape_string($_POST['Subject']);
         $content = $_POST['ContentMessage'];
-        $result = insertWithMultiInbox($fromUserId, $toAddress, $subject, $content);
-        $result2 = insertWithMultiInbox2($fromUserId, $toGroup, $subject, $content);
+        $toGroup = trim($toGroup);
+        if (isset($toGroup) === true && $toGroup === '') {
+            $result = insertWithMultiInbox($fromUserId, $toAddress, $subject, $content);
+        }
+        if (isset($toAddress) === true && $toAddress === '') {
+            $result = insertWithMultiInbox2($fromUserId, $toGroup, $subject, $content);
+        }
+        //$result = insertWithMultiInbox($fromUserId, $toAddress, $subject, $content);
+        //$result2 = insertWithMultiInbox2($fromUserId, $toGroup, $subject, $content);
         // echo '--------------------' . $toGroup;
         if (strcmp($result, 'true') == 0) {
             // echo 'Strings match.';
@@ -79,10 +86,10 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
             echo '<script> alert("Can not send! Try again "); </script>';
             //  echo 'Strings do not match.';
         }
-    }else if (isset($_POST['send-action-ex'])) {
+    } else if (isset($_POST['send-action-ex'])) {
         $fromUserId = $_SESSION['user_id'];
         $toAddress = mysql_real_escape_string($_GET['UserId']);
-       //$toGroup = mysql_real_escape_string($_POST['ToGroupAddress']);
+        //$toGroup = mysql_real_escape_string($_POST['ToGroupAddress']);
         $subject = mysql_real_escape_string($_POST['Subject']);
         $content = $_POST['ContentMessage'];
         $result = insertWithMultiInbox($fromUserId, $toAddress, $subject, $content);
@@ -92,7 +99,7 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
             // echo 'Strings match.';
             echo '<script> alert("Your message has been sent!"); </script>';
         } else {
-            echo '<script> alert('.'"'.$result.'"'.'); </script>';            
+            echo '<script> alert(' . '"' . $result . '"' . '); </script>';
         }
     }
     ?>
@@ -249,9 +256,9 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
                                     <div class="pull-right">
                                         <?php if (isset($_GET['UserId'])) { ?>
                                             <button type="submit" class="btn btn-primary" name = "send-action-ex"><i class="fa fa-envelope-o"></i> Send</button>  
-                                        <?php } else{  ?>
-                                        <button type="submit" class="btn bg-green" name = "send-action"><i class="fa fa-envelope-o"></i> Send</button>                                      
-                                        <?php }?>
+                                        <?php } else { ?>
+                                            <button type="submit" class="btn bg-green" name = "send-action"><i class="fa fa-envelope-o"></i> Send</button>                                      
+                                        <?php } ?>
                                     </div>
 <!--                                    <button class="btn btn-default"><i class="fa fa-times"></i> Discard</button>-->
                                 </div><!-- /.box-footer -->
@@ -276,7 +283,7 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
     <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
     <!-- Page Script -->
     <script>
-            $(function() {
+            $(function () {
                 //Add text editor
                 $("#compose-textarea").wysihtml5();
             });

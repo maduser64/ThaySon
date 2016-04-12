@@ -145,25 +145,18 @@ function getGroupIdUseCreateTime($varName) {
     return $varName;
 }
 
-function getListGroups() {
-    global $groupId, $facebookGroupId, $name, $privacy, $description, $icon, $email, $owner, $createGroupTime, $createTime;
+function getListGroups($tmpuserid) {
+   //lobal $groupId, $facebookGroupId, $name, $privacy, $description, $icon, $email, $owner, $createGroupTime, $createTime;
     $listGroups = array();
     $db = new DB_CONNECT();
-    $result = mysql_query("SELECT *FROM groups WHERE parentGroupId = 0") or die(mysql_error());
+    $result = mysql_query("SELECT * FROM groupuser a JOIN user_groupuser b on a.GroupUserId = b.GroupUserId and b.UserId = ".$tmpuserid) or die(mysql_error());
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_array($result)) {
-            $groups = new Groups();
-            $groups->setGroupId($row[$groupId]);
-            $groups->setFacebookGroupId($row[$facebookGroupId]);
-            $groups->setName($row[$name]);
-            $groups->setPrivacy($row[$privacy]);
-            $groups->setDescription($row[$description]);
-            $groups->setIcon($row[$icon]);
-            $groups->setEmail($row[$email]);
-            $groups->setOwner($row[$owner]);
-            $groups->setCreateGroupTime($row[$createGroupTime]);
-            $groups->setCreateTime($row[$createTime]);
-
+            $groups = new GroupUser();
+            $groups->setGroupUserId($row['GroupUserId']);
+            $groups->setName($row['Name']);
+            $groups->setUserId($row['UseId']);
+            $groups->setDescription($row['Description']);
             array_push($listGroups, $groups);
         }
     }
