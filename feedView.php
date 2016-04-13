@@ -37,17 +37,19 @@ try {
 } catch (Exception $ex) {
     
 }
-$start = ($current - 1) * 10 + 1;
+$start = ($current - 1) * 10;
 $listFeeds = (array) getFeedIdUseGroupId($_GET['groupId'], $start, 10);
 $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
 $totalRecord = getTotalRecord($_SESSION['user_id']);
 $numPage = round($totalRecord / 10);
-
-function getLastWeekDates()
-{
+function getCurentWeekDates(){
+   $date = new DateTime();
+   $date->modify('+2 day');
+   return $date->format('m-d-Y');
+}
+function getLastWeekDates(){
    $date = new DateTime('7 days ago');
- 
-    return $date->format('m-d-Y');
+   return $date->format('m-d-Y');
 }
 ?>
 <html>
@@ -221,7 +223,7 @@ function getLastWeekDates()
                                     <label class="col-md-4 control-label">To Date </label>
                                     <div class="col-md-8">
                                         <div class='input-group date' id='datetimepicker-to-date' data-provide="datepicker" data-date-format="mm-dd-yyyy">
-                                            <input type='text' class="form-control" name = "to-date" placeholder="Input end date" value="<?php $now = new DateTime(); echo $now->format('m-d-Y'); ?>"/>
+                                            <input type='text' class="form-control" name = "to-date" placeholder="Input end date" value="<?php echo getCurentWeekDates(); ?>"/>
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
@@ -278,7 +280,7 @@ function getLastWeekDates()
                                                 //echo '---'.round($numPage);
                                                 $size = sizeof($listFeeds);
                                                 $row = new Feeds();
-                                                $i = $start;
+                                                $i = $start+1;
                                                 foreach ($listFeeds as $row) {
                                                     echo '<tr>';
                                                     echo "<td class =\"text-center\"><input type=\"checkbox\" class =\"cbox\" name=\"checkbox_name[]\" value=\"{$row->getFeedId()}\" /></td>";

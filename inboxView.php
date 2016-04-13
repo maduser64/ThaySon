@@ -17,7 +17,7 @@ if (!isset($_SESSION['user_id'])) {
 $res = getUserById($_SESSION['user_id']);
 $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 $current = $_GET['pageNumInbox'] == null ? 1 : $_GET['pageNumInbox'];
-$start = ($current - 1) * 10 + 1;
+$start = ($current - 1) * 10+1;
 $listInbox = (array) getListInbox2($_SESSION['user_id'], ($start-1), 10);
 $totalRecord = getListInboxSize($_SESSION['user_id']);
 $numPage = round($totalRecord / 10);

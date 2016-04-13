@@ -36,7 +36,7 @@ try {
     
 }
 
-$start = ($current - 1) * 10 + 1;
+$start = ($current - 1) * 10;
 $listComments = (array) getCommentIdUseFeedId($_GET['feedId'], $start, 10);
 
 $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
@@ -216,10 +216,11 @@ $numPage = round($totalRecord / 10);
                                             //echo '---'.round($numPage);
                                             $size = sizeof($listComments);
                                             $row = new Comments();
-                                            $i = $start;
+                                            $i = $start+1;
                                             foreach ($listComments as $row) {
                                                 echo '<tr>';
                                                 echo "<td class=\"text-center\" >{$i}</td>";
+                                                echo "<td class=\"text-center\" ><a href=https://www.facebook.com/{$row->getFacebookUserIdComment()}>{$row->getFacebookUserIdComment()}</a></td>";
                                                 echo "<td class=\"text-left\"><a href=https://www.facebook.com/{$row->getFacebookIdComment()}>{$row->getMessage()}</a></td>";
                                                 echo "<td class=\"text-center\">{$row->getCreateCommentTime()}</td>";
                                                 echo '</tr>';

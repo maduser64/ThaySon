@@ -224,7 +224,7 @@ function createFeeds(Feeds $feeds) {
     global   $feedId, $facebookIdFeed, $facebookUserIdFeed, $message, $createFeedTime, $updateFeedTime, $statusId, $groupId, $createTime, $updateTime; 
     $db = new DB_CONNECT();
     $re=getFeedIdUseFacebookIdFeed($feeds->getFacebookIdFeed());
-    if($re!=null) return false;
+    if($re!=null) return $re;
     $result = mysql_query("INSERT INTO feeds("
             .$facebookIdFeed.","
             .$facebookUserIdFeed.","

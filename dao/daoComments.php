@@ -96,13 +96,14 @@ function getCommentIdUseFeedId($varName, $start, $count) {
      global $commentId, $facebookIdComment, $facebookUserIdComment, $message, $createCommentTime, $statusId, $feedId, $createTime, $updateTime;
     $db = new DB_CONNECT();
     $listComments =  array();
-    $result = mysql_query("SELECT `CommentId`, `FacebookIdComment`, `Message`, `CreateCommentTime`, b.Name 
+    $result = mysql_query("SELECT `CommentId`,`FacebookUserIdComment`, `FacebookIdComment`, `Message`, `CreateCommentTime`, b.Name 
                             FROM comments AS a INNER JOIN status as b on a.statusId = b.StatusId AND feedId = ".$varName 
                             ." ORDER BY a.CreateCommentTime LIMIT ".$start.",".$count. "") or die(mysql_error());
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_array($result)) {
             $comments = new Comments();
             $comments->setCommentId($row[$commentId]);
+            $comments->setFacebookUserIdComment($row[$facebookUserIdComment]);
             $comments->setFacebookIdComment($row[$facebookIdComment]);
             $comments->setMessage($row[$message]);
             $comments->setCreateCommentTime($row[$createCommentTime]);
