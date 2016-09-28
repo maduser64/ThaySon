@@ -4,8 +4,7 @@
 date_default_timezone_set('Europe/London');
 
 //session_start();
-require_once __DIR__ . '/host.php';
-require_once $ROOT . '/Classes/PHPExcel/IOFactory.php';
+require_once '/Classes/PHPExcel/IOFactory.php';
 
 //$inputFileType = 'Excel5';
 $inputFileType = 'Excel2007';

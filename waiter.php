@@ -1,7 +1,6 @@
 <?php
 //chao
 session_start();
-require_once __DIR__ . '/host.php';
 unset($_SESSION['user_id']);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

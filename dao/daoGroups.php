@@ -1,9 +1,8 @@
 <?php
 
-require_once __DIR__ . '/host.php';
-require_once $ROOT . '/dao/db_connect.php';
-require_once $ROOT . '/models/groups.php';
-require_once $ROOT . '/dao/daoGroups.php';
+require_once 'db_connect.php';
+require_once '/models/groups.php';
+require_once 'daoGroups.php';
 $groupId = "GroupId";
 $facebookGroupId = "FacebookGroupId";
 $name = "Name";

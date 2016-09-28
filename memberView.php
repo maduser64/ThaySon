@@ -2,15 +2,14 @@
 
 <?php
 session_start();
-require_once __DIR__ . '/host.php';
-require_once $ROOT . '/dao/daoUsers.php';
-require_once $ROOT . '/models/users.php';
-require_once $ROOT . '/models/inbox.php';
-require_once $ROOT . '/dao/daoInbox.php';
-require_once $ROOT . '/dao/daoComments.php';
-require_once $ROOT . '/models/comments.php';
-require_once $ROOT . '/dao/daoMembers.php';
-require_once $ROOT . '/models/members.php';
+require_once '/dao/daoUsers.php';
+require_once '/models/users.php';
+require_once '/models/inbox.php';
+require_once '/dao/daoInbox.php';
+require_once '/dao/daoComments.php';
+require_once '/models/comments.php';
+require_once '/dao/daoMembers.php';
+require_once '/models/members.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -120,7 +119,7 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>A</b>LT</span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg"><i class="fa fa-home"></i> <b>Admin</b></span>
+                    <span class="logo-lg "><i class="fa fa-home"></i><b>Home Page</b></span>
                 </a>
 
                 <!-- Header Navbar -->
@@ -174,26 +173,7 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
                 </nav>
             </header>
             <!-- Left side column. contains the logo and sidebar -->
-            <aside class="main-sidebar">
-
-                <!-- sidebar: style can be found in sidebar.less -->
-                <section class="sidebar">
-
-                    <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p> <?php echo $res->getFullName(); ?>&nbsp;&nbsp; </p>
-                            <!-- Status -->
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>  
-                </section>
-                <!-- /.sidebar -->
-            </aside>
-
+            <?php include 'includeTab.php';?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->

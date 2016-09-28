@@ -1,8 +1,7 @@
 <?php
-require_once __DIR__ .'/host.php';
-require_once $ROOT .'/dao/db_connect.php';
-require_once $ROOT .'/models/groupuser.php';
-require_once $ROOT .'/dao/daoUser_GroupUser.php';
+require_once 'db_connect.php';
+require_once '/models/groupuser.php';
+require_once 'daoUser_GroupUser.php';
 
 $groupUserId = "GroupUserId";
 $name = "Name";

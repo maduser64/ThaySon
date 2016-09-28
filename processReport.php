@@ -1,9 +1,8 @@
 <?php
 
 session_start();
-require_once __DIR__ . '/host.php';
-require_once $ROOT . '/dao/daoFeeds.php';
-require_once $ROOT . '/models/feeds.php';
+require_once '/dao/daoFeeds.php';
+require_once '/models/feeds.php';
 
 if (isset($_POST['report']) && !isset($_POST['approve'])) {
     echo $_POST['report'] . '</br>';

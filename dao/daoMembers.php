@@ -1,8 +1,7 @@
 <?php
-require_once __DIR__ .'/host.php';
-require_once $ROOT .'/dao/db_connect.php';
-require_once $ROOT .'/models/members.php';
-require_once $ROOT .'/models/membersSearchUserGroup.php';
+require_once 'db_connect.php';
+require_once '/models/members.php';
+require_once '/models/membersSearchUserGroup.php';
 
 $memberId = "MemberId";
 $facebookIdMember = "FacebookIdMember";

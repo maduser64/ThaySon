@@ -1,11 +1,10 @@
 <?php
-require __DIR__.'/host.php';
-require_once $ROOT.'/dao/daoUsers.php';
-require_once $ROOT.'/models/users.php';
-require_once $ROOT . '/models/groups.php';
-require_once $ROOT . '/dao/daoGroups.php';
-require_once $ROOT . '/models/groupuser.php';
-require_once $ROOT . '/dao/daoGroupUser.php';
+require_once '/dao/daoUsers.php';
+require_once '/models/users.php';
+require_once  '/models/groups.php';
+require_once '/dao/daoGroups.php';
+require_once '/models/groupuser.php';
+require_once '/dao/daoGroupUser.php';
 class EmailLookup {
     private $emails = array();
         private function init(){

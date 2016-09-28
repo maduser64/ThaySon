@@ -1,15 +1,14 @@
 <?php
 session_start();
-require_once __DIR__ . '/host.php';
-require_once $ROOT . '/dao/daoUsers.php';
-require_once $ROOT . '/models/users.php';
-require_once $ROOT . '/models/inbox.php';
-require_once $ROOT . '/dao/daoInbox.php';
-require_once $ROOT . '/dao/daoGroups.php';
-require_once $ROOT . '/dao/daoGroupUser.php';
-require_once $ROOT . '/models/groupuser.php';
-require_once $ROOT . '/dao/daoRoles.php';
-require_once $ROOT . '/models/groups.php';
+require_once '/dao/daoUsers.php';
+require_once '/models/users.php';
+require_once '/models/inbox.php';
+require_once '/dao/daoInbox.php';
+require_once '/dao/daoGroups.php';
+require_once '/dao/daoGroupUser.php';
+require_once '/models/groupuser.php';
+require_once '/dao/daoRoles.php';
+require_once '/models/groups.php';
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
 }
@@ -61,6 +60,7 @@ if (isset($_POST['deleteGroup'])) {
         <title>Welcome - <?php echo $res->getUserName(); ?></title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/w3.css">
         <link rel="stylesheet" href="bootstrap/css/sweetalert.css">
         <link rel="stylesheet" href="bootstrap/css/bootstrap-datetimepicker.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -113,11 +113,11 @@ if (isset($_POST['deleteGroup'])) {
             <!-- Main Header -->
             <header class="main-header">
                 <!-- Logo -->
-                <a href="#" class="logo">
+                <a href="homePage.php" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b>A</b>LT</span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg "><i class="fa fa-home"></i><b> Admin Page</b></span>
+                    <span class="logo-lg "><i class="fa fa-home"></i><b>Home Page</b></span>
                 </a>
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">
@@ -173,24 +173,7 @@ if (isset($_POST['deleteGroup'])) {
                 </nav>
             </header>
             <!-- Left side column. contains the logo and sidebar -->
-            <aside class="main-sidebar">
-                <!-- sidebar: style can be found in sidebar.less -->
-                <section class="sidebar">
-
-                    <!-- Sidebar user panel (optional) -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p> <?php echo $res->getFullName(); ?>&nbsp;&nbsp; </p>
-                            <!-- Status -->
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>
-                </section>
-                <!-- /.sidebar -->
-            </aside>
+            <?php include 'includeTab.php';?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
@@ -210,11 +193,18 @@ if (isset($_POST['deleteGroup'])) {
                         <?php
                         if (checkRoleAdminUsingUserId($_SESSION['user_id'])) {
                             ?>
-                            <div class= "col-md-3 text-center " style="padding-bottom: 20px;">                      
-                                <div class="form-group">                                 
-                                    <!--<button class="btn bg-blue col-md-4 btn-sm" name="btn-createGroup"><i class="fa fa-plus-circle"></i> Add Group </button>-->
-                                    <a class="btn bg-blue col-md-6 btn-sm" href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');"><i class="fa fa-plus-circle"></i> Add Group</a>
-                                </div>                     
+                            <div class="row"  style="padding-bottom: 20px;">
+                                <div class= "col-md-3 text-center ">
+                                    <div class="form-group">
+                                        <!--<button class="btn bg-blue col-md-4 btn-sm" name="btn-createGroup"><i class="fa fa-plus-circle"></i> Add Group </button>-->
+                                        <a class="btn bg-blue col-md-4 btn-sm" href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');"><i class="fa fa-plus-circle"></i> Add Group</a>
+                                    </div>                     
+                                </div>
+                                <div class="col-md-3  text-center ">
+                                    <div class="form-group">
+                                        <button class="btn bg-red col-md-4 btn-sm " type="submit" name="deleteGroup"><i class="fa fa-trash"></i> Delete Group</button>
+                                    </div>
+                                </div>
                             </div>
                         <?php } ?>
                         <div class="row">
@@ -225,37 +215,7 @@ if (isset($_POST['deleteGroup'])) {
                                     </div><!-- /.box-header -->
                                     <div class="panel-body">
                                         <input type="hidden" name="param" />
-                                        <div class="col-md-12" style="padding-bottom: 10px;">
-
-                                            <div class= "col-md-2 text-left ">
-                                                <button class="btn bg-red btn-sm " type="submit" name="deleteGroup"><i class="fa fa-trash"></i> Delete Group</button>
-                                            </div>
-                                            <?php if (checkRoleQLNhom($_SESSION['user_id'])||checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
-                                                <div class= "col-md-3 text-left ">
-                                                    <a class="btn bg-blue btn-sm " href="subGroup.php"> Manager group facebook</a>
-                                                </div>
-                                                
-                                            <?php } ?>
-                                            <?php if (checkRoleAdminUsingUserId($_SESSION['user_id'])) { ?>
-                                            <div class="col-md-7 pull-right col-sm-8">
-                                                <div class= " col-md-2 ">
-                                                    <a class="btn bg-blue btn-sm " href="rolesView.php?pageNumRole=1"> Permission</a>
-                                                </div>
-                                                
-                                                <div class="col-md-6 pull-right col-sm-6 " id = "search_form">
-                                                    <!-- search form -->
-                                                   <div class="input-group" >
-                                                        <input type="text" id="key"  class="form-control" name="q" placeholder="Search by FacebookID..." value=""/>
-                                                         <div class="input-group-btn">
-                                                            <a type="submit" name="" id="search-btn" class="form-control btn bg-blue" onclick="check()" ><i class="fa fa-search"></i></a>
-                                                        </div>  
-                                                   </div>
-                                                    <!-- input -->
-
-                                                </div> 
-                                            </div>
-                                            <?php } ?>
-                                        </div>
+                                        
                                         <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>

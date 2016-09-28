@@ -1,7 +1,6 @@
 <?php
-require_once __DIR__ .'/host.php';
-require_once $ROOT .'/dao/db_connect.php';
-require_once $ROOT .'/models/feeds.php';
+require_once 'db_connect.php';
+require_once '/models/feeds.php';
 
 $feedId = "FeedId";
 $facebookIdFeed = "FacebookIdFeed";

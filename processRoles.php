@@ -1,11 +1,10 @@
 <?php
 
 session_start();
-require_once __DIR__ . '/host.php';
-require_once $ROOT . '/dao/daoUser_Role.php';
-require_once $ROOT . '/models/user_role.php';
-require_once $ROOT . '/dao/daoUsers.php';
-require_once $ROOT . '/dao/daoRoles.php';
+require_once '/dao/daoUser_Role.php';
+require_once '/models/user_role.php';
+require_once '/dao/daoUsers.php';
+require_once '/dao/daoRoles.php';
 //
 //if (isset($_POST['thanhVien']) && !isset($_POST['quanTri']) && !isset($_POST['quanLyNhom']) && !isset($_POST['capQuyen']) && !isset($_POST['xoaQuyen'])) {
 //    echo $_POST['thanhVien'] . '</br>';

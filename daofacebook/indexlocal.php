@@ -1,23 +1,22 @@
 <?php
 
 header('Content-type:text/html; charset=utf-8');
-require_once __DIR__ . '/host.php';
-require_once $ROOT . "/facebook-php-sdk-v4-5.0-dev/src/Facebook/autoload.php";
+require_once "/facebook-php-sdk-v4-5.0-dev/src/Facebook/autoload.php";
 
-require_once $ROOT . '/models/users.php';
-require_once $ROOT . '/models/groups.php';
-require_once $ROOT . '/models/feeds.php';
-require_once $ROOT . '/models/members.php';
-require_once $ROOT . '/models/status.php';
-require_once $ROOT . '/models/comments.php';
-require_once $ROOT . '/models/user_group.php';
+require_once '/models/users.php';
+require_once '/models/groups.php';
+require_once '/models/feeds.php';
+require_once '/models/members.php';
+require_once '/models/status.php';
+require_once '/models/comments.php';
+require_once '/models/user_group.php';
 
-require_once $ROOT . '/dao/daoUsers.php';
-require_once $ROOT . '/dao/daoGroups.php';
-require_once $ROOT . '/dao/daoComments.php';
-require_once $ROOT . '/dao/daoMembers.php';
-require_once $ROOT . '/dao/daoStatus.php';
-require_once $ROOT . '/dao/daoFeeds.php';
+require_once '/dao/daoUsers.php';
+require_once '/dao/daoGroups.php';
+require_once '/dao/daoComments.php';
+require_once '/dao/daoMembers.php';
+require_once '/dao/daoStatus.php';
+require_once '/dao/daoFeeds.php';
 
 // khởi tạo 1 session
 session_start();

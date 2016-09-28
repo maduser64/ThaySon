@@ -1,8 +1,7 @@
 <?php
 
-require_once __DIR__ . '/host.php';
-require_once $ROOT . '/dao/db_connect.php';
-require_once $ROOT . '/models/inbox.php';
+require_once 'db_connect.php';
+require_once '/models/inbox.php';
 
 $inboxId = "InboxId";
 $fromUserId = "FromUserId";

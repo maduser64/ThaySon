@@ -14,8 +14,7 @@
 <?php
 session_start();
 
-require_once __DIR__ . '/host.php';
-require_once $ROOT . '/readExcel.php';
+require_once '/readExcel.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");

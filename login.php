@@ -19,8 +19,8 @@
     </head>
     <?php
     require_once __DIR__ . '/host.php';
-    require_once $ROOT . '/dao/daoUsers.php';
-    require_once $ROOT . '/models/users.php';
+    require_once '/dao/daoUsers.php';
+    require_once '/models/users.php';
     session_start();
 
 //if(isset($_SESSION['user_id'])!="")

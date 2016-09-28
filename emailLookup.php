@@ -1,7 +1,6 @@
 <?php
-require __DIR__.'/host.php';
-require_once $ROOT.'/dao/daoUsers.php';
-require_once $ROOT.'/models/users.php';
+require_once '/dao/daoUsers.php';
+require_once '/models/users.php';
 
 
 

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <?php
 session_start();
-require_once __DIR__ . '/host.php';
-require_once $ROOT . '/dao/daoUsers.php';
-require_once $ROOT . '/dao/daoRoles.php';
-require_once $ROOT . '/models/users.php';
-require_once $ROOT . '/models/inbox.php';
-require_once $ROOT . '/dao/daoInbox.php';
-require_once $ROOT . '/dao/daoGroups.php';
-require_once $ROOT . '/models/groups.php';
+require_once '/dao/daoUsers.php';
+require_once '/dao/daoRoles.php';
+require_once '/models/users.php';
+require_once '/models/inbox.php';
+require_once '/dao/daoInbox.php';
+require_once '/dao/daoGroups.php';
+require_once '/models/groups.php';
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
 }
@@ -119,9 +118,9 @@ if(isset($_POST['change'])){
                 <!-- Logo -->
                 <a href="homePage.php" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <!--<span class="logo-mini"><b>A</b>LT</span>-->
+                    <span class="logo-mini"><b>A</b>LT</span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg"><i class="fa fa-home"></i><b> Admin</b></span>
+                    <span class="logo-lg "><i class="fa fa-home"></i><b>Home Page</b></span>
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">                
@@ -179,24 +178,7 @@ if(isset($_POST['change'])){
                 </nav>
             </header>
             <!-- Left side column. contains the logo and sidebar -->
-            <aside class="main-sidebar">
-                <!--             sidebar: style can be found in sidebar.less -->
-                <section class="sidebar">
-                    <!--                 Sidebar user panel -->
-                    <div class="user-panel">
-                        <div class="pull-left image">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                        </div>
-                        <div class="pull-left info">
-                            <p><?php echo '' . $res->getFullName(); ?></p>
-                            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-                        </div>
-                    </div>
-
-                </section>
-                <!--/.sidebar -->
-            </aside>
-
+            <?php include 'includeTab.php';?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
