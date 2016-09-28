@@ -1,6 +1,6 @@
 <?php
 require_once 'db_connect.php';
-require_once '/models/status.php';
+require_once '/../models/status.php';
 
 $statusId = "StatusId";
 $name = "Name";

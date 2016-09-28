@@ -1,6 +1,6 @@
 <?php
 require_once 'db_connect.php';
-require_once '/models/user_role.php';
+require_once '/../models/user_role.php';
 
 $userRoleId = "UserRoleId";
 $roleId = "RoleId";

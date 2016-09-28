@@ -1,7 +1,7 @@
 <?php
 
 require_once 'db_connect.php';
-require_once '/models/groups.php';
+require_once '/../models/groups.php';
 require_once 'daoGroups.php';
 $groupId = "GroupId";
 $facebookGroupId = "FacebookGroupId";

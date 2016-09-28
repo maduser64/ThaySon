@@ -194,13 +194,13 @@ if (isset($_POST['deleteGroup'])) {
                         if (checkRoleAdminUsingUserId($_SESSION['user_id'])) {
                             ?>
                             <div class="row"  style="padding-bottom: 20px;">
-                                <div class= "col-md-3 text-center ">
+                                <div class= "col-md-4 text-center ">
                                     <div class="form-group">
                                         <!--<button class="btn bg-blue col-md-4 btn-sm" name="btn-createGroup"><i class="fa fa-plus-circle"></i> Add Group </button>-->
                                         <a class="btn bg-blue col-md-4 btn-sm" href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');"><i class="fa fa-plus-circle"></i> Add Group</a>
                                     </div>                     
                                 </div>
-                                <div class="col-md-3  text-center ">
+                                <div class="col-md-4  text-center ">
                                     <div class="form-group">
                                         <button class="btn bg-red col-md-4 btn-sm " type="submit" name="deleteGroup"><i class="fa fa-trash"></i> Delete Group</button>
                                     </div>

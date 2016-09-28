@@ -1,6 +1,6 @@
 <?php
 require_once 'db_connect.php';
-require_once '/models/groupuser.php';
+require_once '/../models/groupuser.php';
 require_once 'daoUser_GroupUser.php';
 
 $groupUserId = "GroupUserId";

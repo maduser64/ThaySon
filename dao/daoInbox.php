@@ -1,7 +1,7 @@
 <?php
 
 require_once 'db_connect.php';
-require_once '/models/inbox.php';
+require_once '/../models/inbox.php';
 
 $inboxId = "InboxId";
 $fromUserId = "FromUserId";

@@ -1,7 +1,7 @@
 <?php
 
 require_once 'db_connect.php';
-require_once 'models/users.php';
+require_once '/../models/users.php';
 
 $userId = "UserId";
 $userName = "UserName";

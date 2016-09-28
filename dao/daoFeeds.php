@@ -1,6 +1,6 @@
 <?php
 require_once 'db_connect.php';
-require_once '/models/feeds.php';
+require_once '/../models/feeds.php';
 
 $feedId = "FeedId";
 $facebookIdFeed = "FacebookIdFeed";

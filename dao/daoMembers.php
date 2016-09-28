@@ -1,7 +1,7 @@
 <?php
 require_once 'db_connect.php';
-require_once '/models/members.php';
-require_once '/models/membersSearchUserGroup.php';
+require_once '/../models/members.php';
+require_once '/../models/membersSearchUserGroup.php';
 
 $memberId = "MemberId";
 $facebookIdMember = "FacebookIdMember";

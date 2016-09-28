@@ -1,7 +1,7 @@
 <?php
 
 require_once  'db_connect.php';
-require_once  '/models/comments.php';
+require_once  '/../models/comments.php';
 
 $commentId = "CommentId";
 $facebookIdComment = "FacebookIdComment";
