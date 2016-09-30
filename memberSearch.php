@@ -33,21 +33,10 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Welcome - <?php echo $res->getUserName(); ?></title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-        <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-        <link rel="stylesheet"
-              href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet"
-              href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <?php include 'includeCss.php'; ?>
         <!-- DataTables -->
         <script src="plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script>
             $(function () {
                 $("#datetimepicker-from-date").datepicker();
@@ -96,7 +85,9 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">
-                    <!-- Sidebar toggle button-->                  
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
@@ -266,14 +257,7 @@ $listInbox = getInboxIdUseStatus($_SESSION['user_id']);
             </div><!-- /.content-wrapper 
 
             <!-- Main Footer -->
-            <footer class="main-footer">
-                <!-- To the right -->
-                <div class="pull-right hidden-xs">
-                    Anything you want
-                </div>
-                <!-- Default to the left -->
-                <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
-            </footer>
+            <?php include 'includeFooter.php'; ?>
             <script type="text/javascript">
 
                 var _gaq = _gaq || [];

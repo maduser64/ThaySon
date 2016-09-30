@@ -93,22 +93,11 @@ if (isset($_POST['sentMail'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Welcome - <?php echo $res->getUserName(); ?></title>
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-        <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-        <link rel="stylesheet"
-              href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet"
-              href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <?php include 'includeCss.php'; ?>
+        
         <!-- bootstrap wysihtml5 - text editor -->
         <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <!--  - mail -->
         <link rel="stylesheet" href="mailBox/css/token-input.css">
         <!--        <link rel="stylesheet" href="mailBox/css/send_email.css">-->
@@ -117,9 +106,6 @@ if (isset($_POST['sentMail'])) {
         <script src="mailBox/js/jquery.tokeninput.js"></script>
         <script src="mailBox/js/send_email.js"></script>
         <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js" ></script>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-        <!-- Bootstrap 3.3.5 -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
         <!--  - alert -->
         <link rel="stylesheet" href="bootstrap/css/sweetalert.css"/>
         <script src="bootstrap/js/sweetalert.min.js"/>
@@ -168,6 +154,9 @@ if (isset($_POST['sentMail'])) {
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">
                     <!-- Sidebar toggle button-->                  
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
@@ -355,16 +344,7 @@ if (isset($_POST['sentMail'])) {
 
                 </section>
             </div>
-            <footer class="main-footer">
-                <!-- To the right -->
-                <div class="pull-right hidden-xs">
-                    Anything you want
-                </div>
-                <!-- Default to the left -->
-                <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
-            </footer>
-
-
+            <?php include 'includeFooter.php'; ?>
         </div>  <!-- /.content -->
     </body>
     <script type="text/javascript">

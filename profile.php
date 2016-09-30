@@ -124,6 +124,9 @@ if(isset($_POST['change'])){
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top" role="navigation">                
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             <!-- Messages: style can be found in dropdown.less-->
@@ -348,12 +351,7 @@ if(isset($_POST['change'])){
                     </div>
                 </section><!-- /.content -->
             </div><!-- /.content-wrapper -->
-            <footer class="main-footer">
-                <div class="pull-right hidden-xs">
-                    <b>Version</b> 2.3.0
-                </div>
-                <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
-            </footer>
+            <?php include 'includeFooter.php'; ?>
         </div><!-- ./wrapper -->
 
         <!-- jQuery 2.1.4 -->

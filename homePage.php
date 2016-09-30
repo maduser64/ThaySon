@@ -58,22 +58,11 @@ if (isset($_POST['deleteGroup'])) {
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Welcome - <?php echo $res->getUserName(); ?></title>
+        <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="css/w3.css">
-        <link rel="stylesheet" href="bootstrap/css/sweetalert.css">
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-datetimepicker.min.css">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-        <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <link rel="stylesheet"
-              href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <link rel="stylesheet"
-              href="https://cdn.datatables.net/1.10.10/css/dataTables.bootstrap.min.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+        <?php include 'includeCss.php'; ?>
+        
         <script>
             //$('#search-btn').click(function(event){
             function check() {
@@ -104,9 +93,6 @@ if (isset($_POST['deleteGroup'])) {
 
             });
         </script>
-        <!-- Bootstrap 3.3.5 -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
@@ -121,6 +107,9 @@ if (isset($_POST['deleteGroup'])) {
                 </a>
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
@@ -166,14 +155,14 @@ if (isset($_POST['deleteGroup'])) {
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" data-toggle="control-sidebar"></a>
+                                <!--<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
                             </li>
                         </ul>
                     </div>
                 </nav>
             </header>
             <!-- Left side column. contains the logo and sidebar -->
-            <?php include 'includeTab.php';?>
+            <?php include 'includeTab.php'; ?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
@@ -215,7 +204,7 @@ if (isset($_POST['deleteGroup'])) {
                                     </div><!-- /.box-header -->
                                     <div class="panel-body">
                                         <input type="hidden" name="param" />
-                                        
+
                                         <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>
@@ -282,14 +271,7 @@ if (isset($_POST['deleteGroup'])) {
             </div><!-- /.content-wrapper -->
 
             <!-- Main Footer -->
-            <footer class="main-footer">
-                <!-- To the right -->
-                <div class="pull-right hidden-xs">
-                    Anything you want
-                </div>
-                <!-- Default to the left -->
-                <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
-            </footer>
+            <?php include 'includeFooter.php'; ?>
         </div>
     </body>
     <script type="text/javascript">
@@ -297,11 +279,11 @@ if (isset($_POST['deleteGroup'])) {
             //console.log('Click');
             var e = document.getElementById(id);
             var e1 = document.getElementById("search_form");
-            if (e.style.display == 'block'){
+            if (e.style.display == 'block') {
                 e.style.display = 'none';
                 e1.style.display = 'block';
             }
-            else{
+            else {
                 e.style.display = 'block';
                 e1.style.display = 'none';
             }
