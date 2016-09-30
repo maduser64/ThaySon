@@ -87,6 +87,7 @@ if(isset($_POST['change'])){
     <head>
         <meta charset="UTF-8">
         <title>User Profile</title>
+        <link rel="shortcut icon" href="css/icon.ico" />
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <!-- Bootstrap 3.3.5 -->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">

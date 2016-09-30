@@ -17,6 +17,7 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Welcome - <?php echo $res->getUserName(); ?></title>
+        <link rel="shortcut icon" href="css/icon.ico" />
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <?php include 'includeCss.php'; ?>
         <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
