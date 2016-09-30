@@ -131,8 +131,6 @@ try {
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
-
-
                 <section class="content-header">
                     <h1>
                         Roles
@@ -143,22 +141,22 @@ try {
                         <li class="active">Roles</li>
                     </ol>
                 </section>
-
                 <!-- Main content -->
                 <section class="content">                              
                     <div class="row">
                         <form id="form_id" name="myform" action="processRoles.php" method="POST">
-                            <div class="col-md-12"  style="padding-bottom: 10px;">
-                                <div class= "col-md-2" style="padding-left: 10px;">
-                                    <a class="left text-center btn btn-sm bg-blue" href = "homePage.php"><fi class="fa fa-backward"></fi>  Back</a>
+                            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="padding-bottom: 10px;">
+                                <div class= "col-sm-4">
+                                    <a class="left text-center btn btn-sm btn-file bg-blue" href = "homePage.php"><fi class="fa fa-backward"></fi>  Back</a>
                                 </div>                                
-                                <div class= "col-md-2 text-left ">
+                                <div class= "col-sm-4">
                                     <button type="submit" name="deleteUser" class="text-center btn btn-sm btn-file bg-maroon" >Delete User</button>
                                 </div>
-                                <div class= "col-md-8 right ">
-                                    <button type="submit" name="capQuyen1" class="text-center btn btn-sm btn-danger" >Save changes</button>
+                                <div class= "col-sm-4">
+                                    <button type="submit" name="capQuyen1" class="text-center btn btn-sm btn-file btn-danger" >Save changes</button>
                                 </div>
                             </div>
+                            
                             <div class="col-md-12">
                                 <div class="box">
                                     <div class="box-header">
