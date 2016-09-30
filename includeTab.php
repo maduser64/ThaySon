@@ -36,7 +36,7 @@
                         window.location.href = 'memberSearch.php?FacebookProfileId='.concat(keey);
                     }
                 }
-            </script>>
+            </script>
             <!-- /.search form -->
         <?php } ?>
         <!-- Sidebar Menu -->
