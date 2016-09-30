@@ -105,7 +105,7 @@ else if(checkRoleTV($_SESSION['user_id'])|| checkRoleQuanTri($_SESSION['user_id'
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" data-toggle="control-sidebar"></a>
+                                <!--<a href="#" data-toggle="control-sidebar"></a>-->
                             </li>
                         </ul>
                     </div>

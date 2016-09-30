@@ -65,20 +65,6 @@ if (isset($_POST['deleteGroup'])) {
         <?php include 'includeCss.php'; ?>
         
         <script>
-            //$('#search-btn').click(function(event){
-            function check() {
-                // alert( 'Insert FB Id to Search');
-                if (!$('#key').val())
-                    alert('Insert FB Id to Search');
-                else {
-                    var keey = $('#key').val();
-                    window.location.href = 'memberSearch.php?FacebookProfileId='.concat(keey);
-                }
-                // $('search-btn').val();
-            }
-            // });
-
-            //    
             jQuery(document).ready(function ($) {
                 $('#selectall').click(function (event) {  //on click 
                     if (this.checked) { // check select status
