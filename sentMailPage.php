@@ -108,65 +108,70 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
                 <!-- Main content -->
                 <section class="content">
-                    <form method="post" class="row">
-                        <div class="col-md-2">
-                            <a href="inboxView.php?pageNumInbox=1" class="btn btn-primary btn-block margin-bottom"><i class="fa fa-backward"></i> Back to Inbox</a>             
-                        </div><!-- /.col -->
-                        <div class="col-md-9">
-                            <div class="box box-primary table-responsive">
-                                <div class="box-header with-border">
-                                    <h3 class="box-title"> Compose New Message</h3>
-                                </div><!-- /.box-header -->
-                                <div class="box-body" style="align-content: center">
-                                    <?php
-                                    if (isset($_GET['UserId'])) {
-                                        $keyy = ($_GET['UserName']);
-                                        ?>
-                                        <div class="form-group">
-    <!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
-                                            <div><span>To users: </span></div>
-                                            <input readonly="true" type="text" name="ToAddress1"  class="form-control" required value="<?php echo $keyy ?>"/>
-                                        </div>
-                                    <?php } else { ?>
-                                        <div class="form-group">
-    <!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
-                                            <div class="email_subject_label"><span>To users: </span></div>
-                                            <input type="text" name="ToAddress" id="to_manuals" class="form-control" placeholder="To users:" />
-                                        </div>   
-                                        <div class="form-group">
-    <!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
-                                            <div class="email_subject_label"><span>To groups: </span></div>
-                                            <input type="text" name="ToGroupAddress" id="cc_manuals" class="form-control" placeholder="To groups:" />
-                                        </div> 
-                                    <?php } ?>
-                                    <div class="form-group">
-                                        <div class="email_subject_label"><span>Subject: </span></div>
-                                        <input name="Subject" class="form-control" placeholder="Subject:" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <textarea name ="ContentMessage" class="form-control" style="height: 300px" required>
-                                            <?php
-                                            if (isset($_GET['reportLink']))
-                                                echo $_GET['reportLink'];
+                    <form method="post">
+                        <div class="row">
+                            <div class="col-md-2" style="padding-bottom: 10px;">
+                                <div class= "left" style="display:inline" >
+                                    <a href="inboxView.php?pageNumInbox=1" class="left text-center btn btn-sm btn-file bg-blue"><i class="fa fa-backward"></i> Back</a>
+                                </div> 
+                            </div><!-- /.col -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="box box-primary table-responsive">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title"> Compose New Message</h3>
+                                    </div><!-- /.box-header -->
+                                    <div class="box-body" style="align-content: center">
+                                        <?php
+                                        if (isset($_GET['UserId'])) {
+                                            $keyy = ($_GET['UserName']);
                                             ?>
-                                        </textarea>
-                                    </div>                                 
-
-                                </div><!-- /.box-body -->
-                                <div class="box-footer">
-                                    <div class="pull-right">
-                                        <?php if (isset($_GET['UserId'])) { ?>
-                                            <button type="submit" class="btn btn-primary" name = "send-action-ex"><i class="fa fa-envelope-o"></i> Send</button>  
+                                            <div class="form-group">
+        <!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
+                                                <div><span>To users: </span></div>
+                                                <input readonly="true" type="text" name="ToAddress1"  class="form-control" required value="<?php echo $keyy ?>"/>
+                                            </div>
                                         <?php } else { ?>
-                                            <button type="submit" class="btn bg-green" name = "send-action"><i class="fa fa-envelope-o"></i> Send</button>                                      
+                                            <div class="form-group">
+        <!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
+                                                <div class="email_subject_label"><span>To users: </span></div>
+                                                <input type="text" name="ToAddress" id="to_manuals" class="form-control" placeholder="To users:" />
+                                            </div>   
+                                            <div class="form-group">
+        <!--                                        <input id="to_manuals" class="form-control" placeholder="To:">-->       
+                                                <div class="email_subject_label"><span>To groups: </span></div>
+                                                <input type="text" name="ToGroupAddress" id="cc_manuals" class="form-control" placeholder="To groups:" />
+                                            </div> 
                                         <?php } ?>
-                                    </div>
-<!--                                    <button class="btn btn-default"><i class="fa fa-times"></i> Discard</button>-->
-                                </div><!-- /.box-footer -->
-                            </div><!-- /. box -->
-                        </div><!-- /.col -->
-                        <!-- /.row -->
+                                        <div class="form-group">
+                                            <div class="email_subject_label"><span>Subject: </span></div>
+                                            <input name="Subject" class="form-control" placeholder="Subject:" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <textarea name ="ContentMessage" class="form-control" style="height: 300px" required>
+                                                <?php
+                                                if (isset($_GET['reportLink']))
+                                                    echo $_GET['reportLink'];
+                                                ?>
+                                            </textarea>
+                                        </div>                                 
+
+                                    </div><!-- /.box-body -->
+                                    <div class="box-footer">
+                                        <div class="pull-right">
+                                            <?php if (isset($_GET['UserId'])) { ?>
+                                                <button type="submit" class="btn btn-primary" name = "send-action-ex"><i class="fa fa-envelope-o"></i> Send</button>  
+                                            <?php } else { ?>
+                                                <button type="submit" class="btn bg-green" name = "send-action"><i class="fa fa-envelope-o"></i> Send</button>                                      
+                                            <?php } ?>
+                                        </div>
+    <!--                                    <button class="btn btn-default"><i class="fa fa-times"></i> Discard</button>-->
+                                    </div><!-- /.box-footer -->
+                                </div><!-- /. box -->
+                            </div><!-- /.col -->
+                        </div><!-- /.row -->
                     </form>
                 </section><!-- /.content -->
             </div><!-- /.content-wrapper -->

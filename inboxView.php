@@ -80,24 +80,24 @@ if (isset($_POST['deleteGroup'])) {
 
                 <!-- Main content -->
                 <section class="content">
-                    <div class= "col-md-12 text-center " style="padding-bottom: 20px; padding-left: 10px; margin-left: 37px;">
-                    </div>
                     <div class="row">
                         <form id="form_id" name="myform" action="approvedInbox.php" method="POST">
-                            <div class= "col-md-12" style="padding-top: 10px;padding-bottom: 10px;">
-                                <div class= "col-md-3" >
-                                    <a class="btn-sm btn bg-blue" href = "homePage.php"><i class="fa fa-backward"></i> Back</a>
-                                </div>
-                                    <div class= "col-md-3 " >
-                                        <button type="button"class=" btn-sm btn bg-blue" name="approve"><i class="fa fa-upload"></i> Approve</button>
+<!--                            <div class="row">-->
+                                <div class= "col-md-12" style="padding-bottom: 10px;">
+                                    <div class= "left" style="display:inline">
+                                        <a class="left text-center btn btn-sm btn-file bg-blue" href = "homePage.php"><i class="fa fa-backward"></i> Back</a>
                                     </div>
-                                    <div class= "col-md-3" >
-                                        <button  type="button" name="deleteGroup" class="btn btn-sm bg-red-active"><i class="fa fa-trash"></i> Delete Message</button>
+                                    <div class= "center" style="margin-left: 10px; display:inline">
+                                        <a class="left text-center btn btn-sm btn-file bg-blue" href = "sentMailPage.php"><i class="fa fa-envelope-o"></i> New</a>
                                     </div>
-                                <div class= "col-md-3 col-sm-3 pull-right">
-                                    <a class="btn btn-sm bg-blue " href = "sentMailPage.php"><i class="fa fa-envelope-o"></i> Compose New Message</a>
+                                    <div class= "center" style="margin-left: 10px;display:inline">
+                                        <button type="button"class="text-center btn btn-sm btn-file bg-blue" name="approve"><i class="fa fa-upload"></i> Approve</button>
+                                    </div>
+                                    <div class= "right" style="margin-left: 10px;display:inline">
+                                        <button  type="button" name="deleteGroup" class="text-center btn btn-sm btn-file bg-red-active"><i class="fa fa-trash"></i> Delete</button>
+                                    </div>
                                 </div>
-                            </div>
+                            <!--</div>-->
                             <div class="col-md-12">
                                 <div class="box table-responsive">
                                     <div class="box-header">

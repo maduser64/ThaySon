@@ -156,44 +156,43 @@ if (isset($_POST['sentMail'])) {
                 <!-- Main content -->
                 <section class="content">
                     <form method="post" id="myForm" > 
-                        <div class= "col-md-2 text-center " style="padding-bottom: 20px;">
-                            <div class="form-group">                                 
-                                <a href="homePage.php" class="btn bg-blue col-md-6 btn-sm"><i class="fa fa-backward"></i> Back</a>             
-                            </div>                     
-                        </div> 
+                        <div class="row">
+                            <div class="col-md-12" style="padding-bottom: 10px;">
+                                <div class= "left" style="display:inline" >
+                                    <a href="homePage.php" class="left text-center btn btn-sm btn-file bg-blue"><i class="fa fa-backward"></i> Back</a>             
+                                </div>
+                                <div class= "center" style="margin-left: 10px; display:inline">
+                                    <a class="left text-center btn btn-sm btn-file bg-blue" href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');"><i class="fa fa-plus-circle"></i> Add</a>
+                                </div>
+                                <div class= "center" style="margin-left: 10px;display:inline">
+                                    <button class="text-center btn btn-sm btn-file bg-blue" type="submit" name="sentMail"> <i class="fa fa-envelope-o"></i> Send mail</button>
+                                </div>
+                                <div class= "right" style="margin-left: 10px;display:inline">
+                                    <button class="text-center btn btn-sm btn-file bg-red-active" type="submit" name="deleteUser"> <i class="fa fa-trash"></i> Delete</button>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box table-responsive ">
                                     <div class="box-header">
-                                        <h3 class="box-title">Users</h3>
+                                        <div class="row">
+                                            <div class="col-md-12" style="padding-bottom: 10px;">
+                                                <h3 class="box-title left text-center" style="display:inline">Users</h3>
+                                                <div class="col-sm-3 col-md-3 pull-right" id="search_user1" style="display:inline">
+                                                    <div class="input-group">
+                                                        <input type="text" name="usename"  class="form-control" placeholder="Search user..." value="<?php echo $key ?>"/>
+                                                        <div class="input-group-btn">
+                                                            <button  name="searchUser" id="search-btn" class=" btn bg-blue" onclick="check();" ><i class="glyphicon glyphicon-search"></i></button>
+                                                        </div>
+                                                    </div>                                
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div><!-- /.box-header -->
                                     <div class="box-body ">
                                         <input type="hidden" name="param" />
-                                        <div class="col-md-12" style="padding-bottom: 10px;">
-
-                                            <div class= "col-md-2 text-left ">
-                                                <button class="btn bg-red btn-sm " type="submit" name="deleteUser"> <i class="fa fa-trash"></i> Delete Users</button>
-                                            </div>
-                                            <div class= "col-md-2 text-center ">
-                                                <div class="form-group">                                 
-                                                    <a class="btn bg-blue btn-sm" href="javascript:void(0)" onclick="toggle_visibility('popupBoxOnePosition');"><i class="fa fa-plus-circle"></i>  Add User</a>
-                                                </div>                     
-                                            </div>   
-                                            <div class= "col-md-2 text-center ">
-                                                <div class="form-group">  
-                                                    <button class="btn bg-blue btn-sm btn-default" type="submit" name="sentMail"> <i class="fa fa-envelope-o"></i> Select to send mail</button>
-<!--                                                    <a class="btn bg-blue btn-sm" href="sentMailPage.php" ><i class="fa fa-plus-circle"></i> Select to send mail</a>-->
-                                                </div>                     
-                                            </div>
-                                            <div class="col-sm-3 col-md-3 pull-right" id="search_user1">
-                                                <div class="input-group">
-                                                    <input type="text" name="usename"  class="form-control" placeholder="Search user..." value="<?php echo $key ?>"/>
-                                                    <div class="input-group-btn">
-                                                        <button  name="searchUser" id="search-btn" class=" btn bg-blue" onclick="check();" ><i class="glyphicon glyphicon-search"></i></button>
-                                                    </div>
-                                                </div>                                
-                                            </div>                                           
-                                        </div>
+                                        
                                         <table id="example1" class="table table-bordered table-striped" cellspacing="0" width="100%">
                                             <thead>
                                                 <tr>

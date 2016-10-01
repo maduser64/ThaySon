@@ -81,13 +81,14 @@ $numPage = round($totalRecord / 10);
                 <section class="content">
 
                     <!-- Your Page Content Here -->
-                    <div class= "col-md-12" style="padding-bottom: 20px; padding-left: 10px;">
-                        <?php
-                        $backLink = "feedView.php?facebookGroupId=" . $_SESSION['group_id'] . "&groupId=" . $_SESSION['id_group_csdl'] . "&pageNum=" . $_SESSION['pageNum'];
-                        ?>
-                        <a class="left control-button text-center btn btn-sm bg-blue" href = "<?php echo $backLink; ?>"><i class="fa fa-backward"></i> Back</a>
+                    <div class="row">
+                        <div class= "col-md-12" style="padding-bottom: 10px;">
+                            <?php
+                            $backLink = "feedView.php?facebookGroupId=" . $_SESSION['group_id'] . "&groupId=" . $_SESSION['id_group_csdl'] . "&pageNum=" . $_SESSION['pageNum'];
+                            ?>
+                            <a class="left text-center btn btn-sm btn-file bg-blue" href = "<?php echo $backLink; ?>"><i class="fa fa-backward"></i> Back</a>
+                        </div>
                     </div>
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box table-responsive">

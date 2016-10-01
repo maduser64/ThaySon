@@ -132,8 +132,8 @@ function getLastWeekDates(){
                                 </div>
 
                             </div>
-                            <div class="col-md-4 left">
-                                <button type="submit" class=" col-md-6  btn bg-blue" value="Update feeds"/>
+                            <div class="col-md-4 col-sm-8 center">
+                                <button type="submit" class=" col-md-6 btn bg-blue" value="Update feeds"/>
                                 <i class="fa fa-refresh"></i> Refresh Feeds</buton> 
                             </div>
                         </form>
@@ -141,16 +141,15 @@ function getLastWeekDates(){
 
                     <div class="row">
                         <form id="form_id" name="myform" action="processReport.php" method="POST">
-                            <div class= "col-md-6" style="padding-top: 10px;padding-bottom: 10px;">
-                                <div class= "col-md-2" style="padding-bottom: 20px; padding-left: 10px;">
-                                    <a class="btn-sm btn bg-blue" href = "subGroup.php"><i class="fa fa-backward"></i> Back</a>
+                            <div class= "col-md-12" style="padding-bottom: 10px;">
+                                <div class= "left" style="display:inline" >
+                                    <a class="left text-center btn btn-sm btn-file bg-blue" href = "subGroup.php"><i class="fa fa-backward"></i> Back</a>
                                 </div>
-                                    <div class= "col-md-2 text-left ">
-                                        <button type="submit" class="btn-sm btn bg-blue" name="approve"><i class="fa fa-compass"></i> Approve</button>
-                                        <!--<input type="submit" name="approve" class="control-button text-center btn btn-sm bg-blue" value="Approve"/>-->
-                                    </div>
-                                
-                                <div class= "col-md-2 text-left " >
+                                <div class= "center" style="display:inline;margin-left: 10px;" >
+                                    <button type="submit" class="btn-sm btn bg-blue" name="approve"><i class="fa fa-compass"></i> Approve</button>
+                                    <!--<input type="submit" name="approve" class="control-button text-center btn btn-sm bg-blue" value="Approve"/>-->
+                                </div>
+                                <div class= "right" style="display:inline;margin-left: 10px;" >
                                     <button type="submit"class="left btn-sm btn bg-blue" name="report"><i class="fa fa-upload"></i> Report</button>
 <!--                                    <input type="submit" name="report" class="control-button  btn  bg-blue" value="Report"/>-->
                                 </div>

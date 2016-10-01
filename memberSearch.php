@@ -90,7 +90,7 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
                     <form id="form_id"  method="post" enctype="multipart/form-data">
                         <div class="row">
                             <div class= "col-md-12" style="padding-bottom: 20px;">
-                                <a class="col-md-1 btn btn-sm bg-blue" href = "homePage.php"><i class="fa fa-backward "></i> Back</a>
+                                <a class="left text-center btn btn-sm btn-file bg-blue" href = "homePage.php"><i class="fa fa-backward "></i> Back</a>
                             </div> <!-- col -->
                             <div class="col-md-12">
                                 <div class="box table-responsive">

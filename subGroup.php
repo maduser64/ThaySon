@@ -57,20 +57,27 @@ else if(checkRoleTV($_SESSION['user_id'])|| checkRoleQuanTri($_SESSION['user_id'
                 </section>
                 <!-- Main content -->
                 <section class="content">
-                    <div class= "col-md-12 text-center " style="padding-bottom: 20px;">
-                        <?php if(checkRoleAdminUsingUserId($_SESSION['user_id'])==true||  checkRoleQuanTri($_SESSION['user_id'])==true){ ?>
-                        <a class="btn bg-blue col-md-1 btn-sm" href="homePage.php"><i class="fa fa-backward"></i>  Back </a> 
-                        <?php } ?>    
-                        <?php if ($rule==TRUE) { ?>                          
-                            <div class="col-md-7"></div>
-                            <form action="connectFbToCSDL/createGroup.php" method="post" class="form-horizontal col-md-4">                                                  
-                                <div class="col-md-8 center-block">
-                                    <input class="form-control"  type="text" name="groupfacebook_id" placeholder="Facebook Group Id">
+                    <div class="row">
+                        <div class= "col-md-12" style="padding-bottom: 10px;">
+                            <?php if(checkRoleAdminUsingUserId($_SESSION['user_id'])==true||  checkRoleQuanTri($_SESSION['user_id'])==true){ ?>
+                                <div class= "left" style="display:inline" >
+                                    <a class="left text-center btn btn-sm btn-file bg-blue" href="homePage.php"><i class="fa fa-backward"></i>  Back</a> 
                                 </div>
-                                <button class="btn bg-blue col-md-4 btn-sm" name="btn-createGroup"><i class="fa fa-plus-circle"></i> Add Group </button>                    
-                            </form>
-                        <?php } ?>
+                            <?php } ?>
+                        </div>
                     </div>
+                    <?php if ($rule==TRUE) { ?>
+                    <div class="row">
+                        <form action="connectFbToCSDL/createGroup.php" method="post" class="col-md-4">
+                            <div class="input-group">
+                                <input type="text" name="groupfacebook_id"  class="form-control" placeholder="Facebook Group Id" value=""/>
+                                <div class="input-group-btn">
+                                    <button  name="btn-createGroup" class="text-center btn btn-sm btn-file bg-blue"><i class="fa fa-plus-circle"></i> Add Group</button>
+                                </div>
+                            </div> 
+                        </form>
+                    </div>
+                    <?php } ?>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="box table-responsive ">

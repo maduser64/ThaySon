@@ -192,7 +192,7 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
                 <!-- Main content -->
                 <section class="content">
                     <form  method="post" enctype="multipart/form-data">
-                        <div class= "col-md-22" style="padding-bottom: 20px;">
+                        <div class= "col-md-22" style="padding-bottom: 10px;">
                             <span><h5 class="box-title">Select excel file to upload, download sample file <a href="files/SampleFileInput.xlsx">here</a>:</h5></span>
                                 <table>
                                     <tr>
@@ -205,8 +205,8 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
                     </form>
                     <form id="form_id"  method="post" enctype="multipart/form-data">
                         <div class="row">
-                            <div class= "col-md-12" style="padding-bottom: 20px;">
-                                <a class="col-md-1 btn btn-sm bg-blue" href = "subGroup.php"><i class="fa fa-backward "></i> Back</a>
+                            <div class= "col-md-12" style="padding-bottom: 10px;">
+                                <a class="left text-center btn btn-sm btn-file bg-blue" href = "subGroup.php"><i class="fa fa-backward "></i> Back</a>
                             </div> <!-- col -->
                             <div class="col-md-12">
                                 <div class="box table-responsive">
@@ -352,7 +352,7 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <?php
-                                echo"<button class=\"col-md-1 center btn btn-primary\" type=\"submit\" name = \"update\"><i class=\"fa fa-envelope-o fa-save\" style=\"margin-right: 5px;\"></i> Save</button>";
+                                echo"<button class=\"col-md-1 center btn btn-file bg-blue\" type=\"submit\" name = \"update\"><i class=\"fa fa-envelope-o fa-save\" style=\"margin-right: 5px;\"></i> Save</button>";
                                 ?>
 
                             </div>                           
