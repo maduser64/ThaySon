@@ -1,3 +1,10 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Welcome - <?php echo $userNameLogin->getUserName(); ?></title>
+<link rel="shortcut icon" href="css/icon.ico" />
+<!-- Tell the browser to be responsive to screen width -->
+<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
 <link rel="stylesheet" href="css/w3.css">
 <link rel="stylesheet" href="bootstrap/css/sweetalert.css">
 <!-- Bootstrap 3.3.5 -->
@@ -20,3 +27,4 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/app.min.js"></script>
+<link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">

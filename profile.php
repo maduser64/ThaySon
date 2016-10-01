@@ -16,9 +16,9 @@ if (isset($_GET['update'])) {
     <script>alert('Done!');</script>
     <?php
 }
-$res = new Users();
-$res = getUserById($_SESSION['user_id']);
-$listInbox = getInboxIdUseStatus($_SESSION['user_id']);
+$userNameLogin = new Users();
+$userNameLogin = getUserById($_SESSION['user_id']);
+$numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
 //$listGroup = (array) getListGroupsWithIdUser($_SESSION['user_id']);
 //echo '---'.$listInbox;
@@ -34,18 +34,18 @@ if (isset($_POST['save'])) {
     $class = mysql_real_escape_string($_POST['class']);
     $school = mysql_real_escape_string($_POST['school']);
     // echo ''.$email.$fullname.$address.$phone.$phone2;
-    $res->setEmail($email);
-    $res->setPhoneNumber1($phone);
-    $res->setAddress1($address);
-    $res->setGender($gender);
-    $res->setBirthday(date('Y-m-d', strtotime($tdate)));
-    $res->setAddress2($address2);
-    $res->setClass($class);
-    $res->setSchool($school);
-    $res->setPhoneNumber2($phone2);
-    $res->setFullName($fullname);
+    $userNameLogin->setEmail($email);
+    $userNameLogin->setPhoneNumber1($phone);
+    $userNameLogin->setAddress1($address);
+    $userNameLogin->setGender($gender);
+    $userNameLogin->setBirthday(date('Y-m-d', strtotime($tdate)));
+    $userNameLogin->setAddress2($address2);
+    $userNameLogin->setClass($class);
+    $userNameLogin->setSchool($school);
+    $userNameLogin->setPhoneNumber2($phone2);
+    $userNameLogin->setFullName($fullname);
 
-    $insert = updateUsers($res);
+    $insert = updateUsers($userNameLogin);
 
     if ($insert == true) {
         header("Location: profile.php?update=ok");
@@ -68,8 +68,8 @@ if(isset($_POST['change'])){
        
         $valid = validateUserAndPass("tuongvv", $repeat);
         if (strcmp($valid, 'true') == 0) {
-            $res->setPassword($repeat);
-            if(updateUsersPass($res)==true){
+            $userNameLogin->setPassword($repeat);
+            if(updateUsersPass($userNameLogin)==true){
                 echo '<script>alert(\'Successful!\');</script>';
             }else {
                 echo '<script>alert(\'Error!\');</script>';
@@ -114,74 +114,6 @@ if(isset($_POST['change'])){
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
         <div class="wrapper">
-
-            <header class="main-header">
-                <!-- Logo -->
-                <a href="homePage.php" class="logo">
-                    <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><b>A</b>LT</span>
-                    <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg "><i class="fa fa-home"></i><b> Home Page</b></span>
-                </a>
-                <!-- Header Navbar: style can be found in header.less -->
-                <nav class="navbar navbar-static-top" role="navigation">                
-                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                        <span class="sr-only">Toggle navigation</span>
-                    </a>
-                    <div class="navbar-custom-menu">
-                        <ul class="nav navbar-nav">
-                            <!-- Messages: style can be found in dropdown.less-->
-                            <li class="dropdown messages-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-envelope-o"></i>
-                                    <span class="label label-success"><?php echo '' . ($listInbox == null ? 0 : $listInbox); ?></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header">You have <?php echo '' . ($listInbox == null ? 0 : $listInbox); ?> messages</li>                                   
-                                    <li class="footer"><a href="inboxView.php?pageNumInbox=1">See All Messages</a></li>
-                                </ul>
-                            </li>
-                            <!-- Notifications: style can be found in dropdown.less -->
-
-                            <!-- User Account: style can be found in dropdown.less -->
-                            <li class="dropdown user user-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                    <span class="hidden-xs"><?php echo '' . $res->getFullName(); ?></span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <!-- User image -->
-                                    <li class="user-header">
-                                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                        <p>
-                                            <?php echo '' . $res->getFullName(); ?>
-                                            <small><?php echo '' . $res->getCreateTime(); ?></small>
-                                        </p>
-                                    </li>
-                                    <!-- Menu Body -->
-                                    <li class="user-body">                                     
-                                    </li>
-                                    <!-- Menu Footer-->
-                                    <li class="user-footer">
-                                        <div class="pull-left">
-                                            <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
-                                        </div>
-                                        <div class="pull-right">
-                                            <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li> 
-                            <li class="dropdown notifications-menu">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">                                
-                                    <span class="label label-warning"></span>
-                                </a>  
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-            <!-- Left side column. contains the logo and sidebar -->
             <?php include 'includeTab.php';?>
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
@@ -206,8 +138,8 @@ if(isset($_POST['change'])){
                                 <div class="box box-primary">
                                     <div class="box-body box-profile">
                                         <img class="profile-user-img img-responsive img-circle" src="dist/img/user4-128x128.jpg" alt="User profile picture">
-                                        <h3 class="profile-username text-center"> <?php echo '' . $res->getFullName(); ?></h3>
-                                        <p class="text-muted text-center"> Member since <?php echo '' . $res->getCreateTime(); ?></p>
+                                        <h3 class="profile-username text-center"> <?php echo '' . $userNameLogin->getFullName(); ?></h3>
+                                        <p class="text-muted text-center"> Member since <?php echo '' . $userNameLogin->getCreateTime(); ?></p>
 
                                     </div><!-- /.box-body -->
                                 </div><!-- /.box -->
@@ -254,20 +186,20 @@ if(isset($_POST['change'])){
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Full name:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="<?php echo $res->getFullName() ?>" type="text" name="fullname">
+                                                <input class="form-control" value="<?php echo $userNameLogin->getFullName() ?>" type="text" name="fullname">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Phone Number:</label>
                                             <div class="col-lg-8">
-                                                <input name="phonenumber" class="form-control" value="<?php echo $res->getPhoneNumber1() ?>" type="text">
+                                                <input name="phonenumber" class="form-control" value="<?php echo $userNameLogin->getPhoneNumber1() ?>" type="text">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Date of birth:</label>
                                             <div class="col-lg-8">
                                                 <div class='input-group date' id='datepicker' data-provide="datepicker" data-date-format="dd-mm-yyyy">
-                                                    <input type='text' class="form-control" name = "date" value="<?php echo $res->getBirthday() ?>"/>
+                                                    <input type='text' class="form-control" name = "date" value="<?php echo $userNameLogin->getBirthday() ?>"/>
                                                     <span class="input-group-addon">
                                                         <span class="glyphicon glyphicon-calendar"></span>
                                                     </span>
@@ -277,13 +209,13 @@ if(isset($_POST['change'])){
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Current Address:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="<?php echo $res->getAddress1() ?>" type="text" name="address">
+                                                <input class="form-control" value="<?php echo $userNameLogin->getAddress1() ?>" type="text" name="address">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Email:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="<?php echo $res->getEmail() ?>" type="text" name="email">
+                                                <input class="form-control" value="<?php echo $userNameLogin->getEmail() ?>" type="text" name="email">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -292,7 +224,7 @@ if(isset($_POST['change'])){
                                                 <div class="ui-select">
                                                     <select id="user_time_zone" class="form-control" name="gender">
                                                         <?php
-                                                        if ($res->getGender() == 1) {
+                                                        if ($userNameLogin->getGender() == 1) {
                                                             echo '<option value="1" name="gen" selected>Male</option>';
                                                             echo '<option value="2" name="gen">Female</option>';
                                                         } else {
@@ -308,30 +240,30 @@ if(isset($_POST['change'])){
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Home Number:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="<?php echo $res->getPhoneNumber2() ?>" type="text" name="phonenumber2">
+                                                <input class="form-control" value="<?php echo $userNameLogin->getPhoneNumber2() ?>" type="text" name="phonenumber2">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Home town:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="<?php echo $res->getAddress2() ?>" type="text" name="address2">
+                                                <input class="form-control" value="<?php echo $userNameLogin->getAddress2() ?>" type="text" name="address2">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Class:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="<?php echo $res->getClass() ?>" type="text" name="class">
+                                                <input class="form-control" value="<?php echo $userNameLogin->getClass() ?>" type="text" name="class">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">School:</label>
                                             <div class="col-lg-8">
-                                                <input class="form-control" value="<?php echo $res->getSchool() ?>" type="text" name="school">
+                                                <input class="form-control" value="<?php echo $userNameLogin->getSchool() ?>" type="text" name="school">
                                             </div>
                                         </div>
 
                                         <?php
-                                        if (checkRole($res->getUserId(), 5)) {
+                                        if (checkRole($userNameLogin->getUserId(), 5)) {
                                             ?>
                                             <div class="form-group">
                                                 <label class="col-md-5 control-label"></label>
