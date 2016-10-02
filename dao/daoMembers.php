@@ -276,7 +276,7 @@ $listMembers = array();
     $result = mysql_query("SELECT members.MemberId, members.Address1,members.Administrator,members.Name,members.GroupId, members.Birthday, members.PhoneNumber1,members.Email, members.Gender,members.PhoneNumber2, members.Address2, members.Class, members.School, members.FacebookIdMember, members.RealName,members.FacebookLink, members.FacebookProfileId, "
             ." members.CreateTime,members.UpdateTime, users.UserName,users.FullName,users.PhoneNumber1,users.UserId, groups.FacebookGroupId "
             ." FROM users,user_group,groups,members "  
-            ." WHERE users.UserId=user_group.UserId AND user_group.GroupId=members.GroupId AND groups.GroupId =user_group.GroupId AND members.FacebookProfileId like N'%".$varName."%'") or die(mysql_error());
+            ." WHERE users.UserId=user_group.UserId AND user_group.GroupId=members.GroupId AND groups.GroupId =user_group.GroupId AND members.FacebookProfileId = '$varName'") or die(mysql_error());
 
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_array($result)) {

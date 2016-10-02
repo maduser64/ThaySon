@@ -18,7 +18,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $userNameLogin = getUserById($_SESSION['user_id']);
 if (isset($_GET['FacebookProfileId'])) {
-    $listMembers = (array) searchMembersByFacebookProfileIdInAllGroup($_GET['FacebookProfileId']);
+    $listMembers = (array) searchMembersByFacebookProfileIdInAllGroup(htmlentities(@mysql_real_escape_string($_GET['FacebookProfileId'])));
 }else {
     header("Location: homePage.php");
     return;
