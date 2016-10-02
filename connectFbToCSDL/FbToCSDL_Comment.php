@@ -78,7 +78,7 @@ if (isset($accessToken)) {
         }
         try {
             echo '<br><br>------------------------------------------<br>  ' . $status->getProperty("message");
-            $comment->setMessage($status->getProperty("message"));
+            $comment->setMessage(html_entity_decode(@mysql_real_escape_string($status->getProperty("message"))));
         } catch (Exception $ex) {
             
         }

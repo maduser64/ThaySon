@@ -82,7 +82,7 @@ if (isset($accessToken)) {
         }
         try {
             echo '<br><br>------------------------------------------<br>  ' . $status->getProperty("message");
-            $feed->setMessage($status->getProperty("message"));
+            $feed->setMessage(html_entity_decode(@mysql_real_escape_string($status->getProperty("message"))));
         } catch (Exception $ex) {
             
         }
@@ -133,7 +133,7 @@ if (isset($accessToken)) {
             }
             try {
                 echo '<br><br>------------------------------------------<br>  ' . $status2->getProperty("message");
-                $comment->setMessage($status2->getProperty("message"));
+                $comment->setMessage(html_entity_decode(@mysql_real_escape_string($status2->getProperty("message"))));
             } catch (Exception $ex) {
                 
             }

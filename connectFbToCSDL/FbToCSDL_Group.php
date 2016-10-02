@@ -78,25 +78,25 @@ if (isset($accessToken)) {
     }
     try {
         echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getProperty("name");
-        $group->setName($feedEdge->getProperty("name"));
+        $group->setName(html_entity_decode(@mysql_real_escape_string($feedEdge->getProperty("name"))));
     } catch (Exception $ex) {
         
     }
     try {
         echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getProperty("privacy");
-        $group->setPrivacy($feedEdge->getProperty("privacy"));
+        $group->setPrivacy(html_entity_decode(@mysql_real_escape_string($feedEdge->getProperty("privacy"))));
     } catch (Exception $ex) {
         
     }
     try {
         echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getProperty("icon");
-        $group->setIcon($feedEdge->getProperty("icon"));
+        $group->setIcon(html_entity_decode(@mysql_real_escape_string($feedEdge->getProperty("icon"))));
     } catch (Exception $ex) {
         
     }
     try {
         echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getProperty("email");
-        $group->setEmail($feedEdge->getProperty("email"));
+        $group->setEmail(html_entity_decode(@mysql_real_escape_string($feedEdge->getProperty("email"))));
     } catch (Exception $ex) {
         
     }
@@ -104,7 +104,7 @@ if (isset($accessToken)) {
     try {
         if($feedEdge->getField("owner")!=null){
             echo '<br><br>------------------------------------------<br>  ' . $feedEdge["owner"]->getField("id",null);
-            $group->setOwner($feedEdge["owner"]->getProperty("id",null));
+            $group->setOwner(html_entity_decode(@mysql_real_escape_string($feedEdge["owner"]->getProperty("id",null))));
         }
     } catch (Exception $ex) {
         
@@ -128,7 +128,7 @@ if (isset($accessToken)) {
         }
         try {
             echo '<br><br>------------------------------------------<br>  ' . $status2->getProperty("name");
-            $member->setName($status2->getProperty("name"));
+            $member->setName(html_entity_decode(@mysql_real_escape_string($status2->getProperty("name"))));
         } catch (Exception $ex) {
             
         }
