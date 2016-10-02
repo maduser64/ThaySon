@@ -231,7 +231,8 @@ function createFeeds(Feeds $feeds) {
             .$createFeedTime.","
             .$updateFeedTime.","
             .$statusId.","
-            .$groupId
+            .$groupId.","
+            .$createTime
             .") VALUES( '"
             .$feeds->getFacebookIdFeed()."','"
             .$feeds->getFacebookUserIdFeed()."','"
@@ -239,7 +240,7 @@ function createFeeds(Feeds $feeds) {
             .$feeds->getCreateFeedTime()."','"
             .$feeds->getUpdateFeedTime()."','"
             .$feeds->getStatusId()."','"
-            .$feeds->getGroupId()."')");
+            .$feeds->getGroupId()."', NOW())");
     if ($result) {
         return getFeedIdUseFacebookIdFeed($feeds->getFacebookIdFeed());
     }

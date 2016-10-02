@@ -213,14 +213,15 @@ function createInbox(Inbox $inbox) {
             . $subject . ","
             . $content . ","
             . $status . ","
-            . $sentdate
+            . $sentdate . ","
+            . $createTime
             . ") VALUES( '"
             . $inbox->getFromUserId() . "','"
             . $inbox->getToUserId() . "','"
             . $inbox->getSubject() . "','"
             . $inbox->getContent() . "','"
             . $inbox->getStatus() . "','"
-            . $inbox->getSentdate() . "')");
+            . $inbox->getSentdate() . "', NOW())");
     if ($result) {
         return true;
     }

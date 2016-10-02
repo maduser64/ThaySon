@@ -108,11 +108,11 @@ $listGroupUser = array();
     }
     return $listGroupUser;
 }
-function getListGroupUserUsingUserId() {
+function getListGroupUserUsingUserId($varName) {
  global    $groupUserId, $name, $description, $userId, $createTime, $updateTime; 
     $listGroupUser = array();
     $db = new DB_CONNECT();
-    $result = mysql_query("SELECT *FROM groupuser ") or die(mysql_error());
+    $result = mysql_query("SELECT *FROM groupuser WHERE $userId = '$varName'") or die(mysql_error());
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_array($result)) {
             $groupuser = new GroupUser();
@@ -148,11 +148,12 @@ function createGroupUser(GroupUser $groupuser) {
     $result = mysql_query("INSERT INTO groupuser("
             .$name.","
             .$description.","
-            .$userId
+            .$userId.","
+            .$createTime
             .") VALUES( '"
             .$groupuser->getName()."','"
             .$groupuser->getDescription()."','"
-            .$groupuser->getUserId()."')");
+            .$groupuser->getUserId()."', NOW())");
     if ($result) {
         return true;
     }

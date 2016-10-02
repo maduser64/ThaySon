@@ -294,6 +294,7 @@ function createGroups(Groups $groups) {
             . $email . ","
             . $owner . ","
             . $createGroupTime
+            . $createTime . ","
             . ") VALUES( '"
             . $groups->getFacebookGroupId() . "','"
             . $groups->getName() . "','"
@@ -302,7 +303,7 @@ function createGroups(Groups $groups) {
             . $groups->getIcon() . "','"
             . $groups->getEmail() . "','"
             . $groups->getOwner() . "','"
-            . $groups->getCreateGroupTime() . "')");
+            . $groups->getCreateGroupTime() . "', NOW())");
     if ($result) {
         return getGroupIdUseFacebookGroupId($groups->getFacebookGroupId());
     }

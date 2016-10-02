@@ -31,19 +31,22 @@
 		$user=$_POST['UserName'];
 		$upass=$_POST['Password'];
 		//echo $user.' '.$upass;
-        //$user = @mysql_real_escape_string($user);
-        //$upass = @mysql_real_escape_string($upass);
+        $user = @mysql_real_escape_string($user);
+        $user = htmlentities($user);
+        $upass = @mysql_real_escape_string($upass);
+        $upass = htmlentities($upass);
+        
         //$res=mysql_query("SELECT * FROM users WHERE email='$email'");
         //$row=mysql_fetch_array($res);
 		
         $valid = check_Pass($upass);
-		$valid2 = check_Pass($user);
+        $valid2 = check_Pass($user);
 	//	echo $user.'-->'.$upass.' $valid: ';
         if ($valid&&$valid2) {
-            $user = checkUser($user,$upass);
+            $userLogin = checkUser($user,$upass);
             if ($user != null) {
-                $_SESSION['user_id'] = $user->getUserId();
-				//echo ' >>>>  ok';
+                $_SESSION['user_id'] = $userLogin->getUserId();
+//                echo ' >>>>  ok: '.$userLogin->getUserId();
                 header("Location: homePage.php");                             
             } else {
                  echo '<script> alert("UserName/Password invalid")</script>;';

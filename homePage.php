@@ -15,7 +15,9 @@ if (!isset($_SESSION['user_id'])) {
 $userNameLogin = getUserById($_SESSION['user_id']);
 $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
-if (checkRoleAdminUsingUserId($_SESSION['user_id']) || checkRoleQuanTri($_SESSION['user_id'])) {
+$roleAdmin = checkRoleAdminUsingUserId($_SESSION['user_id']);
+$roleQuanTri = checkRoleQuanTri($_SESSION['user_id']);
+if ($roleAdmin || $roleQuanTri) {
     $listGroup = (array) getListGroupUserUsingUserId($_SESSION['user_id']);
 } else if (checkRoleQLNhom($_SESSION['user_id']) || checkRoleTV($_SESSION['user_id'])) {
     header("Location: subGroup.php");
@@ -95,7 +97,7 @@ if (isset($_POST['deleteGroup'])) {
                 <section class="content">
                     <form method="post" id="myForm" > 
                         <?php
-                        if (checkRoleAdminUsingUserId($_SESSION['user_id'])) {
+                        if ($roleAdmin || $roleQuanTri) {
                             ?>
                         <div class="row">
                             <div class="col-md-12" style="padding-bottom: 10px;">

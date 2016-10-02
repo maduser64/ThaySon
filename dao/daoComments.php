@@ -197,14 +197,15 @@ function createComments(Comments $comments) {
             . $message . ","
             . $createCommentTime . ","
             . $statusId . ","
-            . $feedId
+            . $feedId . ","
+            . $createTime
             . ") VALUES( '"
             . $comments->getFacebookIdComment() . "','"
             . $comments->getFacebookUserIdComment() . "','"
             . $comments->getMessage() . "','"
             . $comments->getCreateCommentTime() . "','"
             . $comments->getStatusId() . "','"
-            . $comments->getFeedId() . "')");
+            . $comments->getFeedId() . "', NOW())");
     if ($result) {
         return true;
     }

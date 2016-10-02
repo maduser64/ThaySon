@@ -13,7 +13,7 @@ ob_start();
 include 'config.php';
 
 $web_root = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
-$redirect_url = $web_root.'connectFbToCSDL/FbToCSDL_Feed.php'; // Khi đăng nhập xong sẽ tự động chuyển hướng sang trang web này, nếu k điền j thì mặc đinh đường link cài đặt trong app
+$redirect_url = $web_root.'/FbToCSDL_Feed.php'; // Khi đăng nhập xong sẽ tự động chuyển hướng sang trang web này, nếu k điền j thì mặc đinh đường link cài đặt trong app
 
 //thêm thư viện
 //use Facebook\FacebookSession;

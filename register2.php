@@ -12,10 +12,15 @@ if (isset($_POST['btn-signup'])) {
     $email = $_POST['email'];
     $upass = $_POST['upass'];
     $urpass = $_POST['urpass'];
-//    $uname = @mysql_real_escape_string($_POST['uname']);
-//    $email = @mysql_real_escape_string($_POST['email']);
-//    $upass = @mysql_real_escape_string($_POST['upass']);
-//    $urpass = @mysql_real_escape_string($_POST['urpass']);
+    
+    $uname = @mysql_real_escape_string($uname);
+    $uname = htmlentities($uname);
+    $email = @mysql_real_escape_string($email);
+    $email = htmlentities($email);
+    $upass = @mysql_real_escape_string($upass);
+    $upass = htmlentities($upass);
+    $urpass = @mysql_real_escape_string($urpass);
+    $urpass = htmlentities($urpass);
     if (strcmp($upass, $urpass) == 0) {
         $valid = validateUserAndPass($uname, $upass);
         if (strcmp($valid, 'true') == 0) {

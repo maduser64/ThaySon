@@ -398,7 +398,8 @@ function createMembers(Members $members) {
             .$class.","
             .$school.","
             .$facebookLink.","
-            .$facebookProfileId
+            .$facebookProfileId.","
+            .$createTime
             .") VALUES( '"
             .$members->getFacebookIdMember()."','"
             .$members->getName()."','"
@@ -415,7 +416,7 @@ function createMembers(Members $members) {
             .$members->getClass()."','"
             .$members->getSchool()."','"
             .$members->getFacebookLink()."','"
-            .$members->getFacebookProfileId()."')") or die(mysql_error());
+            .$members->getFacebookProfileId()."', NOW())") or die(mysql_error());
     if ($result) {
         return true;
     }

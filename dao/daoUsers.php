@@ -546,7 +546,7 @@ function createUsers(Users $users) {
 //$sql = 'TEST create';
 //System.out.print($sql);
     $db = new DB_CONNECT();
-    $sql = "INSERT INTO users(UserName,Password,FullName,Address1,Address2,Birthday,PhoneNumber1,PhoneNumber2,Email,Gender,School, Class) VALUES( '"
+    $sql = "INSERT INTO users($userName,$password ,$fullName ,$address1 , $address2, $birthday, $phoneNumber1, $phoneNumber2, Email, $gender, $school, $class, $createTime) VALUES( '"
             . $users->getUserName() . "','"
             . $users->getPassword() . "','"
             . $users->getFullName() . "','"
@@ -558,8 +558,8 @@ function createUsers(Users $users) {
             . $users->getEmail() . "','"
             . $users->getGender() . "','"
             . $users->getSchool() . "','"
-            . $users->getClass() . "');";
-    //echo '' . $sql;
+            . $users->getClass() . "',NOW());";
+//    echo '' . $sql;
     $result = mysql_query($sql);
     if ($result) {
         return 'true';
