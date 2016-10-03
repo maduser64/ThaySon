@@ -68,7 +68,10 @@ if (isset($accessToken)) {
 
 
     $feedEdge = $responseGroup->getGraphGroup();
-    echo '<br> ---: ' . $feedEdge;
+//    echo '<br><br>'.$responseGroup->get;
+    echo '<br><br> ---: ' . $feedEdge;
+    echo '<br><br> ---: ' . $responseGroup->getBody();
+//    echo '<br><br> ---: ' . $fb->next($feedEdge->getGraphEdge());
     $group = new Groups();
     try {
         $group->setFacebookGroupId($_SESSION['group_id']);
@@ -77,26 +80,26 @@ if (isset($accessToken)) {
         
     }
     try {
-        echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getProperty("name");
-        $group->setName(html_entity_decode(@mysql_real_escape_string($feedEdge->getProperty("name"))));
+        echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getField("name");
+        $group->setName(html_entity_decode(@mysql_real_escape_string($feedEdge->getField("name"))));
     } catch (Exception $ex) {
         
     }
     try {
-        echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getProperty("privacy");
-        $group->setPrivacy(html_entity_decode(@mysql_real_escape_string($feedEdge->getProperty("privacy"))));
+        echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getField("privacy");
+        $group->setPrivacy(html_entity_decode(@mysql_real_escape_string($feedEdge->getField("privacy"))));
     } catch (Exception $ex) {
         
     }
     try {
-        echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getProperty("icon");
-        $group->setIcon(html_entity_decode(@mysql_real_escape_string($feedEdge->getProperty("icon"))));
+        echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getField("icon");
+        $group->setIcon(html_entity_decode(@mysql_real_escape_string($feedEdge->getField("icon"))));
     } catch (Exception $ex) {
         
     }
     try {
-        echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getProperty("email");
-        $group->setEmail(html_entity_decode(@mysql_real_escape_string($feedEdge->getProperty("email"))));
+        echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getField("email");
+        $group->setEmail(html_entity_decode(@mysql_real_escape_string($feedEdge->getField("email"))));
     } catch (Exception $ex) {
         
     }
@@ -104,22 +107,26 @@ if (isset($accessToken)) {
     try {
         if($feedEdge->getField("owner")!=null){
             echo '<br><br>------------------------------------------<br>  ' . $feedEdge["owner"]->getField("id",null);
-            $group->setOwner(html_entity_decode(@mysql_real_escape_string($feedEdge["owner"]->getProperty("id",null))));
+            $group->setOwner(html_entity_decode(@mysql_real_escape_string($feedEdge["owner"]->getField("id",null))));
+        } else {
+            echo '<br><br>empty owner';
         }
     } catch (Exception $ex) {
-        
+        echo '<br><br>errors owner';
     }
 
     $id_group = createGroups($group);
-
+    echo '<br><br>--->'.$id_group;
     $user_group = new User_group();
     $user_group->setUserId($_SESSION['user_id']);
     $user_group->setGroupId($id_group);
 
     echo $id_group . ' ' . createUser_Group($user_group);
-
+//    echo '<br><br> paging: '.$feedEdge["members"]->getField("2");
+//    echo '<br><br> paging: '.implode(" ",$feedEdge["members"]->getField("2"));
     $member = new Members();
     foreach ($feedEdge["members"] as $status2) {
+        echo '<br><br>'. $status2;
         try {
             echo '<br><br>------------------------------------------<br>  ' . $status2->getProperty("id");
             $member->setFacebookIdMember($status2->getProperty("id"));

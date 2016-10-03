@@ -283,7 +283,7 @@ function createGroups(Groups $groups) {
             updateGroups($groups);
             return $rows[$groupId];
         }
-        return;
+        return false;
     }
     $result = mysql_query("INSERT INTO groups("
             . $facebookGroupId . ","
@@ -293,8 +293,8 @@ function createGroups(Groups $groups) {
             . $icon . ","
             . $email . ","
             . $owner . ","
-            . $createGroupTime
-            . $createTime . ","
+            . $createGroupTime . ","
+            . $createTime
             . ") VALUES( '"
             . $groups->getFacebookGroupId() . "','"
             . $groups->getName() . "','"
