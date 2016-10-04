@@ -51,7 +51,8 @@ if (isset($_POST['btn-signup'])) {
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Login & Registration System</title>
+        <title>Register</title>
+        <link rel="shortcut icon" href="css/icon.ico" />
         <link rel="stylesheet" href="style.css" type="text/css" />
         <link rel="stylesheet" type="text/css"
               href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"/>

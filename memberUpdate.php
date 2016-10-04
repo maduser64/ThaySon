@@ -11,6 +11,7 @@ require_once '/models/comments.php';
 require_once '/dao/daoMembers.php';
 require_once '/models/members.php';
 require_once '/readExcel.php';
+require_once '/findmyfbid.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -27,31 +28,6 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
 
 //----------------------------------------------------------------------------------------
-    function getData($data) {
-        $dom = new DOMDocument;
-        $dom->loadHTML($data);
-        $divs = $dom->getElementsByTagName('code');
-        foreach ($divs as $div) {
-            return $div->nodeValue;
-        }
-    }
-
-    function getFacebookIdProfile($profile_url) {
-        $url = 'http://findmyfbid.com';
-        $data = array('url' => $profile_url);
-
-// use key 'http' even if you send the request to https://...
-        $options = array(
-            'http' => array(
-                'header' => "Content-type: application/x-www-form-urlencoded\r\n",
-                'method' => 'POST',
-                'content' => http_build_query($data),
-            ),
-        );
-        $context = stream_context_create($options);
-        $result = file_get_contents($url, false, $context);
-        return getData($result);
-    }
 
     if (isset($_POST["update"])) {
         echo '<script> showPleaseWait(); </script>';

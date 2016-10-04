@@ -17,6 +17,36 @@
 //curl_close($ch);
 
 
-$website = file_get_contents('https://www.facebook.com/tritueviet01');
-echo $website;
+//$website = file_get_contents('https://www.facebook.com/tritueviet01');
+//echo $website;
+
+
+$name="19875379";
+$url = "http://www.ikea.co.il/default.asp?strSearch=".$name;
+
+$ch = curl_init();
+$timeout = 0;
+curl_setopt ($ch, CURLOPT_URL, $url);
+curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+curl_setopt($ch, CURLOPT_HEADER, TRUE);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+$header = curl_exec($ch);
+$redir = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+//print_r($redir);
+//
+$x = preg_match("/<script>location.href=(.|\n)*?<\/script>/", $header, $matches);
+$script = $matches[0];
+$redirect = str_replace("<script>location.href='", "", $script);
+$redirect = "http://www.ikea.co.il" . str_replace("';</script>", "", $redirect);
+//
+echo $redirect; 
+
+
+//$name="19875379";
+//$url = "http://www.ikea.co.il/default.asp?strSearch=".$name;
+//$ch = curl_init($url);
+//$last_url = curl_getinfo($ch, CURLOPT_ );
+//echo $last_url;
 ?>

@@ -11,14 +11,22 @@ require_once '/models/comments.php';
 require_once '/dao/daoMembers.php';
 require_once '/models/members.php';
 require_once '/models/membersSearchUserGroup.php';
+require_once '/findmyfbid.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
 }
-
+//----------------------------------------------------------------------------------------
 $userNameLogin = getUserById($_SESSION['user_id']);
 if (isset($_GET['FacebookProfileId'])) {
-    $listMembers = (array) searchMembersByFacebookProfileIdInAllGroup(htmlentities(@mysql_real_escape_string($_GET['FacebookProfileId'])));
+    
+    
+    $searchFaceBook = strtolower(htmlentities(@mysql_real_escape_string($_GET['FacebookProfileId'])));
+    $aaaa = stripos($searchFaceBook,'http');
+    if (strcasecmp( $aaaa ,'0') == 0) {
+        $searchFaceBook = trim(getFacebookIdProfile($searchFaceBook));
+    }
+    $listMembers = (array) searchMembersByFacebookProfileIdInAllGroup($searchFaceBook);
 }else {
     header("Location: homePage.php");
     return;
