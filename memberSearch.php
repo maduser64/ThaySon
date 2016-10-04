@@ -19,8 +19,6 @@ if (!isset($_SESSION['user_id'])) {
 //----------------------------------------------------------------------------------------
 $userNameLogin = getUserById($_SESSION['user_id']);
 if (isset($_GET['FacebookProfileId'])) {
-    
-    
     $searchFaceBook = strtolower(htmlentities(@mysql_real_escape_string($_GET['FacebookProfileId'])));
     $aaaa = stripos($searchFaceBook,'http');
     if (strcasecmp( $aaaa ,'0') == 0) {
@@ -54,13 +52,9 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
         </script>
 
         <script src="dist/js/app.min.js"></script>
-        <!-- Bootstrap 3.3.5 -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
         <!--  - alert -->
         <link rel="stylesheet" href="bootstrap/css/sweetalert.css"/>
         <script src="bootstrap/js/sweetalert.min.js"/>
-        <!-- <script src="bootstrap/js/sweetalert2.min.js"/>
-        <link rel="stylesheet" type="text/css" href="bootstrap/css/sweetalert2.css"/>-->
         <script src="mailBox/js/jquery-1.9.1.js"></script>
         <script >
             function showAlertFalse() {
@@ -199,22 +193,6 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
             <!-- Main Footer -->
             <?php include 'includeFooter.php'; ?>
-            <script type="text/javascript">
-
-                var _gaq = _gaq || [];
-                _gaq.push(['_setAccount', 'UA-38304687-1']);
-                _gaq.push(['_trackPageview']);
-
-                (function () {
-                    var ga = document.createElement('script');
-                    ga.type = 'text/javascript';
-                    ga.async = true;
-                    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                    var s = document.getElementsByTagName('script')[0];
-                    s.parentNode.insertBefore(ga, s);
-                })();
-
-            </script>
         </div>
     </body>
 </html>
