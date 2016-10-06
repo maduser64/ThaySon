@@ -49,6 +49,19 @@ function getMemberIdUseFacebookIdMember($varName) {
     return NULL;
 }
 
+function getMemberIdUseFacebookIdMemberAndGroupId($facebookIdMemberName, $groupIdName) {
+    global $memberId,$facebookIdMember, $groupId;
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM members WHERE ".$facebookIdMember." = '".$facebookIdMemberName."' AND ".$groupId." = '".$groupIdName."'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $varName=$row[$memberId];
+            return $varName;
+        }
+    }
+    return NULL;
+}
+
 function getMemberIdUseName($varName) {
     global $memberId,$name;
     $db = new DB_CONNECT();
@@ -376,12 +389,12 @@ function updateMembers(Members $members) {
 function createMembers(Members $members) {
     global   $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school, $facebookLink, $facebookProfileId, $createTime, $updateTime; 
     $db = new DB_CONNECT();
-//    $id=getMemberIdUseFacebookIdMember($members->getFacebookIdMember());
-//    if($id!=NULL){
-//        $members->setMemberId($id);
-//        updateMembers($members);
-//        return;
-//    }
+    $id=getMemberIdUseFacebookIdMemberAndGroupId($members->getFacebookIdMember(), $members->getGroupId());
+    if($id!=NULL){
+        $members->setMemberId($id);
+        updateMembers($members);
+        return;
+    }
     $result = mysql_query("INSERT INTO members("
             .$facebookIdMember.","
             .$name.","
