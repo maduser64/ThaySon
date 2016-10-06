@@ -376,12 +376,12 @@ function updateMembers(Members $members) {
 function createMembers(Members $members) {
     global   $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school, $facebookLink, $facebookProfileId, $createTime, $updateTime; 
     $db = new DB_CONNECT();
-    $id=getMemberIdUseFacebookIdMember($members->getFacebookIdMember());
-    if($id!=NULL){
-        $members->setMemberId($id);
-        updateMembers($members);
-        return;
-    }
+//    $id=getMemberIdUseFacebookIdMember($members->getFacebookIdMember());
+//    if($id!=NULL){
+//        $members->setMemberId($id);
+//        updateMembers($members);
+//        return;
+//    }
     $result = mysql_query("INSERT INTO members("
             .$facebookIdMember.","
             .$name.","
