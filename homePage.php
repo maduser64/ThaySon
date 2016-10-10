@@ -17,8 +17,14 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 
 $roleAdmin = checkRoleAdminUsingUserId($_SESSION['user_id']);
 $roleQuanTri = checkRoleQuanTri($_SESSION['user_id']);
+$nameSearchGroup ='';
 if ($roleAdmin || $roleQuanTri) {
-    $listGroup = (array) getListGroupUserUsingUserId($_SESSION['user_id']);
+    if (isset($_POST['GroupUserName']) && isset($_POST['searchGroup'])) {
+        $nameSearchGroup = $_POST['GroupUserName'];
+        $listGroup = (array) getListGroupUserUsingUserIdAndName($_SESSION['user_id'], $nameSearchGroup);
+    } else {
+        $listGroup = (array) getListGroupUserUsingUserId($_SESSION['user_id']);
+    }
 } else if (checkRoleQLNhom($_SESSION['user_id']) || checkRoleTV($_SESSION['user_id'])) {
     header("Location: subGroup.php");
 } else {
@@ -110,6 +116,16 @@ if (isset($_POST['deleteGroup'])) {
                             </div>
                         </div>    
                         <?php } ?>
+                        <div class="row">
+                            <div class="col-md-4" style="padding-bottom: 10px;">
+                                <div class="input-group">
+                                    <input type="text" name="GroupUserName"  class="form-control" placeholder="Group Name" value="<?php echo $nameSearchGroup?>"/>
+                                    <div class="input-group-btn">
+                                        <button type="submit" name="searchGroup" class="text-center btn btn-sm btn-file bg-blue"><i class="fa fa-search"></i> Search Group User</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box table-responsive ">

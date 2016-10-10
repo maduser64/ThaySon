@@ -356,7 +356,37 @@ function getListUsersRole($start, $count) {
     }
     return $listUsers;
 }
-
+function getListUsersRoleWithName($start, $count, $nameUser) {
+    global $userId, $userName, $password, $fullName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $createTime, $updateTime, $school, $class, $avatar;
+    $listUsers = array();
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM users WHERE $userName like '%$nameUser%' order by " . $fullName . " LIMIT " . $start . "," . $count . "") or die(mysql_error());
+    $rule = "<pre><font color=\"#ff0000\">";
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $users = new Users();
+            $users->setUserId($row[$userId]);
+            $users->setUserName($row[$userName]);
+            $users->setPassword($row[$password]);
+            $users->setFullName($row[$fullName]);
+            $users->setAddress2($row[$address2]);
+            $users->setAddress1($row[$address1]);
+            $users->setBirthday($row[$birthday]);
+            $users->setAvatar($row[$avatar]);
+            $users->setPhoneNumber2($row[$phoneNumber2]);
+            $users->setPhoneNumber1($row[$phoneNumber1]);
+            $users->setEmail($row[$email]);
+            $users->setGender($row[$gender]);
+            $users->setSchool($row[$school]);
+            $users->setClass($row[$class]);
+            $users->setCreateTime($row[$createTime]);
+            $users->setUpdateTime($row[$updateTime]);
+            array_push($listUsers, $users);
+        }
+        return $listUsers;
+    }
+    return $listUsers;
+}
 function getListUsersCount() {
     //global  $userId, $userName, $password, $fullName, $address1, $address2, $birthday,$phoneNumber1,$phoneNumber2, $email, $gender, $createTime, $updateTime,$school, $class, $avatar;
     $listUsers = array();

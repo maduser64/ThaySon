@@ -69,6 +69,11 @@ require_once '/dao/daoRoles.php';
 //    $sendLink = "Location: rolesView.php?pageNumRole=" . $_SESSION['pageNumRole'];
 //    exit(header($sendLink));
 //}
+if (isset($_POST['nameUser']) && isset($_POST['searchUser'])) {
+    $sendLink = "Location: rolesView.php?nameUser=".$_POST['nameUser']."&searchUser=1&pageNumRole=1";
+    exit(header($sendLink));
+}
+
 if (isset($_POST['deleteUser'])) {
     echo '-------------------------------------------------------------------------------------deleteUser';
     $posted = array_unique($_POST['checkbox_name']);

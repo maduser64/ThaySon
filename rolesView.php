@@ -17,10 +17,18 @@ $userNameLogin = getUserById($_SESSION['user_id']);
 
 $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 $current = $_GET['pageNumRole'] == null ? 1 : $_GET['pageNumRole'];
-$start = ($current - 1) * 10 + 1;
-$listInbox = (array) getListUsersRole(($start - 1), 10);
+$start = ($current - 1) * 10;
+$nameUser ='';
+
+if (isset($_GET['nameUser']) && isset($_GET['searchUser'])) {
+    $nameUser = $_GET['nameUser'];
+    $listInbox = (array) getListUsersRoleWithName(0, 30, $nameUser);
+} else {
+    $listInbox = (array) getListUsersRole($start, 10);
+}
+
 $totalRecord = getListUsersCount();
-$numPage = round($totalRecord / 10);
+$numPage = round($totalRecord / 10 + 0.5);
 $listRole = getListRoles();
 try {
     $_SESSION['pageNumRole'] = $current;
@@ -85,6 +93,15 @@ try {
                                 </span>
                             </div>
                             
+                            <div class="col-md-4" style="padding-bottom: 10px;">
+                                <div class="input-group">
+                                    <input type="text" name="nameUser"  class="form-control" placeholder="User Name" value="<?php echo $nameUser?>"/>
+                                    <div class="input-group-btn">
+                                        <button type="submit" name="searchUser" class="text-center btn btn-sm btn-file bg-blue"><i class="fa fa-search"></i> Search User</button>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="col-md-12">
                                 <div class="box">
                                     <div class="box-header">
@@ -144,7 +161,7 @@ try {
                         <div class="padding-2 col-md-12 text-center">
                             <ul class="pagination">
                                 <?php
-                                if ($numPage != null && $numPage != 1) {
+                                if ($numPage != null && $numPage > 1) {
                                     $iPage = $current;
                                     if ($iPage > 1) {
                                         $ncurrent = $current - 1;

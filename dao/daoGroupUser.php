@@ -108,6 +108,28 @@ $listGroupUser = array();
     }
     return $listGroupUser;
 }
+
+function getListGroupUserUsingUserIdAndName($varID, $varNameSearch) {
+ global    $groupUserId, $name, $description, $userId, $createTime, $updateTime; 
+    $listGroupUser = array();
+    $db = new DB_CONNECT();
+    $result = mysql_query("SELECT *FROM groupuser WHERE $userId = '$varID' AND $name like '%$varNameSearch%'") or die(mysql_error());
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $groupuser = new GroupUser();
+            $groupuser->setGroupUserId($row[$groupUserId]);
+            $groupuser->setName($row[$name]);
+            $groupuser->setDescription($row[$description]);
+            $groupuser->setUserId($row[$userId]);
+            $groupuser->setCreateTime($row[$createTime]);
+            $groupuser->setUpdateTime($row[$updateTime]);
+
+            array_push($listGroupUser, $groupuser);
+        }
+    }
+    return $listGroupUser;
+}
+
 function getListGroupUserUsingUserId($varName) {
  global    $groupUserId, $name, $description, $userId, $createTime, $updateTime; 
     $listGroupUser = array();
