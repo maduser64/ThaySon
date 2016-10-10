@@ -40,7 +40,7 @@ $listComments = (array) getCommentIdUseFeedId($_GET['feedId'], $start, 10);
 
 $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 $totalRecord = getTotalRecord1($_GET['feedId']);
-$numPage = round($totalRecord / 10);
+$numPage = round($totalRecord / 10  + 0.5);
 //$userRow=mysql_fetch_row($res);
 ?>
 <html>

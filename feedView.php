@@ -40,7 +40,7 @@ $start = ($current - 1) * 10;
 $listFeeds = (array) getFeedIdUseGroupId($_GET['groupId'], $start, 10);
 $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 $totalRecord = getTotalRecord($_SESSION['user_id']);
-$numPage = round($totalRecord / 10);
+$numPage = round($totalRecord / 10 + 0.5);
 function getCurentWeekDates(){
    $date = new DateTime();
    $date->modify('+2 day');

@@ -19,7 +19,7 @@ $current = $_GET['pageNumInbox'] == null ? 1 : $_GET['pageNumInbox'];
 $start = ($current - 1) * 10+1;
 $listInbox = (array) getListInbox2($_SESSION['user_id'], ($start-1), 10);
 $totalRecord = getListInboxSize($_SESSION['user_id']);
-$numPage = round($totalRecord / 10);
+$numPage = round($totalRecord / 10 + 0.5);
 try {
     $_SESSION['pageNumInbox'] = $current;
 } catch (Exception $ex) {
@@ -153,7 +153,7 @@ if (isset($_POST['deleteGroup'])) {
                         <div class="padding-2 col-md-12 text-center">
                             <ul class="pagination">
                                 <?php
-                                if ($numPage != null && $numPage != 1) {
+                                if ($numPage != null && $numPage > 1) {
                                     $iPage = $current;
                                     if ($iPage > 1) {
                                         $ncurrent = $current - 1;
