@@ -49,13 +49,12 @@ if (isset($_POST['create'])) {
 if (isset($_POST['deleteGroup'])) {
     $posted = array_unique($_POST['checkbox_name']);
     foreach ($posted as $value) {
-        echo $value . '</br>';
+        //echo $value . '</br>';
         $res = deleteGroupUserUseGroupUserId($value);
     }
     if ($res == 'Error') {
-        echo '' . "<script> alert(\"Lỗi\");</script>";
-    } else
-        echo '' . "<script> alert(\"TC\");</script>";
+        echo '' . "<script> alert(\"Errors!\");</script>";
+    }
     //echo '---------------------------------------------------'.$res;
     $backLink = "Location: homePage.php";
     exit(header($backLink));
@@ -117,7 +116,7 @@ if (isset($_POST['deleteGroup'])) {
                         </div>    
                         <?php } ?>
                         <div class="row">
-                            <div class="col-md-4" style="padding-bottom: 10px;">
+                            <div class="col-md-4" style="padding-bottom: 10px; z-index: 10" >
                                 <div class="input-group">
                                     <input type="text" name="GroupUserName"  class="form-control" placeholder="Group Name" value="<?php echo $nameSearchGroup?>"/>
                                     <div class="input-group-btn">
@@ -172,7 +171,7 @@ if (isset($_POST['deleteGroup'])) {
                                 </div><!-- /.box -->
                             </div><!-- /.col -->
                         </div><!-- /.row -->
-                        <div id="popupBoxOnePosition">
+                        <div id="popupBoxOnePosition" style=" z-index: 100">
                             <div class="popupBoxWrapper">
                                 <div class="popupBoxContent">
 

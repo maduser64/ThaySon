@@ -69,7 +69,7 @@ require_once '/dao/daoRoles.php';
 //    $sendLink = "Location: rolesView.php?pageNumRole=" . $_SESSION['pageNumRole'];
 //    exit(header($sendLink));
 //}
-if (isset($_POST['nameUser']) && isset($_POST['searchUser'])) {
+if (isset($_POST['nameUser']) && isset($_POST['searchUser']) && !isset($_POST['capQuyen1'])) {
     $sendLink = "Location: rolesView.php?nameUser=".$_POST['nameUser']."&searchUser=1&pageNumRole=1";
     exit(header($sendLink));
 }
@@ -86,9 +86,13 @@ if (isset($_POST['deleteUser'])) {
 if (isset($_POST['capQuyen1'])) {
     //echo '-------------------------------------------------------------------------------------capQuyen1';
     // $users = getListUsers();
-    $current = $_SESSION['pageNumRole'];
-    $start = ($current - 1) * 10 + 1;
-    $listUser = (array) getListUsersRole(($start - 1), 10);
+    if (strcasecmp($_SESSION['isSearch'], '0') == 0) {
+        $listUser = (array) getListUsersRoleWithName(0, 30, $_SESSION['nameUser']);    
+    } else {
+        $current = $_SESSION['pageNumRole'];
+        $start = ($current - 1) * 10 + 1;
+        $listUser = (array) getListUsersRole(($start - 1), 10);    
+    }
     //echo  '---'.sizeof($listUser).'---';
     $role = getListRoles();
     for ($i = 0; $i < sizeof($listUser); $i++) {

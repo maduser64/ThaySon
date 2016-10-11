@@ -44,10 +44,10 @@
         $valid2 = check_Pass($user);
 	//	echo $user.'-->'.$upass.' $valid: ';
         if ($valid&&$valid2) {
+            $userLogin = new Users();
             $userLogin = checkUser($user,$upass);
-            if ($user != null) {
+            if ($userLogin != null) {
                 $_SESSION['user_id'] = $userLogin->getUserId();
-//                echo ' >>>>  ok: '.$userLogin->getUserId();
                 header("Location: homePage.php");                             
             } else {
                  echo '<script> alert("UserName/Password invalid")</script>;';

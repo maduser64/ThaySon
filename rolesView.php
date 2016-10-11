@@ -23,18 +23,23 @@ $nameUser ='';
 if (isset($_GET['nameUser']) && isset($_GET['searchUser'])) {
     $nameUser = $_GET['nameUser'];
     $listInbox = (array) getListUsersRoleWithName(0, 30, $nameUser);
+    try {
+        $_SESSION['isSearch'] = '0';
+        $_SESSION['nameUser'] = $nameUser;
+    } catch (Exception $ex) {
+    }
 } else {
     $listInbox = (array) getListUsersRole($start, 10);
+    try {
+        $_SESSION['pageNumRole'] = $current;
+    } catch (Exception $ex) {
+    }
 }
 
 $totalRecord = getListUsersCount();
 $numPage = round($totalRecord / 10 + 0.5);
 $listRole = getListRoles();
-try {
-    $_SESSION['pageNumRole'] = $current;
-} catch (Exception $ex) {
-    
-}
+
 ?>
 <html>
     <head>

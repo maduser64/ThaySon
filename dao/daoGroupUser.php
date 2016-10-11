@@ -1,7 +1,7 @@
 <?php
 require_once 'db_connect.php';
 require_once '/../models/groupuser.php';
-require_once 'daoUser_GroupUser.php';
+require_once (dirname(__FILE__) .'/daoUser_GroupUser.php');
 
 $groupUserId = "GroupUserId";
 $name = "Name";
@@ -188,7 +188,7 @@ function deleteGroupUserUseGroupUserId($id) {
     $result = mysql_query("DELETE FROM groupuser WHERE ".$groupUserId." = '".$id."'");
     if ($result) {
         ///  xoa nhieu hon o user_groupuser
-        if(deleteUser_GroupUserUseGroupUserId($id)) 
+        //if(deleteUser_GroupUserUseGroupUserId($id)) 
             return true;
     }
     return false;

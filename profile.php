@@ -23,44 +23,49 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
 //$listGroup = (array) getListGroupsWithIdUser($_SESSION['user_id']);
 //echo '---'.$listInbox;
 if (isset($_POST['save'])) {
-    $email = mysql_real_escape_string($_POST['email']);
-    $fullname = mysql_real_escape_string($_POST['fullname']);
-    $address = mysql_real_escape_string($_POST['address']);
-    $phone = mysql_real_escape_string($_POST['phonenumber']);
-    $gender = mysql_real_escape_string($_POST['gender']);
-    $tdate = mysql_real_escape_string($_POST['date']);
-    $phone2 = mysql_real_escape_string($_POST['phonenumber2']);
-    $address2 = mysql_real_escape_string($_POST['address2']);
-    $class = mysql_real_escape_string($_POST['class']);
-    $school = mysql_real_escape_string($_POST['school']);
+    $email = html_entity_decode(mysql_real_escape_string($_POST['email']));
+    $fullname = html_entity_decode(mysql_real_escape_string($_POST['fullname']));
+    $address = html_entity_decode(mysql_real_escape_string($_POST['address']));
+    $phone = html_entity_decode(mysql_real_escape_string($_POST['phonenumber']));
+    $gender = html_entity_decode(mysql_real_escape_string($_POST['gender']));
+    $tdate = html_entity_decode(mysql_real_escape_string($_POST['date']));
+    $phone2 = html_entity_decode(mysql_real_escape_string($_POST['phonenumber2']));
+    $address2 = html_entity_decode(mysql_real_escape_string($_POST['address2']));
+    $class = html_entity_decode(mysql_real_escape_string($_POST['class']));
+    $school = html_entity_decode(mysql_real_escape_string($_POST['school']));
     // echo ''.$email.$fullname.$address.$phone.$phone2;
-    $userNameLogin->setEmail($email);
-    $userNameLogin->setPhoneNumber1($phone);
-    $userNameLogin->setAddress1($address);
-    $userNameLogin->setGender($gender);
-    $userNameLogin->setBirthday(date('Y-m-d', strtotime($tdate)));
-    $userNameLogin->setAddress2($address2);
-    $userNameLogin->setClass($class);
-    $userNameLogin->setSchool($school);
-    $userNameLogin->setPhoneNumber2($phone2);
-    $userNameLogin->setFullName($fullname);
-
-    $insert = updateUsers($userNameLogin);
-
-    if ($insert == true) {
-        header("Location: profile.php?update=ok");
+    if (strlen($email) < 1 || strlen($fullname) < 1 || strlen($address) < 1 || strlen($phone) < 1 || strlen($gender) < 1 
+        || strlen($tdate) < 1 || strlen($phone2) < 1 ||strlen($address2) < 1 || strlen($class) < 1 ||strlen($school) < 1 ) {
+        echo '<script>alert(\'Field empty!\');</script>';
     } else {
-        ?>
-        <script>alert('error while registering you...');</script>
-        <?php
+        $userNameLogin->setEmail($email);
+        $userNameLogin->setPhoneNumber1($phone);
+        $userNameLogin->setAddress1($address);
+        $userNameLogin->setGender($gender);
+        $userNameLogin->setBirthday(date('Y-m-d', strtotime($tdate)));
+        $userNameLogin->setAddress2($address2);
+        $userNameLogin->setClass($class);
+        $userNameLogin->setSchool($school);
+        $userNameLogin->setPhoneNumber2($phone2);
+        $userNameLogin->setFullName($fullname);
+
+        $insert = updateUsers($userNameLogin);
+
+        if ($insert == true) {
+            header("Location: profile.php?update=ok");
+        } else {
+            ?>
+            <script>alert('error while registering you...');</script>
+            <?php
+        }
     }
 }
 if(isset($_POST['change'])){
     
     $new = $_POST['newpassword'];
     $repeat = $_POST['repeatnewpassword'];
-//    $new = mysql_real_escape_string($_POST['newpassword']);
-//    $repeat = mysql_real_escape_string($_POST['repeatnewpassword']);
+    $new = html_entity_decode(mysql_real_escape_string($_POST['newpassword']));
+    $repeat = html_entity_decode(mysql_real_escape_string($_POST['repeatnewpassword']));
    // echo '$new: '.$new.'  '.$repeat;
     
     if(strcmp($new,$repeat)==0){

@@ -81,7 +81,7 @@ if (isset($_POST['deleteGroup'])) {
                 <!-- Main content -->
                 <section class="content">
                     <div class="row">
-                        <form id="form_id" name="myform" action="approvedInbox.php" method="POST">
+                        <form id="form_id" name="myform" action="processInbox.php" method="POST">
 <!--                            <div class="row">-->
                                 <div class= "col-md-12" style="padding-bottom: 10px;">
                                     <div class= "left" style="display:inline">
@@ -91,10 +91,10 @@ if (isset($_POST['deleteGroup'])) {
                                         <a class="left text-center btn btn-sm btn-file bg-blue" href = "sentMailPage.php"><i class="fa fa-envelope-o"></i> New</a>
                                     </div>
                                     <div class= "center" style="margin-left: 10px;display:inline">
-                                        <button type="button"class="text-center btn btn-sm btn-file bg-blue" name="approve"><i class="fa fa-upload"></i> Approve</button>
+                                        <button type="submit"class="text-center btn btn-sm btn-file bg-blue" name="approveMail"><i class="fa fa-upload"></i> Approve</button>
                                     </div>
                                     <div class= "right" style="margin-left: 10px;display:inline">
-                                        <button  type="button" name="deleteGroup" class="text-center btn btn-sm btn-file bg-red-active"><i class="fa fa-trash"></i> Delete</button>
+                                        <button  type="submit" name="deleteMail" class="text-center btn btn-sm btn-file bg-red-active"><i class="fa fa-trash"></i> Delete</button>
                                     </div>
                                 </div>
                             <!--</div>-->
@@ -157,7 +157,7 @@ if (isset($_POST['deleteGroup'])) {
                                     $iPage = $current;
                                     if ($iPage > 1) {
                                         $ncurrent = $current - 1;
-                                        echo "<li><a href =feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum=$ncurrent>&laquo;</a></li>";
+                                        echo "<li><a href =inboxView.php?pageNumInbox=1>&laquo;</a></li>";
                                     }
                                     //$startPage, $endPage;
                                     $startPage = $iPage - 2;
@@ -171,14 +171,14 @@ if (isset($_POST['deleteGroup'])) {
                                     }
                                     for ($i = $startPage; $i <= $endPage; ++$i) {
                                         if ($iPage == $i)
-                                            echo "<li class = \"active\"><a href=feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum=$i>$i</a></li>";
+                                            echo "<li class = \"active\"><a href=inboxView.php?pageNumInbox={$_GET['pageNumInbox']}>$i</a></li>";
                                         else
-                                            echo "<li><a href =feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum={$i}>$i</a></li>";
+                                            echo "<li><a href =inboxView.php?pageNumInbox={$i}>$i</a></li>";
 //                                            <li <% if (iPage == i){ %>  class = "active"  <%} %>><button  type="submit" value="<%=i %>" name="page"><%=i %></button></li>
                                     }
                                     if ($iPage < $numPage) {
                                         $ncurrent = $iPage + 1;
-                                        echo "<li><a href =feedView.php?facebookGroupId={$_GET['facebookGroupId']}&groupId={$_GET['groupId']}&pageNum={$ncurrent}>&raquo</a></li>";
+                                        echo "<li><a href =inboxView.php?pageNumInbox={$ncurrent}>&raquo</a></li>";
                                     }
                                 }
                                 ?>
