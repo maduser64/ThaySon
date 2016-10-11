@@ -130,6 +130,15 @@ function deleteUser_GroupUserUseUserGroupUserId($id) {
     }
     return false;
 }
+function deleteUser_GroupUserUseGroupUserId($id) {
+    global $groupUserId;
+    $db = new DB_CONNECT();
+    $result = mysql_query("DELETE FROM user_groupuser WHERE " . $groupUserId . " = '" . $id . "'");
+    if ($result) {
+        return true;
+    }
+    return false;
+}
 function deleteUser_GroupUserUseUserId($id) {
     global $userId;
     $db = new DB_CONNECT();
@@ -149,6 +158,7 @@ function deleteUser_Group($user,$groupId) {
     }
     return false;
 }
+
 function addUser($stringUser,$grId){
     // echo '---------------------------------------------------'.$stringUser.'----'.$grId; 
     $sUser = trim($stringUser);

@@ -52,7 +52,7 @@ if (isset($_POST['deleteGroup'])) {
         //echo $value . '</br>';
         $res = deleteGroupUserUseGroupUserId($value);
     }
-    if ($res == 'Error') {
+    if ($res === false) {
         echo '' . "<script> alert(\"Errors!\");</script>";
     }
     //echo '---------------------------------------------------'.$res;
