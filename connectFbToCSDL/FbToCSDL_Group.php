@@ -47,12 +47,9 @@ if (isset($accessToken)) {
     $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
 
     try {
-//        $responseUser = $fb->get('/me');
-//        $userNode = $responseUser->getGraphUser();
         $link = '/' . $_SESSION['group_id'] . '?fields=name,owner,privacy,icon,email,updated_time,description,id,members.limit(1150){administrator,name,id}';
         echo $link;
         $responseGroup = $fb->get($link);
-//        $responseFeed = $fb->get('/me/feed?fields=id,message&limit=5');
     } catch (Facebook\Exceptions\FacebookResponseException $e) {
 // When Graph returns an error
         echo 'Graph returned an error: ' . $e->getMessage() . '<br>';
@@ -62,22 +59,18 @@ if (isset($accessToken)) {
         echo 'Facebook SDK returned an error: ' . $e->getMessage() . '<br>';
         exit;
     }
-
-//    echo 'Logged in as ' . $userNode->getName();
-//    echo 'group ' . $responseGroup->getBody();
-
-
     $feedEdge = $responseGroup->getGraphGroup();
-//    echo '<br><br>'.$responseGroup->get;
-    echo '<br><br> ---: ' . $feedEdge;
-    echo '<br><br> ---: ' . $responseGroup->getBody();
-//    echo '<br><br> ---: ' . $fb->next($feedEdge->getGraphEdge());
+    echo '<br><br>'.$responseGroup->getBody();
+//    $varDecodeJson = json_decode($responseGroup->getBody(), true);
+//    $varDecodeJson = $varDecodeJson["members"]["paging"]["next"];
+//    $varNewJson = file_get_contents($varDecodeJson);
+//    echo '<br><br> ---: '.$varNewJson;
+    
     $group = new Groups();
     try {
         $group->setFacebookGroupId($_SESSION['group_id']);
         echo '</br>' . $group->getFacebookGroupId();
     } catch (Exception $ex) {
-        
     }
     try {
         echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getField("name");
@@ -130,26 +123,50 @@ if (isset($accessToken)) {
         try {
             echo '<br><br>------------------------------------------<br>  ' . $status2->getProperty("id");
             $member->setFacebookIdMember($status2->getProperty("id"));
-        } catch (Exception $ex) {
-            
-        }
+        } catch (Exception $ex) {}
         try {
             echo '<br><br>------------------------------------------<br>  ' . $status2->getProperty("name");
             $member->setName(html_entity_decode(@mysql_real_escape_string($status2->getProperty("name"))));
-        } catch (Exception $ex) {
-            
-        }
+        } catch (Exception $ex) {}
         try {
             echo '<br><br>------------------------------------------<br>  ' . $status2->getProperty("administrator");
             $member->setAdministrator($status2->getProperty("administrator"));
-        } catch (Exception $ex) {
-            
-        }
+        } catch (Exception $ex) {}
         $member->setGroupId($id_group);
         createMembers($member);
     }
+    echo '<br>------------------------------------------------------------------------------------------------<br>';
+    $varDecodeJson = json_decode($responseGroup->getBody(), true);
+    if (isset($varDecodeJson["members"]["paging"]["next"])) {
+        $varDecodeJson = $varDecodeJson["members"]["paging"]["next"];
+        while(strlen($varDecodeJson)>0){
+            $varNewJson = json_decode(file_get_contents($varDecodeJson), true);
+    //        echo '<br><br> while: ---: '.$varNewJson;
+            $member = new Members();
 
-
+            foreach ($varNewJson["data"] as $status2) {
+                try {
+                    echo '<br><br>------------------------------------------<br>  ' . $status2["id"];
+                    $member->setFacebookIdMember($status2["id"]);
+                } catch (Exception $ex) {}
+                try {
+                    echo '<br><br>------------------------------------------<br>  ' . $status2["name"];
+                    $member->setName(html_entity_decode(@mysql_real_escape_string($status2["name"])));
+                } catch (Exception $ex) {}
+                try {
+                    echo '<br><br>------------------------------------------<br>  ' . $status2["administrator"];
+                    $member->setAdministrator($status2["administrator"]);
+                } catch (Exception $ex) {}
+                $member->setGroupId($id_group);
+                createMembers($member);
+            }
+            if (isset($varDecodeJson["members"]["paging"]["next"])) {
+                $varDecodeJson = $varNewJson["paging"]["next"];
+            } else {
+                $varDecodeJson ='';
+            }
+        }
+    }
     header("Location: ../subGroup.php");
 } else {
 //  nếu k có accesstoken thì chuyển hướng sang trang đăng nhập
