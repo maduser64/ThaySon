@@ -7,4 +7,3 @@ echo $groupId."  ".$_SESSION['group_id'];
 header("Location: FbToCSDL_Group.php");
 
 ?>
-

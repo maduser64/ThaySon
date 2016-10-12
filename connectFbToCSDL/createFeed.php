@@ -21,4 +21,3 @@ echo "".$_SESSION['group_id']." - ".$_SESSION['id_group_csdl']. " -|- ".$start2.
 
 header("Location: FbToCSDL_Feed.php");
 ?>
-

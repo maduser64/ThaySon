@@ -93,9 +93,7 @@ if (isset($accessToken)) {
     try {
         echo '<br><br>------------------------------------------<br>  ' . $feedEdge->getField("email");
         $group->setEmail(html_entity_decode(@mysql_real_escape_string($feedEdge->getField("email"))));
-    } catch (Exception $ex) {
-        
-    }
+    } catch (Exception $ex) {}
 
     try {
         if($feedEdge->getField("owner")!=null){

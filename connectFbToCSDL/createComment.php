@@ -21,4 +21,3 @@ echo "".$_SESSION['feed_id']." - ".$_SESSION['id_feed_csdl']. " -|- ".$start2." 
 
 //header("Location: FbToCSDL_Comment.php");
 ?>
-

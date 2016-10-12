@@ -15,20 +15,12 @@ include 'config.php';
 $web_root = "http://".$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']);
 $redirect_url = $web_root.'/FbToCSDL_Feed.php'; // Khi đăng nhập xong sẽ tự động chuyển hướng sang trang web này, nếu k điền j thì mặc đinh đường link cài đặt trong app
 
-//thêm thư viện
-//use Facebook\FacebookSession;
-//use Facebook\FacebookRequest;
-//use Facebook\GraphUser;
-//use Facebook\FacebookRedirectLoginHelper;
-//use Facebook\FacebookSDKException;
-// khai báo bắt buộc
 $fb = new Facebook\Facebook([
     'app_id' => $app_id,
     'app_secret' => $app_secret,
     'default_graph_version' => 'v2.2',
         ]);
 $helper = $fb->getRedirectLoginHelper();
-
 try {
     $accessToken = $helper->getAccessToken();
 } catch (FacebookRequestException $ex) {
@@ -44,17 +36,11 @@ if (isset($_GET["log-out"]) && $_GET["log-out"] == 1) {
 //  nếu tồn tại accessToken thì thực hiện lệnh
 if (isset($accessToken)) {
     $_SESSION['facebook_access_token'] = (string) $accessToken;
-
     $fb->setDefaultAccessToken($_SESSION['facebook_access_token']);
-
     try {
-//        $responseUser = $fb->get('/me');
-//        $userNode = $responseUser->getGraphUser();
         $link = '/' . $_SESSION['group_id'] . '?fields=feed.since(' . $_SESSION['date_start'] . ').until(' . $_SESSION['date_end'] . ').limit(1150){id,message,from,created_time,updated_time,comments.limit(1150){id,message,from,created_time}}';
         echo $link;
         $responseFeed = $fb->get($link);
-
-//        $responseFeed = $fb->get('/me/feed?fields=id,message&limit=5');
     } catch (Facebook\Exceptions\FacebookResponseException $e) {
 // When Graph returns an error
         echo 'Graph returned an error: ' . $e->getMessage() . '<br>';
@@ -64,104 +50,102 @@ if (isset($accessToken)) {
         echo 'Facebook SDK returned an error: ' . $e->getMessage() . '<br>';
         exit;
     }
-//    echo 'Logged in as ' . $userNode->getName();
+//    $feedEdge = $responseFeed->getGraphNode();
+    $varJsonDecode = json_decode($responseFeed->getBody(), true)["feed"];
+    
+    if (count($varJsonDecode["data"])>0){
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        echo '<br><br>---------------------------------------------------------------------------------------------------------------------------------------------<br>  ';
+        do {
+            $feed = new Feeds();
+            $i = 0;
+            foreach ($varJsonDecode["data"] as $status) {
+                try {
+                    echo '<br><br>------------------------------------------<br>  ' . $status["id"];
+                    $feed->setFacebookIdFeed($status["id"]);
+                } catch (Exception $ex) {}
+                try {
+                    echo '<br><br>------------------------------------------<br>  ' . $status["message"];
+                    $feed->setMessage(html_entity_decode(@mysql_real_escape_string($status["message"])));
+                } catch (Exception $ex) {}
+                try {
+                    echo '<br><br>------------------------------------------<br>  ' . $status["from"]["id"];
+                    $feed->setFacebookUserIdFeed($status["from"]["id"]);
+                } catch (Exception $ex) {}
+                $feed->setStatusId((int) '1');
+                $feed->setGroupId((int) ('' . $_SESSION['id_group_csdl']));
+                echo '<br><br>------------------------------------------<br>  ' . $feed->getStatusId() . '  ' . $feed->getGroupId();
+                echo '<br>' .$status["created_time"] . '  ' .$status["updated_time"];
+                try {
+                    $date = new DateTime($status["created_time"], new DateTimeZone('GMT'));
+                    $date->setTimezone(new DateTimeZone('Asia/Bangkok'));
+                    $stringtime = $date->format('Y-m-d H:i:s');
+                    $feed->setCreateFeedTime('' . $stringtime);
+                    echo '<br><br>------------------------------------------<br>  ' . $feed->getCreateFeedTime();
+                } catch (Exception $ex) {}
+                try {
+                    $date = new DateTime($status["updated_time"], new DateTimeZone('GMT'));
+                    $date->setTimezone(new DateTimeZone('Asia/Bangkok'));
+                    $stringtime = $date->format('Y-m-d H:i:s');
+                    $feed->setUpdateFeedTime('' . $stringtime);
+                    echo '<br><br>------------------------------------------<br>  ' . $feed->getUpdateFeedTime();
+                } catch (Exception $ex) {}
+                $idFeedCSDL= createFeeds($feed);
+//<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-    $feedEdge = $responseFeed->getGraphNode();
-//    echo '<br> ---: ' . $feedEdge['feed']->count();
+                echo '<br>+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++<br>';
+                $varComments = $varJsonDecode["data"][$i]["comments"];
+                if (count($varComments["data"])>0) {
+                    do {
+                        $comment = new Comments();
+                        foreach ($varComments["data"] as $status2) {
+                            try {
+                                echo '<br><br>------------------------------------------<br>  ' . $status2["id"];
+                                $comment->setFacebookIdComment($status2["id"]);
+                            } catch (Exception $ex) {}
+                            try {
+                                echo '<br><br>------------------------------------------<br>  ' . $status2["message"];
+                                $comment->setMessage(html_entity_decode(@mysql_real_escape_string($status2["message"])));
+                            } catch (Exception $ex) {}
+                            try {
+                                echo '<br><br>------------------------------------------<br>  ' . $status2["from"]["id"];
+                                $comment->setFacebookUserIdComment($status2["from"]["id"]);
+                            } catch (Exception $ex) {}
+                            try {
+                                $date = new DateTime($status2["created_time"], new DateTimeZone('GMT'));
+                                $date->setTimezone(new DateTimeZone('Asia/Bangkok'));
+                                $stringtime = $date->format('Y-m-d H:i:s');
+                                $comment->setCreateCommentTime('' . $stringtime);
+                                echo '<br><br>------------------------------------------<br>  ' . $comment->getCreateCommentTime();
+                            } catch (Exception $ex) {}
 
-    echo '<br><br>------------------------------------------<br>  ';
-    $feed = new Feeds();
-    foreach ($feedEdge['feed'] as $status) {
-//        echo '<br><br>------------------------------------------<br>  ' . $status;
-//        echo $status->getProperty("message");
-        try {
-            echo '<br><br>------------------------------------------<br>  ' . $status->getProperty("id");
-            $feed->setFacebookIdFeed($status->getProperty("id"));
-        } catch (Exception $ex) {
-            
-        }
-        try {
-            echo '<br><br>------------------------------------------<br>  ' . $status->getProperty("message");
-            $feed->setMessage(html_entity_decode(@mysql_real_escape_string($status->getProperty("message"))));
-        } catch (Exception $ex) {
-            
-        }
-        try {
-            echo '<br><br>------------------------------------------<br>  ' . $status->getProperty("from")['id'];
-            $feed->setFacebookUserIdFeed($status->getProperty("from")['id']);
-        } catch (Exception $ex) {
-            
-        }
-        $feed->setStatusId((int) '1');
-        $feed->setGroupId((int) ('' . $_SESSION['id_group_csdl']));
-        echo '<br><br>------------------------------------------<br>  ' . $feed->getStatusId() . '  ' . $feed->getGroupId();
+                            $comment->setStatusId((int) '1');
+                            $comment->setFeedId($idFeedCSDL);
 
-        try {
-            $dtime = new DateTime();
-            $unixtime = $dtime->format('U');
-            $dtime = $status->getField("created_time");
-            $localtz = new DateTimeZone("Asia/Calcutta");         //choose the correct PHP timezone
-            $dtime->setTimeZone($localtz);                        //we apply the timezone
-            $stringtime = $dtime->format('Y-m-d H:i:s');
-            $feed->setCreateFeedTime('' . $stringtime);
-            echo '<br><br>------------------------------------------<br>  ' . $feed->getCreateFeedTime();
-        } catch (Exception $ex) {
+                            createComments($comment);
+                        }
+                        if(!isset($varComments["paging"]["next"])){
+                            break;
+                        }
+                        $varComments = json_decode(file_get_contents($varComments["paging"]["next"]), true);
+                        if (count($varComments["data"])<=0){
+                            break;
+                        }
+                    } while (true);
+                }
+                $i++;
+            }
             
-        }
-        try {
-            $dtime = new DateTime();
-            $unixtime = $dtime->format('U');
-            $dtime = $status->getField("updated_time");
-            $localtz = new DateTimeZone("Asia/Calcutta");         //choose the correct PHP timezone
-            $dtime->setTimeZone($localtz);                        //we apply the timezone
-            $stringtime = $dtime->format('Y-m-d H:i:s');
-            $feed->setUpdateFeedTime('' . $stringtime);
-            echo '<br><br>------------------------------------------<br>  ' . $feed->getUpdateFeedTime();
-        } catch (Exception $ex) {
-            
-        }
- //--------------------------------------------------------------------------------------------------------       
-         
-        $comment = new Comments();
-        $idFeedCSDL= createFeeds($feed);
-        foreach ($status["comments"] as $status2) {
-            try {
-                echo '<br><br>------------------------------------------<br>  ' . $status2->getProperty("id");
-                $comment->setFacebookIdComment($status2->getProperty("id"));
-            } catch (Exception $ex) {
-                
+            if(!isset($varJsonDecode["paging"]["next"])){
+                break;
             }
-            try {
-                echo '<br><br>------------------------------------------<br>  ' . $status2->getProperty("message");
-                $comment->setMessage(html_entity_decode(@mysql_real_escape_string($status2->getProperty("message"))));
-            } catch (Exception $ex) {
-                
+            $varJsonDecode = json_decode(file_get_contents($varJsonDecode["paging"]["next"]), true);
+            if (count($varJsonDecode["data"])<=0){
+                break;
             }
-            try {
-                echo '<br><br>------------------------------------------<br>  ' . $status2->getProperty("from")['id'];
-                $comment->setFacebookUserIdComment($status2->getProperty("from")['id']);
-            } catch (Exception $ex) {
-                
-            }
-            $comment->setStatusId((int) '1');
-            $comment->setFeedId($idFeedCSDL);
-            echo '<br><br>------------------------------------------<br>  ' . $comment->getStatusId() . '  ' . $comment->getFeedId();
-
-            try {
-                $dtime = new DateTime();
-                $unixtime = $dtime->format('U');
-                $dtime = $status2->getField("created_time");
-                $localtz = new DateTimeZone("Asia/Calcutta");         //choose the correct PHP timezone
-                $dtime->setTimeZone($localtz);                        //we apply the timezone
-                $stringtime = $dtime->format('Y-m-d H:i:s');
-                $comment->setCreateCommentTime('' . $stringtime);
-                echo '<br><br>------------------------------------------<br>  ' . $comment->getCreateCommentTime();
-            } catch (Exception $ex) {
-                
-            }
-            echo createComments($comment);
-        }
+        } while(true);
     }
+    
     $direct= "Location: ../feedView.php?facebookGroupId=".$_SESSION['group_id']."&groupId=".$_SESSION['id_group_csdl']."&pageNum=".$_SESSION['pageNum'];
     echo $direct;
     header($direct);
