@@ -289,7 +289,7 @@ $listMembers = array();
     $result = mysql_query("SELECT members.MemberId, members.Address1,members.Administrator,members.Name,members.GroupId, members.Birthday, members.PhoneNumber1,members.Email, members.Gender,members.PhoneNumber2, members.Address2, members.Class, members.School, members.FacebookIdMember, members.RealName,members.FacebookLink, members.FacebookProfileId, "
             ." members.CreateTime,members.UpdateTime, users.UserName,users.FullName,users.PhoneNumber1,users.UserId, groups.FacebookGroupId "
             ." FROM users,user_group,groups,members "  
-            ." WHERE users.UserId=user_group.UserId AND user_group.GroupId=members.GroupId AND groups.GroupId =user_group.GroupId AND members.FacebookProfileId = '$varName'") or die(mysql_error());
+            ." WHERE users.UserId=user_group.UserId AND user_group.GroupId=groups.GroupId AND groups.GroupId =members.GroupId AND members.FacebookProfileId = '$varName'") or die(mysql_error());
 
     if (mysql_num_rows($result) > 0) {
         while ($row = mysql_fetch_array($result)) {
@@ -358,7 +358,20 @@ $listMembers = array();
     }
     return $listMembers;
 }
-
+function updateMembersMissField(Members $members) {
+  global    $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school,$facebookLink, $facebookProfileId, $createTime, $updateTime; 
+    $db = new DB_CONNECT();
+    $result = mysql_query("UPDATE members SET  "
+            .$facebookIdMember." = '". $members->getFacebookIdMember()."', "
+            .$name." = '". $members->getName()."', "
+            .$administrator." = '". $members->getAdministrator()."', "
+            .$groupId." = '". $members->getGroupId()
+            ."' WHERE ".$memberId." = '".$members->getMemberId()."'") or die(mysql_error());
+    if ($result) {
+        return true;
+    }
+    return false;
+}
 function updateMembers(Members $members) {
   global    $memberId, $facebookIdMember, $name, $administrator, $groupId, $realName, $address1, $address2, $birthday, $phoneNumber1, $phoneNumber2, $email, $gender, $class, $school,$facebookLink, $facebookProfileId, $createTime, $updateTime; 
     $db = new DB_CONNECT();
@@ -392,7 +405,7 @@ function createMembers(Members $members) {
     $id=getMemberIdUseFacebookIdMemberAndGroupId($members->getFacebookIdMember(), $members->getGroupId());
     if($id!=NULL){
         $members->setMemberId($id);
-        updateMembers($members);
+        updateMembersMissField($members);
         return;
     }
     $result = mysql_query("INSERT INTO members("

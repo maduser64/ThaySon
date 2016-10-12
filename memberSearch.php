@@ -118,7 +118,7 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
                                                     <th class="text-center" >School</th>
                                                     <th class="text-center" >Facebook link</th>
                                                     
-                                                    <th class="text-center" >User name manager</th>
+                                                    <th class="text-center" ><font color="#ff0000">Username manager</font></th>
                                                     <th class="text-center" >Full name manager</th>
                                                     <th class="text-center" >Phone number manager</th>
                                                     <th class="text-center" >Facebook group of member</th>
@@ -154,7 +154,7 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
                                                     echo "<td class=\"text-center\">{$row->getSchool()}</td>";
                                                     echo "<td class=\"text-center\"><a href={$row->getFacebookLink()}>{$row->getFacebookLink()}</a></td>";
                                                     
-                                                    echo "<td class=\"text-center\">{$row->getUsernameManager()}</td>";
+                                                    echo "<td class=\"text-center\"><font color=\"#ff0000\">{$row->getUsernameManager()}</font></td>";
                                                     echo "<td class=\"text-center\">{$row->getFullnameManager()}</td>";
                                                     echo "<td class=\"text-center\">{$row->getPhoneNumberManager()}</td>";
                                                     echo "<td class=\"text-center\"><a href=https://www.facebook.com/{$row->getIdGroupFacebook()}>{$row->getIdGroupFacebook()}</td>";
