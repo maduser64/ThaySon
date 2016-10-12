@@ -51,10 +51,10 @@ $numInbox = getInboxIdUseStatus($_SESSION['user_id']);
     <?php
     if (isset($_POST['send-action'])) {
         $fromUserId = $_SESSION['user_id'];
-        $toAddress = mysql_real_escape_string($_POST['ToAddress']);
-        $toGroup = mysql_real_escape_string($_POST['ToGroupAddress']);
-        $subject = mysql_real_escape_string($_POST['Subject']);
-        $content = $_POST['ContentMessage'];
+        $toAddress = html_entity_decode(mysql_real_escape_string($_POST['ToAddress']));
+        $toGroup = html_entity_decode(mysql_real_escape_string($_POST['ToGroupAddress']));
+        $subject = html_entity_decode(mysql_real_escape_string($_POST['Subject']));
+        $content = html_entity_decode($_POST['ContentMessage']);
         $toGroup = trim($toGroup);
         if (isset($toGroup) === true && $toGroup === '') {
             $result = insertWithMultiInbox($fromUserId, $toAddress, $subject, $content);

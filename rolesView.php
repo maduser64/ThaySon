@@ -166,7 +166,7 @@ $listRole = getListRoles();
                         <div class="padding-2 col-md-12 text-center">
                             <ul class="pagination">
                                 <?php
-                                if ($numPage != null && $numPage > 1) {
+                                if ($numPage != null && $numPage > 1 && !isset($_GET['nameUser']) && !isset($_GET['searchUser'])) {
                                     $iPage = $current;
                                     if ($iPage > 1) {
                                         $ncurrent = $current - 1;

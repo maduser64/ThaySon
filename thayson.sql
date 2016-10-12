@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2016 at 06:00 PM
+-- Generation Time: Oct 12, 2016 at 06:00 PM
 -- Server version: 5.6.11
 -- PHP Version: 5.5.3
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   PRIMARY KEY (`CommentId`),
   KEY `fk_comments_status_idx` (`StatusId`),
   KEY `fk_comments_feeds_idx` (`FeedId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `comments`
@@ -67,7 +67,20 @@ INSERT INTO `comments` (`CommentId`, `FacebookIdComment`, `FacebookUserIdComment
 (17, '1640423716214323', '1015824935228333', 'Chỉ có đắc tội gì lớn lắm nên thầy mới block hết lần này đến lần khác, thầy là người dễ dãi mà', '2015-11-01 19:16:32', 1, 3, '2016-10-04 16:50:00', '0000-00-00 00:00:00'),
 (18, '1640423832880978', '1802669139949178', 'thầy block anh rồi khoognxem được tin này đâu :3', '2015-11-01 19:17:18', 1, 3, '2016-10-04 16:50:00', '0000-00-00 00:00:00'),
 (19, '1640423892880972', '1802669139949178', 'biết đâu giờ thầy vui lên lại add lại đó :3', '2015-11-01 19:17:45', 1, 3, '2016-10-04 16:50:00', '0000-00-00 00:00:00'),
-(20, '1640423919547636', '1117708261642965', '', '2015-11-01 19:17:50', 1, 3, '2016-10-04 16:50:00', '0000-00-00 00:00:00');
+(20, '1640423919547636', '1117708261642965', '', '2015-11-01 19:17:50', 1, 3, '2016-10-04 16:50:00', '0000-00-00 00:00:00'),
+(21, '1188780567832398', '1117708261642965', 'comment test1', '2016-10-10 21:00:25', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(22, '1188780631165725', '1117708261642965', 'comment tes2', '2016-10-10 21:00:32', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(23, '1188780641165724', '1117708261642965', 'comment tes3', '2016-10-10 21:00:34', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(24, '1188780694499052', '1117708261642965', 'comment test4', '2016-10-10 21:00:39', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(25, '1188780714499050', '1117708261642965', 'comment test5', '2016-10-10 21:00:41', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(26, '1188780724499049', '1117708261642965', 'comment test6', '2016-10-10 21:00:42', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(27, '1188780741165714', '1117708261642965', 'comment test7', '2016-10-10 21:00:44', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(28, '1188780751165713', '1117708261642965', 'comment test8', '2016-10-10 21:00:46', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(29, '1188780757832379', '1117708261642965', 'comment test9', '2016-10-10 21:00:49', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(30, '1188780774499044', '1117708261642965', 'comment test10', '2016-10-10 21:00:51', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(31, '1188780807832374', '1117708261642965', 'comment test11', '2016-10-10 21:00:53', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(32, '1188780834499038', '1117708261642965', 'comment test12', '2016-10-10 21:00:58', 1, 4, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(33, '1190367857673669', '1117708261642965', 'comment feed 1 1', '2016-10-12 21:45:27', 1, 7, '2016-10-12 14:45:35', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -89,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `feeds` (
   PRIMARY KEY (`FeedId`),
   KEY `fk_feeds_status_idx` (`StatusId`),
   KEY `fk_feeds_groups_idx` (`GroupId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `feeds`
@@ -98,7 +111,11 @@ CREATE TABLE IF NOT EXISTS `feeds` (
 INSERT INTO `feeds` (`FeedId`, `FacebookIdFeed`, `FacebookUserIdFeed`, `Message`, `CreateFeedTime`, `UpdateFeedTime`, `StatusId`, `GroupId`, `CreateTime`, `UpdateTime`) VALUES
 (1, '1428254904097873_1676816475908380', '1117708261642965', 'Chúc mừng hạnh phúc của thầy nào mọi người!  Ai đi cưới không?!', '2016-02-21 15:13:05', '2016-02-21 21:09:07', 1, 60, '2016-10-04 16:50:00', '0000-00-00 00:00:00'),
 (2, '1428254904097873_1640387746217920', '1117708261642965', 'Cùng chào đón nhân vật admin mới của chúng ta.  có thể nói group sẽ có tên mới: Hội những người phát cuồng vì người yêu thầy .... :p', '2015-11-01 16:20:14', '2015-11-01 22:58:36', 1, 60, '2016-10-04 16:50:00', '0000-00-00 00:00:00'),
-(3, '1428254904097873_1640420606214634', '1117708261642965', 'tang tang tang tàng mặc dù bị block face nhưng tôi vẫn hack được tấm ảnh này để chúc phúc cho đôi trai tài gái sắc...', '2015-11-01 19:03:21', '2015-11-01 19:17:50', 1, 60, '2016-10-04 16:50:00', '0000-00-00 00:00:00');
+(3, '1428254904097873_1640420606214634', '1117708261642965', 'tang tang tang tàng mặc dù bị block face nhưng tôi vẫn hack được tấm ảnh này để chúc phúc cho đôi trai tài gái sắc...', '2015-11-01 19:03:21', '2015-11-01 19:17:50', 1, 60, '2016-10-04 16:50:00', '0000-00-00 00:00:00'),
+(4, '548960115147783_1188780514499070', '1117708261642965', 'test thử lần 1', '2016-10-10 21:00:18', '2016-10-10 21:00:58', 1, 58, '2016-10-10 15:31:21', '0000-00-00 00:00:00'),
+(5, '548960115147783_1190278007682654', '1117708261642965', 'Test feed 3', '2016-10-12 19:45:37', '2016-10-12 19:45:37', 1, 58, '2016-10-12 14:44:34', '0000-00-00 00:00:00'),
+(6, '548960115147783_1190277947682660', '1117708261642965', 'Test feed 2', '2016-10-12 19:45:30', '2016-10-12 19:45:30', 1, 58, '2016-10-12 14:44:35', '0000-00-00 00:00:00'),
+(7, '548960115147783_1190277887682666', '1117708261642965', 'Test feed 1', '2016-10-12 19:45:22', '2016-10-12 19:45:22', 1, 58, '2016-10-12 14:44:35', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -148,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `groupuser` (
   `UpdateTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`GroupUserId`),
   KEY `fk_groupuser_users_idx` (`UserId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `groupuser`
@@ -177,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `inbox` (
   PRIMARY KEY (`InboxId`),
   KEY `fk_inbox_users_from_idx` (`FromUserId`),
   KEY `fk_inbox_users_to_idx` (`ToUserId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=51 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=56 ;
 
 --
 -- Dumping data for table `inbox`
@@ -189,7 +206,12 @@ INSERT INTO `inbox` (`InboxId`, `FromUserId`, `ToUserId`, `Subject`, `Content`, 
 (47, 18, 18, 'ac', 'test thử!', '1', '2016-04-11 11:52:29', '2016-04-11 16:52:29', '2016-04-11 16:52:29'),
 (48, 19, 18, '[test lan 3]', 'câcscascascsacsacsacasc', '1', '2016-04-11 12:11:15', '2016-04-11 17:11:15', '2016-04-11 17:11:15'),
 (49, 19, 20, '[send test new]', 'gửi toàn bộ user', '1', '2016-04-12 08:29:29', '2016-04-12 13:29:29', '2016-04-12 13:29:29'),
-(50, 19, 18, '[send test new]', 'gửi toàn bộ user', '1', '2016-04-12 08:29:29', '2016-04-12 13:29:29', '2016-04-12 13:29:29');
+(50, 19, 18, '[send test new]', 'gửi toàn bộ user', '1', '2016-04-12 08:29:29', '2016-04-12 13:29:29', '2016-04-12 13:29:29'),
+(51, 19, 18, 'Test thử bài 1', 'Test thử bài 1 thực hiện như thế nào thôi ....Test thử bài 1 thực hiện như thế nào thôi ....Test thử bài 1 thực hiện như thế nào thôi ....Test thử bài 1 thực hiện như thế nào thôi ....Test thử bài 1 thực hiện như thế nào thôi ....Test thử bài 1 thực hiện như thế nào thôi ....Test thử bài 1 thực hiện như thế nào thôi ....Test thử bài 1 thực hiện như thế nào thôi ....', '1', '2016-10-10 10:36:59', '0000-00-00 00:00:00', '2016-10-10 15:38:39'),
+(52, 19, 19, '[', '[123 test]', '1', '2016-10-12 10:41:22', '2016-10-12 10:41:22', '0000-00-00 00:00:00'),
+(53, 19, 19, 'html_entity_decode(', 'html_entity_decode(', '1', '2016-10-12 10:42:32', '2016-10-12 10:42:32', '0000-00-00 00:00:00'),
+(54, 33, 1, '[Register NEW MEMBER]', 'Hi,\n Tôi mới đăng kí thành viên mới! Xin bạn hãy kiểm duyệt và cấp quyền cho tôi: testuser13', '1', '2016-10-12 10:55:20', '2016-10-12 15:55:20', '0000-00-00 00:00:00'),
+(55, 34, 1, '[Register NEW MEMBER]', 'Hi,\n Tôi mới đăng kí thành viên mới! Xin bạn hãy kiểm duyệt và cấp quyền cho tôi: testuser14', '1', '2016-10-12 10:56:52', '2016-10-12 15:56:52', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -219,13 +241,20 @@ CREATE TABLE IF NOT EXISTS `members` (
   `UpdateTime` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`MemberId`),
   KEY `fk_members_groups_idx` (`GroupId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1353 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1360 ;
 
 --
 -- Dumping data for table `members`
 --
 
 INSERT INTO `members` (`MemberId`, `FacebookIdMember`, `Name`, `Administrator`, `GroupId`, `RealName`, `Address1`, `Address2`, `Birthday`, `PhoneNumber1`, `PhoneNumber2`, `Email`, `Gender`, `Class`, `School`, `FacebookLink`, `FacebookProfileId`, `CreateTime`, `UpdateTime`) VALUES
+(1359, '341462646196743', 'Loan Loan', 1, 59, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-12 15:02:42', '0000-00-00 00:00:00'),
+(1358, '1117708261642965', 'Tường Vũ', 0, 59, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-12 15:02:42', '0000-00-00 00:00:00'),
+(1357, '1117708261642965', 'Tường Vũ', 1, 57, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-12 15:02:20', '0000-00-00 00:00:00'),
+(1356, '1185459388186688', 'Đông Nguyên', 1, 57, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-12 15:02:20', '0000-00-00 00:00:00'),
+(1355, '1091820464260392', 'Nguyễn Thơ', 0, 57, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-12 15:02:20', '0000-00-00 00:00:00'),
+(1354, '10209677912838934', 'Quang Tran', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-12 14:46:30', '0000-00-00 00:00:00'),
+(1353, '1083016148479054', 'Phượng Đỗ Thị', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-12 14:46:30', '0000-00-00 00:00:00'),
 (1352, '1389791937701197', 'Tuấn Vũ', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:38', '0000-00-00 00:00:00'),
 (1351, '1274459962595655', 'Mạnh Nguyễn Thế', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:38', '0000-00-00 00:00:00'),
 (1350, '1111083315607614', 'Phan Hải', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:38', '0000-00-00 00:00:00'),
@@ -313,7 +342,7 @@ INSERT INTO `members` (`MemberId`, `FacebookIdMember`, `Name`, `Administrator`, 
 (1268, '676576195832053', 'Ssd Ptit', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
 (1267, '1212557992100839', 'Mai Thu Nga', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
 (1266, '1133673496719924', 'Đào Hoàng Tiến', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
-(1265, '897575540374898', 'ThuHương Nguyễn', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
+(1265, '897575540374898', 'Nguyễn ThuHương', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '2016-10-12 14:46:30'),
 (1264, '1286420711377734', 'Tiến An', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
 (1263, '1409087605787297', 'Ngô Lan Hoa', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
 (1262, '951941454933249', 'Bùi Hồng Sơn', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
@@ -416,8 +445,8 @@ INSERT INTO `members` (`MemberId`, `FacebookIdMember`, `Name`, `Administrator`, 
 (1165, '341462646196743', 'Loan Loan', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
 (1164, '637932949700282', 'Vương Ngân', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
 (1163, '547292172131632', 'Linhh Lê', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
-(1162, '344206425925449', 'Špv', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00'),
-(1160, '1117708261642965', 'Tường Vũ', 1, 58, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 15:37:33', '0000-00-00 00:00:00'),
+(1162, '344206425925449', 'Thanh Tâm', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '2016-10-12 14:46:30'),
+(1160, '1117708261642965', 'Tường Vũ', 1, 58, 'ABC1', 'ABC', 'ABC', '2016-09-08 00:00:00', '98632879344', '98632879344', 'triuewesd@yahoo.com', 'nam', 'D11CN6', 'PTIT', 'https://www.facebook.com/tritueviet01', '100002114043418', '2016-10-06 15:37:33', '2016-10-12 14:57:54'),
 (1161, '344236335910447', 'Việt Tuệ Trí', 0, 60, '', '', '', '0000-00-00 00:00:00', '', '', '', '', '', '', '', '', '2016-10-06 16:00:37', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
@@ -493,20 +522,30 @@ CREATE TABLE IF NOT EXISTS `users` (
   `FacebookId` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`UserId`),
   KEY `avatar` (`Avatar`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`UserId`, `UserName`, `Password`, `FullName`, `Address1`, `Birthday`, `PhoneNumber1`, `Email`, `Gender`, `CreateTime`, `UpdateTime`, `Avatar`, `PhoneNumber2`, `Address2`, `Class`, `School`, `FacebookId`) VALUES
-(19, 'Admin', 'admin', 'Admin', '', '1993-05-10 00:00:00', '', 'admin@gmail.com', '2', '2016-01-29 19:40:59', '2016-04-08 16:34:37', NULL, NULL, NULL, '0', NULL, NULL),
+(1, 'Admin', 'admin', 'Admin', '', '1993-05-10 00:00:00', '', 'admin@gmail.com', '2', '2016-01-29 19:40:59', '2016-10-12 15:57:16', NULL, NULL, NULL, '0', NULL, NULL),
 (18, 'tritueviet', 'abc', 'TUONG VAN VU', 'Tổ 6 Mỗ Lao Hà Đông Hà Nội', '1993-12-08 00:00:00', '01674183276', 'tritueviet01@yahoo.com', '1', '2016-01-29 19:31:55', '2016-09-30 17:09:37', NULL, '01674183276', 'Thái bình', 'D11CN', 'PTIT', NULL),
 (20, 'tho', '123', 'thơ', '1', '2012-12-12 00:00:00', '1', '1', '1', '2016-02-24 10:39:45', '2016-04-03 15:59:15', NULL, NULL, NULL, '', NULL, NULL),
 (21, 'tuongvv', 'abc', '', '', '0000-00-00 00:00:00', '', 'tritueviet01@yahoo.com', '', '2016-04-11 17:42:50', '2016-09-30 17:09:29', NULL, '', '', '', '', NULL),
 (23, 'testuser1', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser1@gmail.com', '', '2016-10-02 16:29:22', '2016-10-02 16:29:22', NULL, '', '', '', '', NULL),
 (22, 'abc123', 'abc', '', '', '0000-00-00 00:00:00', '', 'abc@yahoo.com', '', '2016-04-12 14:18:45', '2016-09-30 17:09:33', NULL, '', '', '', '', NULL),
-(24, 'testuser2', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser2@gmail.com', '', '2016-10-02 17:06:13', '2016-10-02 17:06:13', NULL, '', '', '', '', NULL);
+(24, 'testuser2', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser2@gmail.com', '', '2016-10-02 17:06:13', '2016-10-02 17:06:13', NULL, '', '', '', '', NULL),
+(25, 'testuser3', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser3@gmail.com', '', '2016-10-10 13:49:12', '0000-00-00 00:00:00', NULL, '', '', '', '', NULL),
+(26, 'testuser4', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser4@gmail.com', '', '2016-10-10 13:49:44', '0000-00-00 00:00:00', NULL, '', '', '', '', NULL),
+(27, 'testuser5', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser5@gmail.com', '', '2016-10-10 13:50:05', '0000-00-00 00:00:00', NULL, '', '', '', '', NULL),
+(28, 'testuser6', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser6@gmail.com', '', '2016-10-10 13:50:42', '0000-00-00 00:00:00', NULL, '', '', '', '', NULL),
+(29, 'testuser7', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser7@gmail.com', '', '2016-10-10 13:51:04', '0000-00-00 00:00:00', NULL, '', '', '', '', NULL),
+(30, 'testuser10', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser10@gmail.com', '', '2016-10-12 15:51:16', '0000-00-00 00:00:00', NULL, '', '', '', '', NULL),
+(31, 'testuser11', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser11@gmail.com', '', '2016-10-12 15:53:14', '0000-00-00 00:00:00', NULL, '', '', '', '', NULL),
+(32, 'testuser12', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser12@gmail.com', '', '2016-10-12 15:53:46', '0000-00-00 00:00:00', NULL, '', '', '', '', NULL),
+(33, 'testuser13', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser13@gmail.com', '', '2016-10-12 15:55:20', '0000-00-00 00:00:00', NULL, '', '', '', '', NULL),
+(34, 'testuser14', 'Abc123456', '', '', '0000-00-00 00:00:00', '', 'testuser14@gmail.com', '', '2016-10-12 15:56:52', '0000-00-00 00:00:00', NULL, '', '', '', '', NULL);
 
 -- --------------------------------------------------------
 
@@ -550,7 +589,7 @@ CREATE TABLE IF NOT EXISTS `user_groupuser` (
   PRIMARY KEY (`UserGroupUserId`),
   KEY `fk_user_groupuser_users_idx` (`UserId`),
   KEY `fk_user_groupuser_groupuser_idx` (`GroupUserId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `user_groupuser`
@@ -559,7 +598,10 @@ CREATE TABLE IF NOT EXISTS `user_groupuser` (
 INSERT INTO `user_groupuser` (`UserGroupUserId`, `UserId`, `GroupUserId`) VALUES
 (21, 20, 1),
 (16, 18, 1),
-(22, 18, 4);
+(22, 18, 4),
+(23, 23, 1),
+(24, 22, 1),
+(25, 26, 1);
 
 -- --------------------------------------------------------
 
@@ -574,7 +616,7 @@ CREATE TABLE IF NOT EXISTS `user_role` (
   PRIMARY KEY (`UserRoleId`),
   KEY `fk_user_role_users_idx` (`UserId`),
   KEY `fk_user_role_roles_idx` (`RoleId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=92 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=96 ;
 
 --
 -- Dumping data for table `user_role`
@@ -583,7 +625,7 @@ CREATE TABLE IF NOT EXISTS `user_role` (
 INSERT INTO `user_role` (`UserRoleId`, `RoleId`, `UserId`) VALUES
 (74, 3, 18),
 (72, 4, 18),
-(1, 1, 19),
+(1, 1, 1),
 (75, 2, 19),
 (76, 3, 19),
 (77, 4, 19),
@@ -600,7 +642,11 @@ INSERT INTO `user_role` (`UserRoleId`, `RoleId`, `UserId`) VALUES
 (88, 2, 24),
 (89, 3, 24),
 (90, 4, 24),
-(91, 5, 24);
+(91, 5, 24),
+(92, 2, 1),
+(93, 3, 1),
+(94, 4, 1),
+(95, 5, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

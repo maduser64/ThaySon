@@ -2,6 +2,8 @@
 session_start();
 require_once '/dao/daoUsers.php';
 require_once '/models/users.php';
+require_once '/models/inbox.php';
+require_once '/dao/daoInbox.php';
 if (isset($_SESSION['user']) != "") {
     header("Location: home.php");
 }
@@ -28,16 +30,8 @@ if (isset($_POST['btn-signup'])) {
     $user->setFullName($fullname);
     $insert = createUsers($user);
     echo " : " . $insert;
-//        echo " : ".$user->getPassword(); 
-//        echo " date : ".$user->getBirthday(); 
-//        echo " email : ".createUsers($user); 
-//         echo " email : ".$insert; 
-//        echo " address : ".$user->getAddress(); 
-//        echo " gender : ".$user->getGender(); 
-//        echo " phone : ".$user->getPhoneNumber(); 
-//        echo " fullName :".$user->getFullName(); 
+    
     if ($insert != null) {
-
         $_SESSION['user'] = $user->getUserName();
         header("Location: homePage.php");
     } else {

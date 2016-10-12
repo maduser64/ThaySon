@@ -3,6 +3,9 @@
 session_start();
 require_once '/dao/daoUsers.php';
 require_once '/models/users.php';
+require_once '/models/inbox.php';
+require_once '/dao/daoInbox.php';
+
 if (isset($_SESSION['user']) != "") {
     header("Location: login.php");
 }
@@ -32,7 +35,18 @@ if (isset($_POST['btn-signup'])) {
             $insert = createUsers($user);
             //   echo " : " . $insert;
             if (!strcmp($insert, 'true')) {
-                header("Location: login.php");
+                $now = new DateTime();
+                $fromUser = getUserIdUseUserName($uname);
+                $inbox = new Inbox();
+                $inbox->setContent("Hi,\n Tôi mới đăng kí thành viên mới! Xin bạn hãy kiểm duyệt và cấp quyền cho tôi: ".$uname);
+                $inbox->setFromUserId((int)$fromUser);
+                $inbox->setToUserId((int)'1');
+                $inbox->setSentDate($now->format('Y-m-d H:i:s'));
+                $inbox->setSubject("[Register NEW MEMBER]");
+                $inbox->setStatus((int)'1');
+
+                echo createInbox($inbox);
+                //header("Location: login.php");
             } else {
                 ?>
                 <script>alert('error while registering you...');</script>

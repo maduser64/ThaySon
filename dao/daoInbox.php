@@ -250,12 +250,12 @@ function insertWithMultiInbox($fromUser, $toUser, $subject, $content123) {
     $now = new DateTime();
     // echo $now->format('Y-m-d H:i:s');    // MySQL datetime format
     // echo nl2br(''.$content."\n");
-    $sqlString = "INSERT INTO inbox (FromUserId,ToUserId,Subject,Content,Status,Sentdate) VALUES ";
+    $sqlString = "INSERT INTO inbox (FromUserId,ToUserId,Subject,Content,Status,Sentdate,createTime) VALUES ";
     $item = '';
     for ($i = 0; $i < $amount; $i++) {
-        $item = $item . ' (' . $fromUser . ',' . $myArray[$i] . ",'" . $subject . "','" . $content123 . "',1,'" . $now->format('Y-m-d H:i:s') . "'),";
+        $item = $item . ' (' . $fromUser . ',' . $myArray[$i] . ",'" . $subject . "','" . $content123 . "',1,'" . $now->format('Y-m-d H:i:s') . "','" . $now->format('Y-m-d H:i:s') . "'),";
     }
-    $item = $item . ' (' . $fromUser . ',' . $myArray[$amount] . ",'" . $subject . "','" . $content123 . "',1,'" . $now->format('Y-m-d H:i:s') . "');";
+    $item = $item . ' (' . $fromUser . ',' . $myArray[$amount] . ",'" . $subject . "','" . $content123 . "',1,'" . $now->format('Y-m-d H:i:s') . "','" . $now->format('Y-m-d H:i:s') . "');";
     $sqlString = $sqlString . $item;
     $db = new DB_CONNECT();
     //echo $sqlString;
